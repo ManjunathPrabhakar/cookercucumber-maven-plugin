@@ -5,7 +5,7 @@
 <plugin>
   <name>Cooker Cucumber Maven Plugin</name>
   <description>An Cooker Cucumber Maven Plugin</description>
-  <groupId>org.manjunath</groupId>
+  <groupId>com.github.manjunathprabhakar</groupId>
   <artifactId>cooker-maven-plugin</artifactId>
   <version>1.0-SNAPSHOT</version>
   <goalPrefix>cooker</goalPrefix>
@@ -100,6 +100,42 @@
       <artifactId>gherkin-jvm-deps</artifactId>
       <type>jar</type>
       <version>1.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <type>jar</type>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.scm</groupId>
+      <artifactId>maven-scm-provider-gitexe</artifactId>
+      <type>jar</type>
+      <version>1.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <type>jar</type>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <type>jar</type>
+      <version>2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.scm</groupId>
+      <artifactId>maven-scm-provider-git-commons</artifactId>
+      <type>jar</type>
+      <version>1.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.scm</groupId>
+      <artifactId>maven-scm-api</artifactId>
+      <type>jar</type>
+      <version>1.9.5</version>
     </dependency>
   </dependencies>
 </plugin>

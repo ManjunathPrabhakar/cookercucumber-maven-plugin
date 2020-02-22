@@ -1,5 +1,5 @@
 CookerCucumberMavenPlugin\Kitchen\Ingredients.class
-CookerCucumberMavenPlugin\ManjuRough\ParseCheck.class
+rough\ManjuRough\ParseCheck.class
 CookerCucumberMavenPlugin\ExceptionsFactory\Exceps\CookerFeatureFactoryException.class
 CookerCucumberMavenPlugin\FeatureFactory\ScenarioUtils.class
 CookerCucumberMavenPlugin\FeatureFactory\BackgroundUtils.class
@@ -12,7 +12,6 @@ CookerCucumberMavenPlugin\FeatureFactory\StepsUtils.class
 cookerplugin\MojoLogger.class
 CookerCucumberMavenPlugin\FeatureFactory\ScenarioI.class
 CookerCucumberMavenPlugin\FeatureFactory\ExamplesUtils.class
-CookerCucumberMavenPlugin\ManjuRough\FeatureUtilsold.class
 CookerCucumberMavenPlugin\FeatureFactory\ScenarioOutlineI.class
 CookerCucumberMavenPlugin\FeatureFactory\FeatureDocument.class
 CookerCucumberMavenPlugin\FeatureFactory\TagI.class
@@ -29,3 +28,4 @@ cookerplugin\cookerMOJO.class
 CookerCucumberMavenPlugin\FileGenFactory\RandomNumberGenerator.class
 CookerCucumberMavenPlugin\FeatureFactory\DataTableUtils.class
 CookerCucumberMavenPlugin\FeatureFactory\ScenarioOutlineUtils.class
+rough\ManjuRough\FeatureUtilsold.class

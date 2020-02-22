@@ -19,16 +19,18 @@ public class TestRunnerGenerator {
     //Test Runner Extension
     private static final String TR_EXTENSION = ".java";
 
-    /**
-     * Static method that take all contents for Test Runner file and uses .template and replaces and crates a new TestRunner .java
-     * @param pPlaceHolders
-     * @return
-     */
-    /**
+
+    /*
      * featurefilepath = [COOKER:FEATUREFILE] = Replace with feature file path enclosed with double quotes
      * stepdefnpath = [COOKER:GLUE] = Replace with step defination package enclosed with double quotes
      * classname = [COOKER:RUNNERCLASS] = Replace with featurename
      * random num = append with classname
+     */
+    /**
+     * Static method that take all contents for Test Runner file and uses .template and replaces and crates a new TestRunner .java
+     * @param pPlaceHolders Place Holder
+     * @param customPlaceHolder Custom Placeholder
+     * @param RunnerFileName filename
      */
     public static void genTestRunner(Map<String, String> pPlaceHolders, Map<String, String> customPlaceHolder, String RunnerFileName) {
 

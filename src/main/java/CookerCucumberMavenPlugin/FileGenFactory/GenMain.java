@@ -26,7 +26,7 @@ public class GenMain {
     ////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * This Method is used to generate TestRunner Files and Feature Files in Generated.TestRunners & Generated.FeatureFiles Directory
+     * This Method is used to generate TestRunner Files and Feature Files in Generated.TestRunners and Generated.FeatureFiles Directory
      *
      * @param pFileName       //Feature Name Only
      * @param pFeatureContent //Feature Content
@@ -75,7 +75,7 @@ public class GenMain {
     }
 
     /**
-     * This Method is used to perfrom deletion and creation of Generated.TestRunners & Generated.FeatureFiles Directory
+     * This Method is used to perfrom deletion and creation of Generated.TestRunners and Generated.FeatureFiles Directory
      * It uses static methods from FileUtils Class
      */
     public static void deleteAndCreateDir() {

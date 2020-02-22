@@ -23,7 +23,7 @@ public class FileUtils {
     /**
      * Parameterized Constructor to initlize File Path
      *
-     * @param Folder
+     * @param Folder Folder Name
      */
     public FileUtils(String Folder) {
         //File Path to perform Operations
@@ -31,11 +31,11 @@ public class FileUtils {
     }
 
     /**
-     * Get List<File> with certain extension (this needs parameterized constructor to be initilized)
+     * Get List of Files with certain extension (this needs parameterized constructor to be initilized)
      *
-     * @param extension
-     * @return
-     * @throws Exception
+     * @param extension File Extenstion
+     * @return String
+     * @throws Exception error
      */
     public List<File> getFiles(String extension) throws Exception {
         File[] listFilesFolders = fileFolder.listFiles();
@@ -56,9 +56,9 @@ public class FileUtils {
      * This Method is used to read the file content and pass the content as return value
      * (This needs Empty Constructor to be used)
      *
-     * @param filePathToRead
-     * @return
-     * @throws IOException
+     * @param filePathToRead fullfilepath
+     * @return string
+     * @throws IOException error
      */
     public static String readAndGetFileContent(String filePathToRead) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePathToRead));
@@ -81,8 +81,8 @@ public class FileUtils {
      * This Method is used to write the content and create a file
      * (This needs Empty Constructor to be used)
      *
-     * @param filecontent    -> Contents to be Saved in the File
-     * @param filePathToSave -> Full Path including filename to save the file
+     * @param filecontent     Contents to be Saved in the File
+     * @param filePathToSave  Full Path including filename to save the file
      */
     public static void writeAndCreateFile(String filecontent, String filePathToSave) {
         try {
@@ -97,9 +97,9 @@ public class FileUtils {
 
     /**
      * This method is used to Delete a Folder and its Sub Folders and files in it
-     * Here it is Used to Delete Generated Test Runners & Generated Feature Files Directory
+     * Here it is Used to Delete Generated Test Runners and Generated Feature Files Directory
      *
-     * @param file
+     * @param file filepath
      */
     public static void deleteRunnerandFeatureDir(File file) {
 
@@ -139,9 +139,9 @@ public class FileUtils {
 
     /**
      * This method is used to Create a Folder
-     * Here it is Used to Create Generated Test Runners & Generated Feature Files Directory
+     * Here it is Used to Create Generated Test Runners and Generated Feature Files Directory
      *
-     * @param file
+     * @param file filepath
      */
     public static void createRunnerandFeatureDir(File file) {
 
