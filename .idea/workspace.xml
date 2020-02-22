@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="78abbdea-aacc-46c0-8ede-93da82eb2060" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Y3guKnloi2vViLlYRmZbLeYWod" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CucumberAutomation" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="rough" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="CookerCucumberMavenPlugin.Kitchen" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IntelliJ_Workspace\CookerMavenPlugin\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.cooker-maven-plugin [install]">
+    <configuration name="cooker-maven-plugin [install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="cooker-maven-plugin [org.manjunath:cooker-maven-plugin:version]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="org.manjunath:cooker-maven-plugin:cook" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Maven.cooker-maven-plugin [org.manjunath:cooker-maven-plugin:version]" />
+      <item itemvalue="Maven.cooker-maven-plugin [install]" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78abbdea-aacc-46c0-8ede-93da82eb2060" name="Default Changelist" comment="" />
+      <created>1582176912124</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582176912124</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="30" key="#Project_Structure" timestamp="1582177024913">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="30" key="#Project_Structure/0.0.1366.738@0.0.1366.738" timestamp="1582177024913" />
+    <state x="142" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582342478544">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="142" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1582342478544" />
+    <state x="488" y="61" key="#com.intellij.ide.util.MemberChooser" timestamp="1582206748440">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="488" y="61" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1582206748440" />
+    <state x="250" y="298" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1582352471337">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="250" y="298" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1366.738@0.0.1366.738" timestamp="1582352471337" />
+    <state x="484" y="258" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1582352479226">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="484" y="258" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1366.738@0.0.1366.738" timestamp="1582352479226" />
+    <state x="463" y="127" key="FileChooserDialogImpl" timestamp="1582342509031">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="127" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1582342509031" />
+    <state width="1323" height="182" key="GridCell.Tab.0.bottom" timestamp="1582356507927">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1582356507927" />
+    <state width="1323" height="182" key="GridCell.Tab.0.center" timestamp="1582356507927">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1582356507927" />
+    <state width="1323" height="182" key="GridCell.Tab.0.left" timestamp="1582356507927">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1582356507927" />
+    <state width="1323" height="182" key="GridCell.Tab.0.right" timestamp="1582356507927">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="182" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1582356507927" />
+    <state x="390" y="196" key="com.intellij.ide.util.TipDialog" timestamp="1582341974411">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="390" y="196" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1582341974411" />
+    <state x="391" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1582350175959">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="391" y="0" key="refactoring.ChangeSignatureDialog/0.0.1366.738@0.0.1366.738" timestamp="1582350175959" />
+  </component>
+</project>
