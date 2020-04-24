@@ -10,5 +10,8 @@
         <module name="cooker-maven-plugin" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CookerMavenPlugin" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

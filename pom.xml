@@ -5,7 +5,7 @@
     <!--    <groupId>org.manjunath</groupId>-->
     <groupId>com.github.manjunathprabhakar</groupId>
     <artifactId>cooker-maven-plugin</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>Cooker Cucumber Maven Plugin</name>
@@ -40,7 +40,7 @@
         <developerConnection>scm:git:ssh://github.com:ManjunathPrabhakar/cookercucumber-maven-plugin.git
         </developerConnection>
         <url>https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin</url>
-        <tag>cookercucumber</tag>
+        <tag>cooker-maven-plugin-1.0.2</tag>
     </scm>
 
     <build>

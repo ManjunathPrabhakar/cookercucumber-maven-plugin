@@ -2,50 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78abbdea-aacc-46c0-8ede-93da82eb2060" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml.releaseBackup" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/CookerMavenPlugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CookerMavenPlugin.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/CookIt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/ExceptionsFactory/CookerPluginException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/ExceptionsFactory/Exceps/CookerFeatureFactoryException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/BackgroundI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/BackgroundUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/DataTableUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/DatatableI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/DocStringI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/DocStringUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/ExampleI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/ExamplesUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/FeatureDocument.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/FeatureUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/ScenarioI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/ScenarioOutlineI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/ScenarioOutlineUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/ScenarioUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/StepI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/StepsUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/TagI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FeatureFactory/TagUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FileFactory/FileUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FileGenFactory/FeatureFileGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FileGenFactory/GenMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FileGenFactory/RandomNumberGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/FileGenFactory/TestRunnerGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CookerCucumberMavenPlugin/Kitchen/Ingredients.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.github.manjunathprabhakar/cooker-maven-plugin/plugin-help.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/plugin.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cookerplugin/MojoLogger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cookerplugin/cookerMOJO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rough/ManjuRough/FeatureUtilsold.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/rough/ManjuRough/ParseCheck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cooker-maven-plugin-1.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/release.properties" beforeDir="false" afterPath="$PROJECT_DIR$/release.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
