@@ -142,6 +142,10 @@ public class CookIt {
                                 //Check if the ScenarioOutline Level Tags has the Tags specified by the user
                                 if (scenarioOutlineUtils.getScenarioOutlineTagsList().containsAll(listUserTags)) {
 
+
+                                    if(scenarioOutlineUtils.getScenarioOutlineTagsList().contains("@excel")){
+                                        System.out.println(scenarioOutlineUtils.getsSoName() + " has excel");
+                                    }
                                     //If yes, then we have got the scenariooutline, now to create a file
                                     //get Feature tags, name & keyword and add to String Builder
                                     toFile.append(featureUtils.getFeatureTags());

@@ -1,5 +1,6 @@
 package CookerCucumberMavenPlugin.FeatureFactory;
 
+import CookerCucumberMavenPlugin.FileFactory.ExcelReader;
 import gherkin.ast.Examples;
 import gherkin.ast.ScenarioOutline;
 import gherkin.ast.Step;
@@ -64,12 +65,47 @@ public class ScenarioOutlineUtils implements ScenarioOutlineI {
 
             }
 
-
-            for (Examples examples : sSoExamples) {
-                ExamplesUtils examplesUtils = new ExamplesUtils(examples);
-                String soExampleData = examplesUtils.getExamplesData();
-                this.result.append(soExampleData);
+            List<String> path = new ArrayList<>();
+            ;
+            boolean res = false;
+            for (Tag t : sSoTags) {
+                if (t.getName().contains("@excel")) {
+                    path.add(t.getName().split("=")[1]); //Path
+                    path.add(t.getName().split("=")[2]); //filename
+                    path.add(t.getName().split("=")[3]); //SheetName
+                    res = true;
+                    break;
+                }
             }
+
+            if (res) {
+                this.result.append("Examples:");
+                this.result.append(System.getProperty("line.separator"));
+
+                ExcelReader objExcelFile = new ExcelReader();
+
+                //Prepare the path of excel file
+                String filePath = null;
+                if (path.get(0).equalsIgnoreCase("root")) {
+                    filePath = System.getProperty("user.dir");
+                } else {
+                    filePath = path.get(0);
+                }
+
+
+                //Call read file method of the class to read data
+
+                String z = objExcelFile.readExcel(filePath, path.get(1), path.get(2));
+                this.result.append(z);
+            } else {
+                for (Examples examples : sSoExamples) {
+                    ExamplesUtils examplesUtils = new ExamplesUtils(examples);
+                    String soExampleData = examplesUtils.getExamplesData();
+                    this.result.append(soExampleData);
+                }
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

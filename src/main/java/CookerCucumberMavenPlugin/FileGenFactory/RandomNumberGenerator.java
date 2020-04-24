@@ -9,13 +9,14 @@ public class RandomNumberGenerator {
      * author : Manjunath Prabhakar
      */
     public static String genRandomNumber() {
-        int minNum = 1, maxNum = 5000;
+        int minNum = 1, maxNum = 9999;
         int random = (int) (Math.random() * maxNum + minNum);
         String formattedRandomNum = String.format("%04d", random);
 
         final String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int alpharandom = (int) (Math.random() * 25 + 0);
-        String res = formattedRandomNum + ALPHA.charAt(alpharandom);
+        int alpharandom1 = (int) (Math.random() * 25 + 0);
+        int alpharandom2 = (int) (Math.random() * 25 + 0);
+        String res = "" + ALPHA.charAt(alpharandom1) + ALPHA.charAt(alpharandom2) + formattedRandomNum;
         return res;
     }
 
