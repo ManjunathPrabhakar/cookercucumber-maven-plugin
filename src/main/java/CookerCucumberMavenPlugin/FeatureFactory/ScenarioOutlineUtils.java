@@ -1,6 +1,7 @@
 package CookerCucumberMavenPlugin.FeatureFactory;
 
 import CookerCucumberMavenPlugin.FileFactory.ExcelReader;
+import cookerplugin.MojoLogger;
 import gherkin.ast.Examples;
 import gherkin.ast.ScenarioOutline;
 import gherkin.ast.Step;
@@ -65,39 +66,65 @@ public class ScenarioOutlineUtils implements ScenarioOutlineI {
 
             }
 
+
+            //Check if the Scenario Outline as @excel tag
             List<String> path = new ArrayList<>();
-            ;
-            boolean res = false;
+            boolean needExcel = false;
+            boolean needExamples = true;
             for (Tag t : sSoTags) {
+                //if it has @ excel then extract filepath, filename, sheetname & set res = true
                 if (t.getName().contains("@excel")) {
-                    path.add(t.getName().split("=")[1]); //Path
-                    path.add(t.getName().split("=")[2]); //filename
-                    path.add(t.getName().split("=")[3]); //SheetName
-                    res = true;
-                    break;
+                    try {
+                        path.add(t.getName().split("=")[1]); //Path
+                        path.add(t.getName().split("=")[2]); //filename
+                        path.add(t.getName().split("=")[3]); //SheetName
+                        needExcel = true;
+                        needExamples = false;
+                        break;
+                    } catch (Exception e) {
+                        //If error in extracting then log warning message and set res = false
+                        MojoLogger.getLogger().error("Issue in prasing Excel for Scenario Outline " + sSoName +
+                                "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
+                                "if folderpath is root then project path is taken");
+                        needExcel = false;
+                        needExamples = true;
+                        break;
+                    }
                 }
             }
 
-            if (res) {
-                this.result.append("Examples:");
-                this.result.append(System.getProperty("line.separator"));
 
-                ExcelReader objExcelFile = new ExcelReader();
+            if (needExcel) {
+                StringBuilder stringBuilder = new StringBuilder();
+                try {
+                    stringBuilder.append("Examples:");
+                    stringBuilder.append(System.getProperty("line.separator"));
 
-                //Prepare the path of excel file
-                String filePath = null;
-                if (path.get(0).equalsIgnoreCase("root")) {
-                    filePath = System.getProperty("user.dir");
-                } else {
-                    filePath = path.get(0);
+                    //Prepare the path of excel file
+                    String filePath = null;
+                    if (path.get(0).equalsIgnoreCase("root")) {
+                        filePath = System.getProperty("user.dir");
+                    } else {
+                        filePath = path.get(0);
+                    }
+
+                    //Call read file method of the class to read data
+                    String z = ExcelReader.readExcel(filePath, path.get(1), path.get(2));
+                    stringBuilder.append(z);
+
+                    this.result.append(stringBuilder);
+                } catch (Exception e) {
+                    //If error in extracting then log warning message and set res = false
+                    MojoLogger.getLogger().warn("Issue in prasing Excel for Scenario Outline " + sSoName +
+                            "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
+                            "if folderpath is root then project path is taken");
+                    needExamples = true;
                 }
 
+            }
 
-                //Call read file method of the class to read data
 
-                String z = objExcelFile.readExcel(filePath, path.get(1), path.get(2));
-                this.result.append(z);
-            } else {
+            if(needExamples){
                 for (Examples examples : sSoExamples) {
                     ExamplesUtils examplesUtils = new ExamplesUtils(examples);
                     String soExampleData = examplesUtils.getExamplesData();

@@ -12,96 +12,76 @@ import java.io.IOException;
 
 public class ExcelReader {
 
-    public String readExcel(String filePath, String fileName, String sheetName) throws IOException {
+    public static String readExcel(String filePath, String fileName, String sheetName) throws IOException {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder exampleFromExample = null;
+
+        exampleFromExample = new StringBuilder();
 
         //Create an object of File class to open xlsx file
-
         File file = new File(filePath + "\\" + fileName);
 
         //Create an object of FileInputStream class to read excel file
-
         FileInputStream inputStream = new FileInputStream(file);
 
-        Workbook guru99Workbook = null;
+        Workbook excWorkbook = null;
 
         //Find the file extension by splitting file name in substring  and getting only extension name
-
         String fileExtensionName = fileName.substring(fileName.indexOf("."));
 
         //Check condition if the file is xlsx file
-
         if (fileExtensionName.equals(".xlsx")) {
-
             //If it is xlsx file then create object of XSSFWorkbook class
-
-            guru99Workbook = new XSSFWorkbook(inputStream);
-
+            excWorkbook = new XSSFWorkbook(inputStream);
         }
-
         //Check condition if the file is xls file
-
         else if (fileExtensionName.equals(".xls")) {
-
             //If it is xls file then create object of HSSFWorkbook class
-
-            guru99Workbook = new HSSFWorkbook(inputStream);
-
+            excWorkbook = new HSSFWorkbook(inputStream);
         }
 
         //Read sheet inside the workbook by its name
-
-        Sheet guru99Sheet = guru99Workbook.getSheet(sheetName);
+        Sheet excSheet = excWorkbook.getSheet(sheetName);
 
         //Find number of rows in excel file
-
-        int rowCount = guru99Sheet.getLastRowNum() - guru99Sheet.getFirstRowNum();
+        int rowCount = excSheet.getLastRowNum() - excSheet.getFirstRowNum();
 
         //Create a loop over all the rows of excel file to read it
-
         for (int i = 0; i < rowCount + 1; i++) {
-
-            Row row = guru99Sheet.getRow(i);
-
+            Row row = excSheet.getRow(i);
             //Create a loop to print cell values in a row
-            sb.append("|");
-
+            exampleFromExample.append("|");
             for (int j = 0; j < row.getLastCellNum(); j++) {
-
                 //Print Excel data in console
-                sb.append(row.getCell(j).getStringCellValue());
-                // System.out.print(row.getCell(j).getStringCellValue() );
-                //System.out.print("|");
-                sb.append("|");
-
+                exampleFromExample.append(row.getCell(j).getStringCellValue());
+                exampleFromExample.append("|");
             }
 
-            //System.out.println();
-            sb.append(System.getProperty("line.separator"));
+            exampleFromExample.append(System.getProperty("line.separator"));
         }
 
-        return sb.toString();
+
+        return exampleFromExample.toString();
 
     }
 
-    //Main function is calling readExcel function to read data from excel file
-
-    public static void main(String... strings) throws IOException {
-
-        //Create an object of ReadGuru99ExcelFile class
-
-        ExcelReader objExcelFile = new ExcelReader();
-
-        //Prepare the path of excel file
-
-        String filePath = System.getProperty("user.dir");
-
-        //Call read file method of the class to read data
-
-        String z = objExcelFile.readExcel(filePath, "book.xlsx", "Sheet1");
-        System.out.println(z);
-
-    }
+//    //Main function is calling readExcel function to read data from excel file
+//
+//    public static void main(String... strings) throws IOException {
+//
+//        //Create an object of ReadGuru99ExcelFile class
+//
+//        ExcelReader objExcelFile = new ExcelReader();
+//
+//        //Prepare the path of excel file
+//
+//        String filePath = System.getProperty("user.dir");
+//
+//        //Call read file method of the class to read data
+//
+//        String z = objExcelFile.readExcel(filePath, "book.xlsx", "Sheet1");
+//        System.out.println(z);
+//
+//    }
 
 }
