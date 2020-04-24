@@ -37,7 +37,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin.git</connection>
-        <developerConnection>scm:git:ssh://github.com:ManjunathPrabhakar/cookercucumber-maven-plugin.git
+        <developerConnection>scm:git:https://github.com:ManjunathPrabhakar/cookercucumber-maven-plugin.git
         </developerConnection>
         <url>https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin</url>
         <tag>cooker-maven-plugin-1.0.3</tag>
