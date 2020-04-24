@@ -1,6 +1,7 @@
 package rough.ManjuRough;
 
 import CookerCucumberMavenPlugin.FeatureFactory.FeatureUtils;
+import CookerCucumberMavenPlugin.FileFactory.ExcelReader;
 import CookerCucumberMavenPlugin.FileFactory.FileUtils;
 import gherkin.AstBuilder;
 import gherkin.Parser;
@@ -22,14 +23,17 @@ public class ParseCheck {
 
     public static void main(String[] args) throws Exception {
         String sHome = System.getProperty("user.dir");
-        String sFeaturesHome = "\\src\\test\\resources\\Features";
+        String sFeaturesHome = "\\src\\main\\test\\resources\\Features";
 
         FileUtils featurecontent = new FileUtils(sHome + sFeaturesHome);
+        System.out.println(sHome + sFeaturesHome);
         List<File> featurefiles = featurecontent.getFiles(".feature");
 
         if (featurefiles.size() > 0) {
 
             for (File feature : featurefiles) {
+
+                new ParseCheck().fParseFeature(feature);
 
                 String val = new FileUtils().readAndGetFileContent(feature.getPath());
                 Parser<GherkinDocument> gherkinDocumentParser = new Parser(new AstBuilder());
@@ -37,9 +41,11 @@ public class ParseCheck {
                 Feature featurefile = gherkinDocument.getFeature();
                 FeatureUtils featureUtils = new FeatureUtils(featurefile);
                 String s = featureUtils.getFeatureTags();
-                if(s.contains("@googlefeature")){
+                if (s.contains("@googlefeature")) {
                     System.out.println(featureUtils.getsFeatureName() + " : Full Feature");
                 }
+
+
             }
         }
     }
@@ -49,13 +55,13 @@ public class ParseCheck {
         String val = fileUtils.readAndGetFileContent(featurefile.getPath());
         System.out.println("File : " + featurefile.getName());
         //pParse(val);
-
+        System.out.println("val = " + val);
         pParser(val);
 
 
     }
 
-    public void pParser(String featurefileContent) {
+    public void pParser(String featurefileContent) throws IOException {
         List<Background> backgroundz = new ArrayList<Background>();
         List<Scenario> scenariozList = new ArrayList<Scenario>();
         List<ScenarioOutline> scenarioOutlinezList = new ArrayList<ScenarioOutline>();
@@ -79,6 +85,7 @@ public class ParseCheck {
             }
             if (sd instanceof ScenarioOutline) {
                 scenarioOutlinezList.add((ScenarioOutline) sd);
+                System.out.println(getScenarioOutlineM((ScenarioOutline) sd));
             }
         }
 
@@ -119,7 +126,7 @@ public class ParseCheck {
         }
     }
 
-    public void genFile(Feature f, Scenario s, ScenarioOutline so, Background b) {
+    public void genFile(Feature f, Scenario s, ScenarioOutline so, Background b) throws IOException {
         StringBuilder sb = new StringBuilder();
         String filename = "";
         List<Tag> lf = f.getTags();
@@ -259,7 +266,7 @@ public class ParseCheck {
         return sb.toString();
     }
 
-    public String getScenarioOutlineM(ScenarioOutline featurescenario) {
+    public String getScenarioOutlineM(ScenarioOutline featurescenario) throws IOException {
         StringBuilder sb = new StringBuilder();
         ScenarioOutline scenarioOutline = (ScenarioOutline) featurescenario;
 //        System.out.println("Keyword = " + scenarioOutline.getKeyword());
@@ -305,38 +312,74 @@ public class ParseCheck {
             }
         }
 
+        List<String> path = new ArrayList<>();;
+        boolean res = false;
+        for (Tag t : stag) {
+            if (t.getName().contains("@excel")) {
+                path.add(t.getName().split("=")[1]); //Path
+                path.add(t.getName().split("=")[2]); //filename
+                path.add(t.getName().split("=")[3]); //SheetName
+                res = true;
+                break;
+            }
+        }
 
-        List<Examples> ex = scenarioOutline.getExamples();
-        for (Examples e : ex) {
+        if (res) {
+            System.out.println("Found Excel Keyword");
             sb.append("Examples:");
             sb.append(System.getProperty("line.separator"));
-            Map<String, List<String>> exampleMap = new LinkedHashMap<String, List<String>>();
 
-            List<TableCell> headerCells = e.getTableHeader().getCells();
-            sb.append("|");
-            for (TableCell headerCell : headerCells) {
-                exampleMap.put("<" + headerCell.getValue() + ">", new ArrayList<String>());
-                sb.append(headerCell.getValue() + "|");
+            ExcelReader objExcelFile = new ExcelReader();
+
+            //Prepare the path of excel file
+            String filePath = null;
+            if (path.get(0).equalsIgnoreCase("root")) {
+                filePath = System.getProperty("user.dir");
+            }else{
+                filePath = path.get(0);
             }
-            Object[] columnKeys = exampleMap.keySet().toArray();
-            sb.append(System.getProperty("line.separator"));
 
-            List<TableRow> tableBody = e.getTableBody();
-            for (TableRow tableRow : tableBody) {
-                List<TableCell> cells = tableRow.getCells();
-                sb.append("|");
-                for (int i = 0; i < cells.size(); i++) {
-                    String columnKey = (String) columnKeys[i];
-                    List<String> values = exampleMap.get(columnKey);
-                    values.add(cells.get(i).getValue());
-                    sb.append(cells.get(i).getValue() + "|");
-                }
+
+            //Call read file method of the class to read data
+
+            String z = objExcelFile.readExcel(filePath, path.get(1), path.get(2));
+            sb.append(z);
+
+
+        } else {
+            List<Examples> ex = scenarioOutline.getExamples();
+            for (Examples e : ex) {
+                sb.append("Examples:");
                 sb.append(System.getProperty("line.separator"));
-            }
+                Map<String, List<String>> exampleMap = new LinkedHashMap<String, List<String>>();
 
-            //sb.append(exampleMap);
-            //System.out.println(exampleMap);
+                List<TableCell> headerCells = e.getTableHeader().getCells();
+                sb.append("|");
+                for (TableCell headerCell : headerCells) {
+                    exampleMap.put("<" + headerCell.getValue() + ">", new ArrayList<String>());
+                    sb.append(headerCell.getValue() + "|");
+                }
+                Object[] columnKeys = exampleMap.keySet().toArray();
+                sb.append(System.getProperty("line.separator"));
+
+                List<TableRow> tableBody = e.getTableBody();
+                for (TableRow tableRow : tableBody) {
+                    List<TableCell> cells = tableRow.getCells();
+                    sb.append("|");
+                    for (int i = 0; i < cells.size(); i++) {
+                        String columnKey = (String) columnKeys[i];
+                        List<String> values = exampleMap.get(columnKey);
+                        values.add(cells.get(i).getValue());
+                        sb.append(cells.get(i).getValue() + "|");
+                    }
+                    sb.append(System.getProperty("line.separator"));
+                }
+
+                //sb.append(exampleMap);
+                //System.out.println(exampleMap);
+            }
         }
+
 
         return sb.toString();
     }
