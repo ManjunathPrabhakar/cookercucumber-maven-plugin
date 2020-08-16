@@ -1,5 +1,7 @@
 ## Cucumber Cooker Plugin (Old Gherkin Version 5.1.0)
 
+for newer version of gherkin features please refer new plugin : https://github.com/ManjunathPrabhakar/cooker-new-version/
+
 **CURRENTLY THIS AVAILABLE IN MAVEN CENTRAL**
 Please clone , and run `MVN INSTALL` to install in your machine and Add entries in pom or pick the dependencies from central and add to pom
 
