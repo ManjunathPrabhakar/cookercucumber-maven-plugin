@@ -1,0 +1,12 @@
+
+#forget iml file
+*.iml
+
+manjusshgithub
+manjusshgithub.pub
+
+#forget intelliJ idea directory
+.idea/
+
+#forget maven target directory
+target/
