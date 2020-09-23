@@ -12,9 +12,21 @@ import java.io.IOException;
 
 public class ExcelReader {
 
+    /**
+     * Read the Excel File and Convert that into Examples Format for Scenario Outline
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @param filePath  Folder Path Only
+     * @param fileName  FileName with Extension (xlsx/xls)
+     * @param sheetName Sheetname inside the excel
+     * @return Excel Data in Examples Format
+     * @throws IOException If Any
+     */
     public static String readExcel(String filePath, String fileName, String sheetName) throws IOException {
 
-        StringBuilder exampleFromExample = null;
+        StringBuilder exampleFromExample = new StringBuilder();
+        exampleFromExample.append("Examples:");
+        exampleFromExample.append(System.getProperty("line.separator"));
 
         exampleFromExample = new StringBuilder();
 

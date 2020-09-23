@@ -44,6 +44,12 @@ public class ScenarioOutlineUtils implements ScenarioOutlineI {
         sSoExamples = scenarioOutline.getExamples();
     }
 
+    /**
+     * Read the ScenarioOutline Object and Parse it and get it's Content in as String
+     *  <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @return String Content of ScenarioOutline Object
+     */
     public String getScenarioOutlineData() {
 
         try {
@@ -97,8 +103,6 @@ public class ScenarioOutlineUtils implements ScenarioOutlineI {
             if (needExcel) {
                 StringBuilder stringBuilder = new StringBuilder();
                 try {
-                    stringBuilder.append("Examples:");
-                    stringBuilder.append(System.getProperty("line.separator"));
 
                     //Prepare the path of excel file
                     String filePath = null;
@@ -115,7 +119,7 @@ public class ScenarioOutlineUtils implements ScenarioOutlineI {
                     this.result.append(stringBuilder);
                 } catch (Exception e) {
                     //If error in extracting then log warning message and set res = false
-                    MojoLogger.getLogger().warn("Issue in prasing Excel for Scenario Outline " + sSoName +
+                    MojoLogger.getLogger().error("Issue in prasing Excel for Scenario Outline " + sSoName +
                             "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
                             "if folderpath is root then project path is taken");
                     needExamples = true;
@@ -124,7 +128,7 @@ public class ScenarioOutlineUtils implements ScenarioOutlineI {
             }
 
 
-            if(needExamples){
+            if (needExamples) {
                 for (Examples examples : sSoExamples) {
                     ExamplesUtils examplesUtils = new ExamplesUtils(examples);
                     String soExampleData = examplesUtils.getExamplesData();

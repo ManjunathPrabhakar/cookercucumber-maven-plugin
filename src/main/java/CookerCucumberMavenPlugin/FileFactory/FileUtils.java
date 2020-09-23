@@ -22,6 +22,7 @@ public class FileUtils {
 
     /**
      * Parameterized Constructor to initlize File Path
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
      * @param Folder Folder Name
      */
@@ -31,30 +32,9 @@ public class FileUtils {
     }
 
     /**
-     * Get List of Files with certain extension (this needs parameterized constructor to be initilized)
-     *
-     * @param extension File Extenstion
-     * @return String
-     * @throws Exception error
-     */
-    public List<File> getFiles(String extension) throws Exception {
-        File[] listFilesFolders = fileFolder.listFiles();
-        for (File file : listFilesFolders) {
-            if (file.isDirectory()) {
-                fileFolder = file;
-                getFiles(extension);
-            }
-            if (file.isFile() && file.getName().toLowerCase().endsWith(extension)) {
-                res.add(file);
-            }
-        }
-        return res;
-    }
-
-
-    /**
      * This Method is used to read the file content and pass the content as return value
      * (This needs Empty Constructor to be used)
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
      * @param filePathToRead fullfilepath
      * @return string
@@ -80,9 +60,10 @@ public class FileUtils {
     /**
      * This Method is used to write the content and create a file
      * (This needs Empty Constructor to be used)
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
-     * @param filecontent     Contents to be Saved in the File
-     * @param filePathToSave  Full Path including filename to save the file
+     * @param filecontent    Contents to be Saved in the File
+     * @param filePathToSave Full Path including filename to save the file
      */
     public static void writeAndCreateFile(String filecontent, String filePathToSave) {
         try {
@@ -94,10 +75,10 @@ public class FileUtils {
         }
     }
 
-
     /**
      * This method is used to Delete a Folder and its Sub Folders and files in it
      * Here it is Used to Delete Generated Test Runners and Generated Feature Files Directory
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
      * @param file filepath
      */
@@ -140,6 +121,7 @@ public class FileUtils {
     /**
      * This method is used to Create a Folder
      * Here it is Used to Create Generated Test Runners and Generated Feature Files Directory
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
      * @param file filepath
      */
@@ -150,6 +132,28 @@ public class FileUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Get List of Files with certain extension (this needs parameterized constructor to be initilized)
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @param extension File Extenstion
+     * @return String
+     * @throws Exception error
+     */
+    public List<File> getFiles(String extension) throws Exception {
+        File[] listFilesFolders = fileFolder.listFiles();
+        for (File file : listFilesFolders) {
+            if (file.isDirectory()) {
+                fileFolder = file;
+                getFiles(extension);
+            }
+            if (file.isFile() && file.getName().toLowerCase().endsWith(extension)) {
+                res.add(file);
+            }
+        }
+        return res;
     }
 
 }

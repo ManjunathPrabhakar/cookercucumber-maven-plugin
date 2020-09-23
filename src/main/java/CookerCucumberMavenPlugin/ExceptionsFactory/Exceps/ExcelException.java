@@ -2,13 +2,13 @@ package CookerCucumberMavenPlugin.ExceptionsFactory.Exceps;
 
 import CookerCucumberMavenPlugin.ExceptionsFactory.CookerPluginException;
 
-/**
- * @author Manjunath-PC
- * @created 24/04/2020
- * @project cookercucumber-maven-plugin
- */
 public class ExcelException extends CookerPluginException {
-
+    /**
+     * Constructor to set the error message
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @param message Error Message to display
+     */
     public ExcelException(String message) {
         super(message);
     }

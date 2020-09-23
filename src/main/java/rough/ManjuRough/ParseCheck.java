@@ -312,7 +312,8 @@ public class ParseCheck {
             }
         }
 
-        List<String> path = new ArrayList<>();;
+        List<String> path = new ArrayList<>();
+        ;
         boolean res = false;
         for (Tag t : stag) {
             if (t.getName().contains("@excel")) {
@@ -335,7 +336,7 @@ public class ParseCheck {
             String filePath = null;
             if (path.get(0).equalsIgnoreCase("root")) {
                 filePath = System.getProperty("user.dir");
-            }else{
+            } else {
                 filePath = path.get(0);
             }
 

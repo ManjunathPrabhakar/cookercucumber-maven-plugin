@@ -1,7 +1,7 @@
 package CookerCucumberMavenPlugin.FileGenFactory;
 
-import CookerCucumberMavenPlugin.Kitchen.Ingredients;
 import CookerCucumberMavenPlugin.FileFactory.FileUtils;
+import CookerCucumberMavenPlugin.Kitchen.Ingredients;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,11 +26,14 @@ public class TestRunnerGenerator {
      * classname = [COOKER:RUNNERCLASS] = Replace with featurename
      * random num = append with classname
      */
+
     /**
      * Static method that take all contents for Test Runner file and uses .template and replaces and crates a new TestRunner .java
-     * @param pPlaceHolders Place Holder
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @param pPlaceHolders     Place Holder
      * @param customPlaceHolder Custom Placeholder
-     * @param RunnerFileName filename
+     * @param RunnerFileName    filename
      */
     public static void genTestRunner(Map<String, String> pPlaceHolders, Map<String, String> customPlaceHolder, String RunnerFileName) {
 

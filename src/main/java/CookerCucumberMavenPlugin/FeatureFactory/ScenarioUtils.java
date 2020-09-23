@@ -40,6 +40,12 @@ public class ScenarioUtils implements ScenarioI {
         sSSteps = this.scenario.getSteps();
     }
 
+    /**
+     * Read the Scenario Object and Parse it and get it's Content in as String
+     *  <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @return String Content of SCenario Object
+     */
     public String getScenarioData() {
 
 

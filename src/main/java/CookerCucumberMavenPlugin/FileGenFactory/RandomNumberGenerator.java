@@ -3,10 +3,10 @@ package CookerCucumberMavenPlugin.FileGenFactory;
 public class RandomNumberGenerator {
 
     /**
+     * This method is used to get the random number between AA to ZZ & 0001 to 9999 (XX8888)
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
      * @return : formatted random number
-     * name : genRandomNumber
-     * desc : This method is used to get the random number between 0001 and 5000
-     * author : Manjunath Prabhakar
      */
     public static String genRandomNumber() {
         int minNum = 1, maxNum = 9999;
