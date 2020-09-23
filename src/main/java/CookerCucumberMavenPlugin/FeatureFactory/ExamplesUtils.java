@@ -16,10 +16,24 @@ public class ExamplesUtils implements ExampleI {
         this.examples = pExamples;
     }
 
+    /**
+     * Read the Examples Object and Parse it and get it's Content in as String
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @return String Content of Examples Object
+     */
     public String getExamplesData() {
         try {
+//            //Examples Tags
+//            for (Tag tag : examples.getTags()) {
+//                TagUtils tagUtils = new TagUtils(tag);
+//                String tagData = tagUtils.getTagsData();
+//                this.result.append(tagData);
+//            }
+
             this.result.append(EXAMPLES_KEYWORD);
             this.result.append(System.getProperty("line.separator"));
+
 
             //Map<String, List<String>> exampleMap = new LinkedHashMap<String, List<String>>();
 

@@ -12,10 +12,21 @@ public class DataTableUtils implements DatatableI {
     private DataTable dataTable = null;
     private StringBuilder dtResult = new StringBuilder();
 
+    /**
+     * Constructor to initilize Datatable Object
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * @param pdataTable Object of Datatable
+     */
     public DataTableUtils(DataTable pdataTable) {
         this.dataTable = pdataTable;
     }
 
+    /**
+     * Read the Datatable Object and Parse it and get it's Content in as String
+     *  <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @return String Content of Datatable Object
+     */
     public String getDataTableData() {
 
         try {

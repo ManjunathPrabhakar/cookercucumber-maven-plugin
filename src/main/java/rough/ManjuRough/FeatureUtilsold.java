@@ -29,7 +29,6 @@ public class FeatureUtilsold {
     }
 
 
-
     public void pParse(String featurefileContent) {
         System.out.println("--------------------------------------------------------");
 
@@ -239,10 +238,6 @@ public class FeatureUtilsold {
     public void getTags() {
 
     }
-
-
-
-
 
 
 }

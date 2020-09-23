@@ -1,11 +1,5 @@
 package CookerCucumberMavenPlugin.FeatureFactory;
 
-import CookerCucumberMavenPlugin.ExceptionsFactory.Exceps.*;
-import gherkin.ast.Background;
-
-import java.io.File;
-import java.io.IOException;
-
 public interface FeatureDocument {
 
     String getFeatureData() throws Exception;

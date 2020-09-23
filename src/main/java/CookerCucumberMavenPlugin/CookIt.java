@@ -1,10 +1,7 @@
 package CookerCucumberMavenPlugin;
 
 import CookerCucumberMavenPlugin.ExceptionsFactory.CookerPluginException;
-import CookerCucumberMavenPlugin.FeatureFactory.BackgroundUtils;
-import CookerCucumberMavenPlugin.FeatureFactory.FeatureUtils;
-import CookerCucumberMavenPlugin.FeatureFactory.ScenarioOutlineUtils;
-import CookerCucumberMavenPlugin.FeatureFactory.ScenarioUtils;
+import CookerCucumberMavenPlugin.FeatureFactory.*;
 import CookerCucumberMavenPlugin.FileFactory.FileUtils;
 import CookerCucumberMavenPlugin.FileGenFactory.GenMain;
 import CookerCucumberMavenPlugin.Kitchen.Ingredients;
@@ -25,16 +22,28 @@ public class CookIt {
     //GET ALL NEEDED VALUES FROM INGREDIENTS FROM Ingredients Class
     ///////////////////////////////////////////////////////////////////////////////////////////
     private String ExistingFeatureFilePath = null;
-    private List<String> listUserTags = null;
+    private String listUserTags = null;
+    private CookerTagExpressionParser cookerTagExpressionParser;
 
+    /**
+     * Constructor - Intilizes ExitingFeatureFilePath & Gets the Tag(s) that user want to run
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     */
     public CookIt() {
         //Initilize all Info needed from Ingredients Class
         ExistingFeatureFilePath = Ingredients.getfExiFullPath();
-        listUserTags = Ingredients.getAllTagsList();
+        listUserTags = Ingredients.getUserTag();
+        cookerTagExpressionParser = new CookerTagExpressionParser();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+    /**
+     * Main Method that Parses and perform what the Plugin has to do
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @throws CookerPluginException If Any
+     */
     public void cook() throws CookerPluginException {
 
         try {
@@ -82,7 +91,8 @@ public class CookIt {
                     FeatureUtils featureUtils = new FeatureUtils(featurefile);
 
                     //Check if the Feature Level Tags has the Tags specified by the user
-                    if (featureUtils.getFeatureTagsList().containsAll(listUserTags)) {
+
+                    if (cookerTagExpressionParser.tagParser(listUserTags,featureUtils.getFeatureTagsList())) {
                         //If Feature Level tags contains User Tags, Get all the contents of feature file
                         String toFile = featureUtils.getFeatureData();
                         //Create a Feature File and Its Test Runner
@@ -113,7 +123,7 @@ public class CookIt {
                                 ScenarioUtils scenarioUtils = new ScenarioUtils((Scenario) sd);
 
                                 //Check if the Scenario Level Tags has the Tags specified by the user
-                                if (scenarioUtils.getScenarioTagsList().containsAll(listUserTags)) {
+                                if (cookerTagExpressionParser.tagParser(listUserTags,scenarioUtils.getScenarioTagsList())) {
 
                                     //If yes, then we have got the scenario, now to create a file
                                     //get Feature tags, name & keyword and add to String Builder
@@ -140,10 +150,10 @@ public class CookIt {
                                 ScenarioOutlineUtils scenarioOutlineUtils = new ScenarioOutlineUtils((ScenarioOutline) sd);
 
                                 //Check if the ScenarioOutline Level Tags has the Tags specified by the user
-                                if (scenarioOutlineUtils.getScenarioOutlineTagsList().containsAll(listUserTags)) {
+                                if (cookerTagExpressionParser.tagParser(listUserTags,scenarioOutlineUtils.getScenarioOutlineTagsList())) {
 
 
-                                    if(scenarioOutlineUtils.getScenarioOutlineTagsList().contains("@excel")){
+                                    if (scenarioOutlineUtils.getScenarioOutlineTagsList().contains("@excel")) {
                                         System.out.println(scenarioOutlineUtils.getsSoName() + " has excel");
                                     }
                                     //If yes, then we have got the scenariooutline, now to create a file

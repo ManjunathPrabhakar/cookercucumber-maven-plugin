@@ -44,6 +44,12 @@ public class FeatureUtils implements FeatureDocument {
         sfeaturescenarios = this.feature.getChildren();
     }
 
+    /**
+     * Read the Feature Object and Parse it and get it's Content in as String
+     *  <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @return String Content of Feature Object
+     */
     public String getFeatureData() {
         try {
             if (feature == null) {

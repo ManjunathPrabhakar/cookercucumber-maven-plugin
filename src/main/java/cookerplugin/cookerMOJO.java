@@ -13,9 +13,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.util.Map;
 
 
-/**
- *
- */
 @Mojo(name = "cook", threadSafe = true, defaultPhase = LifecyclePhase.INITIALIZE)
 public class cookerMOJO extends AbstractMojo {
 
@@ -42,6 +39,13 @@ public class cookerMOJO extends AbstractMojo {
 
     private Log LOGGER = getLog();
 
+    /**
+     * This Method is First Executed during INITILIZE (cook) LifeCycle of Maven, Its Thread Safe
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @throws MojoExecutionException If Any
+     * @throws MojoFailureException   If Any
+     */
     public void execute() throws MojoExecutionException, MojoFailureException {
         // The logic of our plugin will go here
         try {
@@ -58,8 +62,6 @@ public class cookerMOJO extends AbstractMojo {
             //Show Ingredients
             showParameters();
 
-            //Start Cooking
-            LOGGER.info("======================== ++++ cooking started ++++ =============================");
             CookIt cookIt = new CookIt();
             cookIt.cook();
             LOGGER.info("======================== ++++ cooking complete ++++ ============================");
@@ -75,6 +77,10 @@ public class cookerMOJO extends AbstractMojo {
         }
     }
 
+    /**
+     * This Method Reads the parameters from POM File and stores it in the Kitchen.Ingredients(PoJo Class)
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     */
     private void getAndMapParameters() {
         try {
             LOGGER.info("============================== Preparing Ingredients ===========================");
@@ -90,6 +96,10 @@ public class cookerMOJO extends AbstractMojo {
         }
     }
 
+    /**
+     * This Method is used to display the Parameters mentioned in the POM during the Execution
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     */
     private void showParameters() {
         try {
             LOGGER.info("============================ Selected Ingredients ==============================");
