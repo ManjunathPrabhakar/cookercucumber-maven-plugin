@@ -1,13 +1,13 @@
 ![cooker_cucumber logo](miscellaneous/cooker-logo.png)  
   
 <p align="left">  
-    <a href="https://img.shields.io/maven-central/v/com.github.manjunathprabhakar/cooker-maven-plugin" alt="maven-release-version">  
+    <a href="https://search.maven.org/search?q=g:%22com.github.manjunathprabhakar%22%20AND%20a:%22cooker-maven-plugin%22" alt="maven-release-version">  
         <img src="https://img.shields.io/maven-central/v/com.github.manjunathprabhakar/cooker-maven-plugin" /></a>  
-    <a href="https://img.shields.io/github/release-date/ManjunathPrabhakar/cookercucumber-maven-plugin" alt="maven-release-version">  
+    <a href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/releases" alt="maven-release-version">  
                             <img src="https://img.shields.io/github/release-date/ManjunathPrabhakar/cookercucumber-maven-plugin" /></a>  
-    <a href="https://img.shields.io/github/last-commit/ManjunathPrabhakar/cookercucumber-maven-plugin" alt="maven-release-version">  
+    <a href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/commits/master" alt="maven-release-version">  
                         <img src="https://img.shields.io/github/last-commit/ManjunathPrabhakar/cookercucumber-maven-plugin" /></a>  
-    <a href="https://img.shields.io/github/contributors/ManjunathPrabhakar/cookercucumber-maven-plugin" alt="maven-release-version">  
+    <a href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/graphs/contributors" alt="maven-release-version">  
                             <img src="https://img.shields.io/github/contributors/ManjunathPrabhakar/cookercucumber-maven-plugin" /></a>  
     <br>  
     <a href="https://img.shields.io/github/languages/count/ManjunathPrabhakar/cookercucumber-maven-plugin" alt="maven-release-version">  
