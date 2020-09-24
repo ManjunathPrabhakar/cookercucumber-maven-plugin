@@ -368,9 +368,9 @@ Developed with Below Tools & Version(s):
 
 ### License
 
-© Copyright 2020 [Manjunath Prabhakar](manjunath189@gmail.com)
+© Copyright 2020 Manjunath Prabhakar (manjunath189@gmail.com)
 
-This plugin uses [Apache License,Version 2.0](LICENSE)
+This plugin uses [Apache License,Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 You may use this feature as per the license and provide credits for the Developer.
 This Software is distributed under the License and is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
