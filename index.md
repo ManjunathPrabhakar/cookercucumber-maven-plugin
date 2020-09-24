@@ -49,10 +49,12 @@
     - [Versions](#version)
     - [License](#license)
     - [Credits](#credits)
+    
 ---
   
 ## Plugin Features  
 
+- One Plugin Two Capabilities ;)
 - This plugin give's two different capabilities which can be combined/used individually.
 
 ### Capability #1 (COOKER MAIN)
