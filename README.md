@@ -371,6 +371,15 @@ This Software is distributed under the License and is distributed on an "AS IS" 
 
 ### Credits
 
-This Plugin Development was inspired by Cucumber Plugins created by [Benjamin Bischoff](https://github.com/laxersaz) 
+
+
+<p>
+Thank you <a href="#" alt="maven-release-version">    
+        <img width="30" height="30" src="https://www.shareicon.net/data/256x256/2017/06/05/886723_heart_512x512.png" /></a>
+</p>
+
+
+- [StackEdit](https://github.com/benweet/stackedit) for helping to edit markdown files.
+- [Benjamin Bischoff](https://github.com/laxersaz) for inspiring to develop this plugin.  
 
 ---
