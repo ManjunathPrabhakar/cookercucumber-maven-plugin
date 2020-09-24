@@ -15,7 +15,7 @@ public class CookerReportMOJO extends AbstractMojo {
 
     private Log LOGGER = getLog();
 
-    @Parameter(property = "jsonPath", required = false, defaultValue = "none")
+    @Parameter(property = "jsonPath", required = true)
     private String jsonPath;
 
     /**

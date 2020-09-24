@@ -1,10 +1,14 @@
 package cookercucumber_reporter;
 
+import com.google.gson.Gson;
+import common.fileFactory.FileUtility;
 import cookercucumber_reporter.json_pojos.Elements;
 import cookercucumber_reporter.json_pojos.FeaturePOJO;
 import cookercucumber_reporter.json_pojos.Steps;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,18 +18,28 @@ import java.util.List;
  */
 public class Reporter {
 
-    public static List<String> generateReport(List<FeaturePOJO> allJsonFiles) {
+    public List<String> generateReport(String jsonPath) throws Exception {
+        List<FeaturePOJO> total = new ArrayList<>();
+        Gson gson = new Gson();
 
-//        List<String> featureNames = new ArrayList<>();
-//        Map<String,Integer> totalScenarios = new HashMap<>();
-//        Map<String,Integer> totalPass = new HashMap<>();
-//        Map<String,Integer> totalFail = new HashMap<>();
-//        Map<String,Integer> totalSkip = new HashMap<>();
-//        Map<String,Integer> passPercentage = new HashMap<>();
-        /*
-        | Feature Name | Total Scenarios | Passed | Failed | Skipped | Pass% |
-        |              |  SUM(Scenarios) | sum|sum|sum
-         */
+        FileUtility featurecontent = new FileUtility(jsonPath);
+        //Get all *.feature files from existing feature files directory
+        List<File> featurefiles = featurecontent.getFiles(".json");
+
+        if (featurefiles.size() > 0) {
+            for (File jsonFile : featurefiles) {
+                String str = FileUtility.readAndGetFileContent(jsonFile.getPath());
+                FeaturePOJO[] featurePOJOS = gson.fromJson(str, FeaturePOJO[].class);
+                total.addAll(Arrays.asList(featurePOJOS));
+            }
+        }
+
+        return gatherSummarizeData(total);
+
+    }
+
+    private List<String> gatherSummarizeData(List<FeaturePOJO> allJsonFiles) {
+
         int sumScenarios = 0, sumPass = 0, sumFail = 0, sumSkip = 0;
         String sumPassPercentage = "%";
 
@@ -46,8 +60,6 @@ public class Reporter {
 
             String featureName;
             int totalScenarios = 0, totalPass = 0, totalFail = 0, totalSkip = 0;
-            double passPercentage = 0;
-
 
             featureName = featurePOJO.getName();
             rows.add(featureName);
@@ -100,7 +112,6 @@ public class Reporter {
             rows.add(((totalPass / totalScenarios) * 100) + "%");
 
             data.add(rows);
-            //System.out.format("%-15s%-15s%-15s%-15s%-15s%-15s\n", featureName, totalScenarios, totalPass, totalFail, totalSkip, ((totalPass / totalScenarios) * 100) + "%");
         }
         sumPassPercentage = (sumPass / sumScenarios) * 100 + "%";
 
@@ -114,10 +125,10 @@ public class Reporter {
 
         data.add(footer);
 
-        return printInTabluarForm(data);
+        return gatherDataInList(data);
     }
 
-    private static List<String> printInTabluarForm(List<List<String>> data) {
+    private List<String> gatherDataInList(List<List<String>> data) {
 
         List<String> res = new ArrayList<>();
 

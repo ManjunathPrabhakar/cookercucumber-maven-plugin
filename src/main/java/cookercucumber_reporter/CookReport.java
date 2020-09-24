@@ -12,7 +12,7 @@ import java.util.List;
 public class CookReport {
 
     public String showReport(String jsonPath) throws Exception {
-        List<String> res = Trigger.start(jsonPath);
+        List<String> res = new Reporter().generateReport(jsonPath);
         for (String s: res
              ) {
             MojoLogger.getLogger().info(s);
