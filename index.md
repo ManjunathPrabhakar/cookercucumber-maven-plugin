@@ -1,5 +1,3 @@
-<link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/ManjunathPrabhakar/cookercucumber-maven-plugin/master/miscellaneous/cooker-logo.png">
-
 <p align="center">
 	<a href="#" alt="logo">  
         <img src="https://raw.githubusercontent.com/ManjunathPrabhakar/cookercucumber-maven-plugin/master/miscellaneous/cooker-logo.png" /></a>  
@@ -26,14 +24,7 @@
     <br>                  
     <a href="https://img.shields.io/github/license/ManjunathPrabhakar/cookercucumber-maven-plugin" alt="maven-release-version">  
                     <img src="https://img.shields.io/github/license/ManjunathPrabhakar/cookercucumber-maven-plugin" /></a>    
-</p>  
-     
->**This Plugin uses Gherkin Dependency 5.2.0, Doesn't Support RULE in feature file**   
-##### For newer version of Gherkin features please refer new plugin : [Click Here](https://github.com/ManjunathPrabhakar/cooker-new-version/)  
-  
-**CURRENTLY THIS AVAILABLE IN MAVEN CENTRAL** (Find the version above)  
-
----
+</p>
 
 # Contents 
 
@@ -52,7 +43,12 @@
     - [Excel Usage](#excel-file-supports-xlsx--xls-only)
     - [CSV Usage](#csv-file-supports-csv-with-delimitercommasemi-colonpipe)
     - [TXT Usage](#text-file-supports-txt-with-exact-copy-like-examples)
-  
+- [Example Project](#example-project)
+- [Appendix](#appendix)
+    - [Limitations](#limitations)
+    - [Versions](#version)
+    - [License](#license)
+    - [Credits](#credits)
 ---
   
 ## Plugin Features  
@@ -341,8 +337,7 @@ Example # 1 :
 Example # 1 :
  
 `@plain=root=myExampleData.txt`
-  
-  
+
 ---
 
 ## Example Project
@@ -351,9 +346,12 @@ Please check out [this example]() for Complete Example on Usage of this Plugin
 
 ---
 
----
-
 ## Appendix
+
+### Limitations
+
+>**This Plugin uses Gherkin Dependency 5.2.0, Doesn't Support RULE in feature file**   
+##### For newer version of Gherkin features please refer new plugin : [Click Here](https://github.com/ManjunathPrabhakar/cooker-new-version/)  
 
 ### Version
 
