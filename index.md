@@ -1,3 +1,8 @@
+<head>
+	<title>Cooker Cucumber Maven Plugin</title>
+</head>
+	
+	
 <p align="center">
 	<a href="#" alt="logo">  
         <img src="https://raw.githubusercontent.com/ManjunathPrabhakar/cookercucumber-maven-plugin/master/miscellaneous/cooker-logo.png" /></a>  
