@@ -1,4 +1,4 @@
-![cooker_cucumber logo](miscellaneous/cooker-logo.png)  
+[![cooker_cucumber logo](miscellaneous/cooker-logo.png)](https://manjunathprabhakar.github.io/cookercucumber-maven-plugin/)  
   
 <p align="left">  
     <a href="https://search.maven.org/search?q=g:%22com.github.manjunathprabhakar%22%20AND%20a:%22cooker-maven-plugin%22" alt="maven-release-version">  

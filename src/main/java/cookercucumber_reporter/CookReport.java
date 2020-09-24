@@ -13,8 +13,8 @@ public class CookReport {
 
     public String showReport(String jsonPath) throws Exception {
         List<String> res = new Reporter().generateReport(jsonPath);
-        for (String s: res
-             ) {
+        for (String s : res
+        ) {
             MojoLogger.getLogger().info(s);
         }
         return "Coming soon!!";

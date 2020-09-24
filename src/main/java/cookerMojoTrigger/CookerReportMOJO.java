@@ -28,7 +28,7 @@ public class CookerReportMOJO extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         // The logic of our plugin will go here
         try {
-            if(jsonPath.equalsIgnoreCase("none")){
+            if (jsonPath.equalsIgnoreCase("none")) {
                 jsonPath = System.getProperty("user.dir") + "\\target\\cucumber-reports";
             }
 
