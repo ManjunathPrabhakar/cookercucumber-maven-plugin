@@ -1,3 +1,7 @@
+<head>
+	<link rel="shortcut icon" type="image/png" href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/blob/master/miscellaneous/cooker-cucumber-logo.png">
+</head>
+
 <p align="center">
 	<a href="#" alt="logo">  
         <img src="https://raw.githubusercontent.com/ManjunathPrabhakar/cookercucumber-maven-plugin/master/miscellaneous/cooker-logo.png" /></a>  
