@@ -223,6 +223,44 @@ Complete POM plugin dependency
 Pick the latest Dependencies from Maven Central and Add to your POM.xml under `<build>` section  
  
  
+ >Note : Please use it with Surefire Plugin / Failsafe Plugin. Example for Surefire Given Below
+ 
+ 
+```xml
+ <plugin>
+     <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-surefire-plugin</artifactId>
+     <version>3.0.0-M4</version>
+     <configuration>
+        <testFailureIgnore>true</testFailureIgnore> <!-- Optional, To not fail the build if any test failure, so our cooker reporter can run -->
+        <!--  <parallel>all</parallel>-->
+        <useUnlimitedThreads>true</useUnlimitedThreads>
+        <useSystemClassLoader>false</useSystemClassLoader>
+        <forkCount>1</forkCount>
+        <reuseForks>true</reuseForks>
+        <parallel>methods</parallel>
+        <!-- <parallel>classes</parallel>-->
+        <!-- <threadCount>4</threadCount>-->
+        <threadCount>1</threadCount> <!-- Number of Browser Instances-->
+        <!-- <classesDirectory>-->
+        <!--    src/test/java/TestRunners/-->
+        <!-- </classesDirectory>-->
+        <!-- <includes>-->
+        <!--    <include>**/src/test/java/generated/testRunners/**.java</include>-->
+        <!-- </includes>-->
+        <suiteXmlFiles>
+            <suiteXmlFile>TestNg.xml</suiteXmlFile>
+        </suiteXmlFiles>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>test</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
 ---
  
 ## Template

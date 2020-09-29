@@ -2,11 +2,10 @@ package cookercucumber_reporter;
 
 import com.google.gson.Gson;
 import common.fileFactory.FileUtility;
-import cookercucumber_reporter.json_pojos.Elements;
-import cookercucumber_reporter.json_pojos.FeaturePOJO;
-import cookercucumber_reporter.json_pojos.Steps;
+import cookercucumber_reporter.json_pojos.*;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,10 +68,39 @@ public class Reporter {
 
 
                 if (e.getType().equalsIgnoreCase("scenario")) {
+                    int pass = 0, fail = 0, skip = 0;
+
+                    //Before Scenario
+                    List<BeforeHook> beforeHooks = e.getBefore();
+                    for (BeforeHook bf : beforeHooks) {
+                        String beforeStatus = bf.getResult().getStatus();
+                        if (beforeStatus.equalsIgnoreCase("passed")) {
+                            pass++;
+                        } else if (beforeStatus.equalsIgnoreCase("failed")) {
+                            fail++;
+                        } else if (beforeStatus.equalsIgnoreCase("skipped")) {
+                            skip++;
+                        }
+                    }
+
                     totalScenarios = totalScenarios + 1;
 
-                    int pass = 0, fail = 0, skip = 0;
+
                     for (Steps s : e.getSteps()) {
+
+                        //Before Step
+                        List<BeforeHook> beforeStepHooks = s.getBefore();
+                        for (BeforeHook bf : beforeStepHooks) {
+                            String beforeStatus = bf.getResult().getStatus();
+                            if (beforeStatus.equalsIgnoreCase("passed")) {
+                                pass++;
+                            } else if (beforeStatus.equalsIgnoreCase("failed")) {
+                                fail++;
+                            } else if (beforeStatus.equalsIgnoreCase("skipped")) {
+                                skip++;
+                            }
+                        }
+
                         String status = s.getResult().getStatus();
                         if (status.equalsIgnoreCase("passed")) {
                             pass++;
@@ -81,7 +109,36 @@ public class Reporter {
                         } else if (status.equalsIgnoreCase("skipped")) {
                             skip++;
                         }
+
+                        //After Step
+                        List<AfterHook> afterStephooks = s.getAfter();
+                        for (AfterHook af : afterStephooks) {
+                            String afterStatus = af.getResult().getStatus();
+                            if (afterStatus.equalsIgnoreCase("passed")) {
+                                pass++;
+                            } else if (afterStatus.equalsIgnoreCase("failed")) {
+                                fail++;
+                            } else if (afterStatus.equalsIgnoreCase("skipped")) {
+                                skip++;
+                            }
+                        }
+
                     }
+
+                    //After Scenario
+                    List<AfterHook> afterhooks = e.getAfter();
+                    for (AfterHook af : afterhooks) {
+                        String afterStatus = af.getResult().getStatus();
+                        if (afterStatus.equalsIgnoreCase("passed")) {
+                            pass++;
+                        } else if (afterStatus.equalsIgnoreCase("failed")) {
+                            fail++;
+                        } else if (afterStatus.equalsIgnoreCase("skipped")) {
+                            skip++;
+                        }
+                    }
+
+
                     if (fail != 0) {
                         totalFail++;
                         //break;
@@ -109,11 +166,13 @@ public class Reporter {
             rows.add(totalSkip + "");
 
 
-            rows.add(((totalPass / totalScenarios) * 100) + "%");
+            String totalPercentage = calculatePercentage(totalPass, totalScenarios);
+
+            rows.add(totalPercentage);
 
             data.add(rows);
         }
-        sumPassPercentage = (sumPass / sumScenarios) * 100 + "%";
+        sumPassPercentage = calculatePercentage(sumPass, sumScenarios);
 
         List<String> footer = new ArrayList<>();
         footer.add("");
@@ -202,5 +261,10 @@ public class Reporter {
 
 
         return res;
+    }
+
+    private String calculatePercentage(double obtained, double total) {
+        DecimalFormat df2 = new DecimalFormat("#.##");
+        return df2.format(obtained * 100 / total) + "%";
     }
 }

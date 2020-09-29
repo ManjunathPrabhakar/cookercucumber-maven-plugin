@@ -2,9 +2,7 @@ package cookercucumber_parser.flatFileParser;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
@@ -71,7 +69,11 @@ public class ExcelParser {
             exampleFromExcel.append("|");
             for (int j = 0; j < row.getLastCellNum(); j++) {
                 //Print Excel data in console
-                exampleFromExcel.append(row.getCell(j).getStringCellValue());
+                Cell cell = row.getCell(j);
+                DataFormatter dataFormatter = new DataFormatter();
+                String value = dataFormatter.formatCellValue(cell);
+
+                exampleFromExcel.append(value/*cell.getStringCellValue()*/);
                 exampleFromExcel.append("|");
             }
 
