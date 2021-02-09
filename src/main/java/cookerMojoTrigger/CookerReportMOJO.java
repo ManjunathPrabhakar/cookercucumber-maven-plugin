@@ -15,8 +15,18 @@ public class CookerReportMOJO extends AbstractMojo {
 
     private Log LOGGER = getLog();
 
-    @Parameter(property = "jsonPath", required = true)
+    @Parameter(property = "jsonPath", required = true, defaultValue = "none")
     private String jsonPath;
+
+    @Parameter(property = "htmlGeneratePath", required = false, defaultValue = "none")
+    private String htmlPath;
+
+    @Parameter(property = "logFilesPath", required = false, defaultValue = "none")
+    private String logPath;
+
+    @Parameter(property = "projectName", required = true, defaultValue = "")
+    private String projectName;
+
 
     /**
      * This Method is First Executed during POST_INTEGRATION_TEST (cook-report) LifeCycle of Maven, Its Thread Safe
@@ -31,17 +41,27 @@ public class CookerReportMOJO extends AbstractMojo {
             if (jsonPath.equalsIgnoreCase("none")) {
                 jsonPath = System.getProperty("user.dir") + "\\target\\cucumber-reports";
             }
+            if (htmlPath.equalsIgnoreCase("none")) {
+                htmlPath = System.getProperty("user.dir") + "\\target\\cooker-html-report";
+            }
+            if (logPath.equalsIgnoreCase("all")) {
+                logPath = System.getProperty("user.dir") + "\\";
+            }
 
-            LOGGER.info("============= COOKER CUCUMBER REPORT MAVEN PLUGIN SUMMARY ===================");
+            LOGGER.info("============== COOKER CUCUMBER REPORT MAVEN PLUGIN STARTED =====================");
+            LOGGER.info("========================== By Manjunath Prabhakar ==============================");
+            LOGGER.info("======================= ++++ generating started ++++ ===========================");
             MojoLogger.setLogger(LOGGER);
-            CookReport cookReport = new CookReport();
-            String res = cookReport.showReport(jsonPath).toUpperCase();
-            LOGGER.info("============ COOKER CUCUMBER REPORT MAVEN PLUGIN More " + res + " ============");
-
+            CookReport cookReport = new CookReport(jsonPath, htmlPath, logPath,projectName);
+            cookReport.showLogReport();
+            cookReport.generateHTMLReport();
+            LOGGER.info("===================== ++++ generating completed ++++ ===========================");
         } catch (Exception e) {
+            LOGGER.error("============== ++++ oh no! report generation aborted ++++ ======================");
             e.printStackTrace();
+            LOGGER.error("================================================================================");
         } finally {
-
+            LOGGER.info("============== COOKER CUCUMBER REPORT MAVEN PLUGIN ENDED =======================");
         }
     }
 

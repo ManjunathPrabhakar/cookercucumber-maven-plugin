@@ -1,10 +1,13 @@
 package cookercucumber_reporter;
 
 import com.google.gson.Gson;
+import common.fileFactory.FileUtility;
+import common.utils.TimeUtility;
 import cookercucumber_reporter.json_pojos.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -16,22 +19,44 @@ import java.util.*;
  */
 public class HTMLReporter {
     String JSONSPATH = null;
-    String userName, hostName;
+    String HTMLPATH = null;
+    String LOGPATH = null;
+    String userName = null;
+    String hostName = null;
+    String userLetter = null;
+    String projectName = null;
 
-    public HTMLReporter(String jsonPath) throws UnknownHostException {
+    public HTMLReporter(String jsonPath, String htmlpath, String logpath,String projectName) {
         this.JSONSPATH = jsonPath;
+        this.HTMLPATH = htmlpath;
+        this.LOGPATH = logpath;
+        this.projectName = projectName;
         userName = System.getProperty("user.name");
-        hostName = InetAddress.getLocalHost().getHostName();
+        try {
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            hostName = "NA";
+        }
+        userLetter = (userName.charAt(0) + "").toUpperCase();
     }
 
     public void genHTML() throws Exception {
         List<FeaturePOJO> jsons = getJSONsToList(JSONSPATH);
 
-        String html = FileUtility.readAndGetFileContent("reposs\\index.html");
+        InputStream resourceAsStream = getClass().getResourceAsStream("/template/temp.html");
+        Scanner s = new Scanner(resourceAsStream).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+
+        String html = result;
+        //System.out.println("html = " + html);
+        //FileUtility.readAndGetFileContent(manual.getAbsolutePath());
         StringBuffer sb = new StringBuffer();
 
         //DASH BOARD DATA
-        String generatedDate = TimeUtils.getCurrTimeStamp();
+        //Report Generated Time Stamp
+        String generatedDate = TimeUtility.getCurrTimeStamp();
+
+        //Total Execution Duration
         long totalDuration = 0l;
         for (FeaturePOJO featurePOJO : jsons) {
             for (Elements elements : featurePOJO.getElements()) {
@@ -40,7 +65,9 @@ public class HTMLReporter {
                 }
             }
         }
-        String totalExectime = TimeUtils.convertNanosecondsToTimeString(totalDuration);
+        String totalExectime = TimeUtility.convertNanosecondsToTimeString(totalDuration);
+
+        //Get Total Feature Details & Total Sceanrio Details
         List<Map<String, Integer>> maps = getfeatureInfo(jsons);
         int featureCount = maps.get(0).get("featureCount");
         int featurePass = maps.get(0).get("featurePass");
@@ -53,7 +80,14 @@ public class HTMLReporter {
         int scenarioSkip = maps.get(0).get("scenarioSkip");
         int scenarioOther = maps.get(0).get("scenarioOther");
 
-        String dashbord = html.replaceAll("@REPORTGENERATIONDATE", generatedDate)
+        //FEATURES DATA Table
+        String featurePageData = getFeatureDataforHTML(jsons);
+
+        String dashbord = html.replaceAll("@PROFILELETTER", userLetter)
+                .replaceAll("@REPORTGENERATIONDATE", generatedDate)
+                .replaceAll("@PROJECTNAME", projectName)
+                .replaceAll("@EXECUTORNAME", userName)
+                .replaceAll("@HOSTNAME", hostName)
                 .replaceAll("@TOTALEXECUTIONTIME", totalExectime)
                 .replaceAll("@TOTALFEATURES", featureCount + "")
                 .replaceAll("@FEATUREPASS", featurePass + "")
@@ -64,18 +98,41 @@ public class HTMLReporter {
                 .replaceAll("@SCENARIOPASS", scenarioPass + "")
                 .replaceAll("@SCENARIOFAIL", scenarioFail + "")
                 .replaceAll("@SCENARIOSKIP", scenarioSkip + "")
-                .replaceAll("@SCENARIOOTHERS", scenarioOther + "");
+                .replaceAll("@SCENARIOOTHERS", scenarioOther + "")
+                .replaceAll("@FEATUREDATA", featurePageData);
+
+        if (LOGPATH.equalsIgnoreCase("none")) {
+            dashbord = dashbord.replaceAll("@LOGDATA","Log not specified/generated");
+        }
+        if (!LOGPATH.equalsIgnoreCase("none")) {
+            FileUtility fileUtility = new FileUtility(LOGPATH);
+            List<File> files = fileUtility.getFiles(".log");
+            Map<String, String> logData = new HashMap<>();
+            for (File file : files
+            ) {
+                logData.put(file.getName(), FileUtility.readAndGetFileContent(file.getAbsolutePath()));
+
+            }
+
+            String logTemp =
+                    "<h1>@LOGFILENAME</h1>" +
+                            "<br>" +
+                            "<p>@LOGFILEDATA</p>" +
+                            "<br>";
+            String log = "";
+            for (Map.Entry<String, String> entry : logData.entrySet()) {
+                log = log + "\n" + logTemp.replaceAll("@LOGFILENAME", entry.getKey())
+                        .replaceAll("@LOGFILEDATA", entry.getValue());
+            }
+
+            dashbord = dashbord.replaceAll("@LOGDATA", log);
+        }
 
 
-        //FEATURES DATA
-        String featurePageData = getFeatureDataforHTML(jsons);
-        dashbord = dashbord.replaceAll("@DATA", featurePageData)
-                .replaceAll("@EXECUTORNAME", userName)
-                .replaceAll("@HOSTNAME", hostName)
-        .replaceAll("@PROJECTNAME","M.O.M Automation");
+        FileUtility.createRunnerandFeatureDir(new File(HTMLPATH));
 
-
-        FileUtility.writeAndCreateFile(dashbord, "reposs\\indexnew.html");
+        FileUtility.writeAndCreateFile(dashbord, HTMLPATH + "\\cooker_cucumber_report_"
+                + TimeUtility.getCurrTimeStampUnderscore() + ".html");
 
 
     }
@@ -211,7 +268,7 @@ public class HTMLReporter {
                     }
                     long res = getElementDuration(element);
                     featuretime = featuretime + res;
-                    String scnDur = TimeUtils.convertNanosecondsToTimeString(res);
+                    String scnDur = TimeUtility.convertNanosecondsToTimeString(res);
                     scnData.put("scnduration", scnDur);
 
                     scenarioData.add(scnData);
@@ -232,7 +289,7 @@ public class HTMLReporter {
                 //break;
             }
 
-            String featurDur = TimeUtils.convertNanosecondsToTimeString(featuretime);
+            String featurDur = TimeUtility.convertNanosecondsToTimeString(featuretime);
             mainData.append("\n");
             mainData.append(featureHolder
                     .replaceAll("@FEATURENAME", name)

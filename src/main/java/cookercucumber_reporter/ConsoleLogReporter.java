@@ -15,7 +15,7 @@ import java.util.List;
  * @created 20/09/2020
  * @project cooker-cucumber-reporter
  */
-public class Reporter {
+public class ConsoleLogReporter {
 
     public List<String> generateReport(String jsonPath) throws Exception {
         List<FeaturePOJO> total = new ArrayList<>();
