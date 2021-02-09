@@ -31,8 +31,7 @@ public class HTMLReporter {
         this.HTMLPATH = htmlpath;
         this.LOGPATH = logpath;
         this.projectName = projectName;
-        userName = System.getProperty("user.name");
-        System.out.println("userName = " + userName);
+        userName = (System.getProperty("user.name")).replaceAll("\\$","\\\\\\$");
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
@@ -41,99 +40,103 @@ public class HTMLReporter {
         userLetter = (userName.charAt(0) + "").toUpperCase();
     }
 
-    public void genHTML() throws Exception {
-        List<FeaturePOJO> jsons = getJSONsToList(JSONSPATH);
+    public void genHTML() {
+        try {
+            List<FeaturePOJO> jsons = getJSONsToList(JSONSPATH);
 
-        InputStream resourceAsStream = getClass().getResourceAsStream("/template/temp.html");
-        Scanner s = new Scanner(resourceAsStream).useDelimiter("\\A");
-        String result = s.hasNext() ? s.next() : "";
+            InputStream resourceAsStream = getClass().getResourceAsStream("/template/temp.html");
+            Scanner s = new Scanner(resourceAsStream).useDelimiter("\\A");
+            String result = s.hasNext() ? s.next() : "";
 
-        String html = result;
-        //System.out.println("html = " + html);
-        //FileUtility.readAndGetFileContent(manual.getAbsolutePath());
-        StringBuffer sb = new StringBuffer();
+            String html = result;
+            //System.out.println("html = " + html);
+            //FileUtility.readAndGetFileContent(manual.getAbsolutePath());
+            StringBuffer sb = new StringBuffer();
 
-        //DASH BOARD DATA
-        //Report Generated Time Stamp
-        String generatedDate = TimeUtility.getCurrTimeStamp();
+            //DASH BOARD DATA
+            //Report Generated Time Stamp
+            String generatedDate = TimeUtility.getCurrTimeStamp();
 
-        //Total Execution Duration
-        long totalDuration = 0l;
-        for (FeaturePOJO featurePOJO : jsons) {
-            for (Elements elements : featurePOJO.getElements()) {
-                if (elements.getType().equalsIgnoreCase("scenario")) {
-                    totalDuration = totalDuration + getElementDuration(elements);
+            //Total Execution Duration
+            long totalDuration = 0l;
+            for (FeaturePOJO featurePOJO : jsons) {
+                for (Elements elements : featurePOJO.getElements()) {
+                    if (elements.getType().equalsIgnoreCase("scenario")) {
+                        totalDuration = totalDuration + getElementDuration(elements);
+                    }
                 }
             }
-        }
-        String totalExectime = TimeUtility.convertNanosecondsToTimeString(totalDuration);
+            String totalExectime = TimeUtility.convertNanosecondsToTimeString(totalDuration);
 
-        //Get Total Feature Details & Total Sceanrio Details
-        List<Map<String, Integer>> maps = getfeatureInfo(jsons);
-        int featureCount = maps.get(0).get("featureCount");
-        int featurePass = maps.get(0).get("featurePass");
-        int featureFail = maps.get(0).get("featureFail");
-        int featureSkip = maps.get(0).get("featureSkip");
-        int featureOther = maps.get(0).get("featureOther");
-        int scenarioCount = maps.get(0).get("scenarioCount");
-        int scenarioPass = maps.get(0).get("scenarioPass");
-        int scenarioFail = maps.get(0).get("scenarioFail");
-        int scenarioSkip = maps.get(0).get("scenarioSkip");
-        int scenarioOther = maps.get(0).get("scenarioOther");
+            //Get Total Feature Details & Total Sceanrio Details
+            List<Map<String, Integer>> maps = getfeatureInfo(jsons);
+            int featureCount = maps.get(0).get("featureCount");
+            int featurePass = maps.get(0).get("featurePass");
+            int featureFail = maps.get(0).get("featureFail");
+            int featureSkip = maps.get(0).get("featureSkip");
+            int featureOther = maps.get(0).get("featureOther");
+            int scenarioCount = maps.get(0).get("scenarioCount");
+            int scenarioPass = maps.get(0).get("scenarioPass");
+            int scenarioFail = maps.get(0).get("scenarioFail");
+            int scenarioSkip = maps.get(0).get("scenarioSkip");
+            int scenarioOther = maps.get(0).get("scenarioOther");
 
-        //FEATURES DATA Table
-        String featurePageData = getFeatureDataforHTML(jsons);
+            //FEATURES DATA Table
+            String featurePageData = getFeatureDataforHTML(jsons);
 
-        String dashbord = html.replaceAll("@PROFILELETTER", userLetter)
-                .replaceAll("@REPORTGENERATIONDATE", generatedDate)
-                .replaceAll("@PROJECTNAME", projectName)
-                .replaceAll("@EXECUTORNAME", userName)
-                .replaceAll("@HOSTNAME", hostName)
-                .replaceAll("@TOTALEXECUTIONTIME", totalExectime)
-                .replaceAll("@TOTALFEATURES", featureCount + "")
-                .replaceAll("@FEATUREPASS", featurePass + "")
-                .replaceAll("@FEATUREFAIL", featureFail + "")
-                .replaceAll("@FEATURESKIP", featureSkip + "")
-                .replaceAll("@FEATUREOTHERS", featureOther + "")
-                .replaceAll("@TOTALSCENARIO", scenarioCount + "")
-                .replaceAll("@SCENARIOPASS", scenarioPass + "")
-                .replaceAll("@SCENARIOFAIL", scenarioFail + "")
-                .replaceAll("@SCENARIOSKIP", scenarioSkip + "")
-                .replaceAll("@SCENARIOOTHERS", scenarioOther + "")
-                .replaceAll("@FEATUREDATA", featurePageData);
+            String dashbord = html.replaceAll("@PROFILELETTER", userLetter)
+                    .replaceAll("@REPORTGENERATIONDATE", generatedDate)
+                    .replaceAll("@PROJECTNAME", projectName)
+                    .replaceAll("@EXECUTORNAME", userName)
+                    .replaceAll("@HOSTNAME", hostName)
+                    .replaceAll("@TOTALEXECUTIONTIME", totalExectime)
+                    .replaceAll("@TOTALFEATURES", featureCount + "")
+                    .replaceAll("@FEATUREPASS", featurePass + "")
+                    .replaceAll("@FEATUREFAIL", featureFail + "")
+                    .replaceAll("@FEATURESKIP", featureSkip + "")
+                    .replaceAll("@FEATUREOTHERS", featureOther + "")
+                    .replaceAll("@TOTALSCENARIO", scenarioCount + "")
+                    .replaceAll("@SCENARIOPASS", scenarioPass + "")
+                    .replaceAll("@SCENARIOFAIL", scenarioFail + "")
+                    .replaceAll("@SCENARIOSKIP", scenarioSkip + "")
+                    .replaceAll("@SCENARIOOTHERS", scenarioOther + "")
+                    .replaceAll("@FEATUREDATA", featurePageData);
 
-        if (LOGPATH.equalsIgnoreCase("none")) {
-            dashbord = dashbord.replaceAll("@LOGDATA","Log not specified/generated");
-        }
-        if (!LOGPATH.equalsIgnoreCase("none")) {
-            FileUtility fileUtility = new FileUtility(LOGPATH);
-            List<File> files = fileUtility.getFiles(".log");
-            Map<String, String> logData = new HashMap<>();
-            for (File file : files
-            ) {
-                logData.put(file.getName(), FileUtility.readAndGetFileContent(file.getAbsolutePath()));
+            if (LOGPATH.equalsIgnoreCase("none")) {
+                dashbord = dashbord.replaceAll("@LOGDATA","Log not specified/generated");
+            }
+            if (!LOGPATH.equalsIgnoreCase("none")) {
+                FileUtility fileUtility = new FileUtility(LOGPATH);
+                List<File> files = fileUtility.getFiles(".log");
+                Map<String, String> logData = new HashMap<>();
+                for (File file : files
+                ) {
+                    logData.put(file.getName(), FileUtility.readAndGetFileContent(file.getAbsolutePath()));
 
+                }
+
+                String logTemp =
+                        "<h1>@LOGFILENAME</h1>" +
+                                "<br>" +
+                                "<p>@LOGFILEDATA</p>" +
+                                "<br>";
+                String log = "";
+                for (Map.Entry<String, String> entry : logData.entrySet()) {
+                    log = log + "\n" + logTemp.replaceAll("@LOGFILENAME", entry.getKey())
+                            .replaceAll("@LOGFILEDATA", entry.getValue());
+                }
+
+                dashbord = dashbord.replaceAll("@LOGDATA", log);
             }
 
-            String logTemp =
-                    "<h1>@LOGFILENAME</h1>" +
-                            "<br>" +
-                            "<p>@LOGFILEDATA</p>" +
-                            "<br>";
-            String log = "";
-            for (Map.Entry<String, String> entry : logData.entrySet()) {
-                log = log + "\n" + logTemp.replaceAll("@LOGFILENAME", entry.getKey())
-                        .replaceAll("@LOGFILEDATA", entry.getValue());
-            }
 
-            dashbord = dashbord.replaceAll("@LOGDATA", log);
+            FileUtility.createRunnerandFeatureDir(new File(HTMLPATH));
+
+            FileUtility.writeAndCreateFile(dashbord, HTMLPATH + "\\cooker_cucumber_report_"
+                    + TimeUtility.getCurrTimeStampUnderscore() + ".html");
+        } catch (Exception e) {
+            System.err.println("Error in Generating HTML : " + e.getMessage());
         }
-
-
-        FileUtility.createRunnerandFeatureDir(new File(HTMLPATH));
-
-        FileUtility.writeAndCreateFile(dashbord, HTMLPATH + "\\cooker_cucumber_report_"
-                + TimeUtility.getCurrTimeStampUnderscore() + ".html");
 
 
     }
