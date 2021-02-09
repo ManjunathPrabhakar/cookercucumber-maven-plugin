@@ -2,6 +2,7 @@ package cookercucumber_reporter;
 
 import com.google.gson.Gson;
 import common.fileFactory.FileUtility;
+import common.utils.OtherUtils;
 import common.utils.TimeUtility;
 import cookercucumber_reporter.json_pojos.*;
 
@@ -26,18 +27,32 @@ public class HTMLReporter {
     String userLetter = null;
     String projectName = null;
 
-    public HTMLReporter(String jsonPath, String htmlpath, String logpath,String projectName) {
+    public HTMLReporter(String jsonPath, String htmlpath, String logpath, String projectName) {
         this.JSONSPATH = jsonPath;
         this.HTMLPATH = htmlpath;
         this.LOGPATH = logpath;
         this.projectName = projectName;
-        userName = (System.getProperty("user.name")).replaceAll("\\$","\\\\\\$");
+        try {
+            if (System.getProperty("user.name").equalsIgnoreCase("")
+                    | System.getProperty("user.name").isEmpty()
+                    | System.getProperty("user.name") == null) {
+                userName = "null";
+                userLetter = (projectName.charAt(0) + "").toUpperCase();
+            } else {
+                userName = System.getProperty("user.name");
+                userLetter = (userName.charAt(0) + "").toUpperCase();
+            }
+        } catch (Exception e) {
+            userName = "null";
+            userLetter = (projectName.charAt(0) + "").toUpperCase();
+        }
+        //userName = (System.getProperty("user.name")).replaceAll("\\$","\\\\\\$");
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
-            hostName = "NA";
+            hostName = "null";
         }
-        userLetter = (userName.charAt(0) + "").toUpperCase();
+
     }
 
     public void genHTML() {
@@ -84,11 +99,11 @@ public class HTMLReporter {
             //FEATURES DATA Table
             String featurePageData = getFeatureDataforHTML(jsons);
 
-            String dashbord = html.replaceAll("@PROFILELETTER", userLetter)
+            String dashbord = html.replaceAll("@PROFILELETTER", OtherUtils.quoteRegExSpecialChars(userLetter))
                     .replaceAll("@REPORTGENERATIONDATE", generatedDate)
-                    .replaceAll("@PROJECTNAME", projectName)
-                    .replaceAll("@EXECUTORNAME", userName)
-                    .replaceAll("@HOSTNAME", hostName)
+                    .replaceAll("@PROJECTNAME", OtherUtils.quoteRegExSpecialChars(projectName))
+                    .replaceAll("@EXECUTORNAME", OtherUtils.quoteRegExSpecialChars(userName))
+                    .replaceAll("@HOSTNAME", OtherUtils.quoteRegExSpecialChars(hostName))
                     .replaceAll("@TOTALEXECUTIONTIME", totalExectime)
                     .replaceAll("@TOTALFEATURES", featureCount + "")
                     .replaceAll("@FEATUREPASS", featurePass + "")
@@ -100,10 +115,10 @@ public class HTMLReporter {
                     .replaceAll("@SCENARIOFAIL", scenarioFail + "")
                     .replaceAll("@SCENARIOSKIP", scenarioSkip + "")
                     .replaceAll("@SCENARIOOTHERS", scenarioOther + "")
-                    .replaceAll("@FEATUREDATA", featurePageData);
+                    .replaceAll("@FEATUREDATA", OtherUtils.quoteRegExSpecialChars(featurePageData));
 
             if (LOGPATH.equalsIgnoreCase("none")) {
-                dashbord = dashbord.replaceAll("@LOGDATA","Log not specified/generated");
+                dashbord = dashbord.replaceAll("@LOGDATA", "Log not specified/generated");
             }
             if (!LOGPATH.equalsIgnoreCase("none")) {
                 FileUtility fileUtility = new FileUtility(LOGPATH);
@@ -122,11 +137,11 @@ public class HTMLReporter {
                                 "<br>";
                 String log = "";
                 for (Map.Entry<String, String> entry : logData.entrySet()) {
-                    log = log + "\n" + logTemp.replaceAll("@LOGFILENAME", entry.getKey())
-                            .replaceAll("@LOGFILEDATA", entry.getValue());
+                    log = log + "\n" + logTemp.replaceAll("@LOGFILENAME", OtherUtils.quoteRegExSpecialChars(entry.getKey()))
+                            .replaceAll("@LOGFILEDATA", OtherUtils.quoteRegExSpecialChars(entry.getValue()));
                 }
 
-                dashbord = dashbord.replaceAll("@LOGDATA", log);
+                dashbord = dashbord.replaceAll("@LOGDATA", OtherUtils.quoteRegExSpecialChars(log));
             }
 
 
