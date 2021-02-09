@@ -32,6 +32,7 @@ public class HTMLReporter {
         this.LOGPATH = logpath;
         this.projectName = projectName;
         userName = System.getProperty("user.name");
+        System.out.println("userName = " + userName);
         try {
             hostName = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
