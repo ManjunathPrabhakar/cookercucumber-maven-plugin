@@ -46,7 +46,6 @@
         <developerConnection>scm:git:https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin.git
         </developerConnection>
         <url>https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin</url>
-        <tag>cooker-maven-plugin-2.0.22</tag>
     </scm>
 
     <!-- maven artifact distribution -->
