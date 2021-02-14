@@ -59,6 +59,22 @@ public class HTMLReporter {
         try {
             List<FeaturePOJO> jsons = getJSONsToList(JSONSPATH);
 
+            //Combine Different Scenarios of Same Feature name Jsons as One
+            Map<String, FeaturePOJO> featuresMap = new HashMap<>();
+            for (FeaturePOJO feature : jsons) {
+                //If Map doesn't have the Feature Name (Key)
+                if (featuresMap.get(feature.getName()) == null)
+                    //Add key as Feature Name & Value as The Feature Itself
+                    featuresMap.put(feature.getName(), feature);
+                else
+                    //Get the Map with Feature Name (Key),
+                    // Get Its feature's elements and add the elements of same feature file
+                    featuresMap.get(feature.getName()).getElements().addAll(feature.getElements());
+            }
+
+            jsons.clear();
+            jsons = new ArrayList<>(featuresMap.values());
+
             InputStream resourceAsStream = getClass().getResourceAsStream("/template/temp.html");
             Scanner s = new Scanner(resourceAsStream).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
