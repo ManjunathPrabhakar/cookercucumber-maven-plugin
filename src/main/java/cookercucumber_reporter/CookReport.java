@@ -50,7 +50,7 @@ public class CookReport {
             FTLReporter ftl = new FTLReporter(this.jsonPath, this.htmlpath, this.startpage, this.projectName, this.turnOffsplash);
             ftl.generateFTLReport();
         } catch (Exception e) {
-            System.out.println("Error in Cooker Cucumber HTML Reporter");
+            System.err.println("Error in Cooker Cucumber HTML Reporter \n" + e);
         }
     }
 }
