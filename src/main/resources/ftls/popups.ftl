@@ -69,16 +69,15 @@
                                         <!-- STEP ARGUMENTS -->
                                         <#if steps.getMatch()?has_content>
                                             <#if steps.getMatch().getArguments()?size gt 0>
-                                                <table border="1px black solid"
-                                                       style="max-width:90%; margin: 2px;border-collapse: collapse;">
+                                                <table class="stepTable">
                                                     <tbody>
                                                     <tr>
                                                         <th>Arguments</th>
                                                     </tr>
                                                     <#list steps.getMatch().getArguments() as args>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">
-                                                                <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${args.getVal()}</pre>
+                                                        <tr>
+                                                            <td>
+                                                                <pre style="white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${args.getVal()}</pre>
                                                             </td>
                                                         </tr>
                                                     </#list>
@@ -88,17 +87,15 @@
                                         </#if>
                                         <!-- STEP DATATABLE -->
                                         <#if steps.getRows()?has_content>
-                                            <table border="1px solid black"
-                                                   style="margin: 2px;border-collapse: collapse; max-width:90%;">
+                                            <table class="stepTable">
                                                 <tbody>
                                                 <tr>
                                                     <th>Datatable</th>
                                                 </tr>
                                                 <#list steps.getRows() as datatable>
-                                                    <tr border="1px solid black">
+                                                    <tr>
                                                         <#list datatable.getCells() as cells>
-                                                            <td style="padding: 2px;"
-                                                                border="1px solid black">${cells}</td>
+                                                            <td>${cells}</td>
                                                         </#list>
                                                     </tr>
                                                 </#list>
@@ -107,16 +104,15 @@
                                         </#if>
                                         <!-- STEP ERROR MESSAGE -->
                                         <#if steps.getResult().getErrorMessage()?has_content>
-                                            <table border="1px red solid" ;
-                                                   style="margin: 2px;max-width:90%; border-collapse: collapse;">
-                                                <tbody border="1px red solid">
+                                            <table class="stepTable">
+                                                <tbody>
                                                 <tr>
                                                     <th>Error Message</th>
                                                 </tr>
-                                                <tr border="1px red solid">
-                                                    <td border="1px red solid">
+                                                <tr>
+                                                    <td>
                                                     <pre class="error"
-                                                         style="padding: 5px; color: red; font-size: small;">${steps.getResult().getErrorMessage()}</pre>
+                                                         style="white-space:pre-wrap; padding: 5px; color: red; font-size: small;">${steps.getResult().getErrorMessage()}</pre>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -126,19 +122,18 @@
                                         <#if steps.getEmbeddings()?has_content>
                                             <#list steps.getEmbeddings() as embedding>
                                                 <#if embedding.getMime_type() == 'image/png'>
-                                                    <table border="1px black solid"
-                                                           style="margin: 2px; max-width:90%; border-collapse: collapse;">
+                                                    <table class="stepTable">
                                                         <tbody>
                                                         <tr>
                                                             <th>Screenshot Embed</th>
                                                         </tr>
                                                         <#if !(embedding.getName() == '')>
-                                                            <tr border="1px black solid">
-                                                                <td border="1px black solid">${embedding.getName()}</td>
+                                                            <tr>
+                                                                <td>${embedding.getName()}</td>
                                                             </tr>
                                                         </#if>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">
+                                                        <tr>
+                                                            <td>
                                                                 <style>
                                                                     #pic1:hover {
                                                                         cursor: pointer;
@@ -147,7 +142,7 @@
                                                                 <img id="pic1" class="materialboxed"
                                                                      onclick="displayImage(this)"
                                                                      data-caption='embedding'
-                                                                     width="250"
+                                                                     width="300"
                                                                      src="data:image/png;base64,${embedding.getData()}">
                                                             </td>
                                                         </tr>
@@ -155,33 +150,31 @@
                                                     </table>
                                                 </#if>
                                                 <#if embedding.getMime_type() == 'text/html'>
-                                                    <table border="1px black solid"
-                                                           style="max-width:90%; margin: 2px;border-collapse: collapse;">
+                                                    <table class="stepTable">
                                                         <tbody>
                                                         <tr>
                                                             <th>HTML Embed</th>
                                                         </tr>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">${embedding.getName()}</td>
+                                                        <tr>
+                                                            <td>${embedding.getName()}</td>
                                                         </tr>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">${embedding.getDecodedData(embedding.getData())}</td>
+                                                        <tr>
+                                                            <td>${embedding.getDecodedData(embedding.getData())}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
                                                 </#if>
                                                 <#if embedding.getMime_type() == 'text/plain'>
-                                                    <table border="margin: 2px;1px black solid"
-                                                           style="max-width:90%;  border-collapse: collapse;">
+                                                    <table class="stepTable">
                                                         <tbody>
                                                         <tr>
                                                             <th>Plain text Embed</th>
                                                         </tr>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">${embedding.getName()}</td>
+                                                        <tr>
+                                                            <td>${embedding.getName()}</td>
                                                         </tr>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">
+                                                        <tr>
+                                                            <td>
                                                                 <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: small;">${embedding.getDecodedData(embedding.getData())}</pre>
                                                             </td>
                                                         </tr>
@@ -192,35 +185,35 @@
                                         </#if>
                                         <!-- STEP OUTPUT -->
                                         <#if steps.getOutput()?has_content>
-                                            <#list steps.getOutput() as output>
-                                                <#if output??>
-                                                    <table border="1px black solid"
-                                                           style="margin: 2px;max-width:90%; border-collapse: collapse;">
-                                                        <tbody>
-                                                        <tr>
-                                                            <th>Output</th>
-                                                        </tr>
-                                                        <tr border="1px black solid">
-                                                            <td border="1px black solid">
-                                                                <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${output}</pre>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </#if>
-                                            </#list>
+                                            <#if steps.getOutput()?size gt 0>
+                                                <table class="stepTable">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>Output</th>
+                                                    </tr>
+                                                    <#list steps.getOutput() as output>
+                                                        <#if output??>
+                                                            <tr>
+                                                                <td>
+                                                                    <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${output}</pre>
+                                                                </td>
+                                                            </tr>
+                                                        </#if>
+                                                    </#list>
+                                                    </tbody>
+                                                </table>
+                                            </#if>
                                         </#if>
                                         <!-- STEP DOCSTRING -->
                                         <#if steps.getDocStrings()?has_content>
                                             <#if steps.getDocStrings().getValue()??>
-                                                <table border="1px black solid"
-                                                       style="margin: 2px;max-width:90%; border-collapse: collapse;">
+                                                <table class="stepTable">
                                                     <tbody>
                                                     <tr>
                                                         <th>Doc Strings</th>
                                                     </tr>
-                                                    <tr border="1px black solid">
-                                                        <td border="1px black solid">
+                                                    <tr>
+                                                        <td>
                                                             <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${steps.getDocStrings().getValue()}</pre>
                                                         </td>
                                                     </tr>

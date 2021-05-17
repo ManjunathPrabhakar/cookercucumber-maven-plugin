@@ -33,6 +33,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .stepTable {
+            margin: 2px;
+            table-layout: fixed;
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body onload="enableView(${firstPage})">
