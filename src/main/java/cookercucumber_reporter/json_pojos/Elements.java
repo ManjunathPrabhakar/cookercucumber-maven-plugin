@@ -2,8 +2,11 @@ package cookercucumber_reporter.json_pojos;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Manjunath Prabhakar (Manjunath-PC)
@@ -187,6 +190,65 @@ public class Elements {
 //
 //        return res.toUpperCase();
 //    }
+
+    public Duration getDuration() {
+        Duration duration = Duration.ofSeconds(0);
+        for (Steps step : steps) {
+            duration = duration.plus(step.getDuration());
+        }
+        if (before != null) {
+            for (BeforeHook hook : before) {
+                duration = duration.plus(hook.getDuration());
+            }
+        }
+        if (after != null) {
+            for (AfterHook hook : after) {
+                duration = duration.plus(hook.getDuration());
+            }
+        }
+        return duration;
+    }
+
+    public String getStatus() {
+        String res = "other";
+
+        if (steps.stream().anyMatch(s -> s.getResult().getStatus().equalsIgnoreCase("failed"))) {
+            res = "fail";
+        } else if (steps.stream().anyMatch(s -> s.getResult().getStatus().equalsIgnoreCase("skipped"))) {
+            res = "skip";
+        } else if (steps.stream().allMatch(s -> s.getResult().getStatus().equalsIgnoreCase("passed"))) {
+            res = "pass";
+        }
+
+        return res;
+    }
+
+    public String getDurationStringFormat(Duration duration) {
+        long da = duration.toDays();
+        long h = duration.minusDays(da).toHours();
+        long m = duration.minusHours(h).toMinutes();
+        long s = duration.minusMinutes(m).getSeconds();
+        long mi = duration.minusSeconds(s).getNano();
+
+        String res = ((da > 0 ? (da + "d") : "") + " " +
+                (h > 0 ? (String.format("%02d", h) + "h") : "") + " " +
+                (m > 0 ? (String.format("%02d", m) + "m") : "") + " " +
+                (s > 0 ? (String.format("%02d", s) + "s") : "") + " " +
+                (mi > 0 ? (("" + mi).substring(0, 3) + "ms") : "")).trim();
+
+        return res.isEmpty() ? "0ms" : res;
+    }
+
+    public Map<String, String> getScenariosStatusesCount() {
+        Map<String, String> stat = new HashMap<>();
+
+        stat.put("pass", "" + steps.stream().filter(s -> getType().equalsIgnoreCase("scenario") & s.getResult().getStatus().equalsIgnoreCase("passed")).count());
+        stat.put("fail", "" + steps.stream().filter(s -> getType().equalsIgnoreCase("scenario") & s.getResult().getStatus().equalsIgnoreCase("failed")).count());
+        stat.put("skip", "" + steps.stream().filter(s -> getType().equalsIgnoreCase("scenario") & s.getResult().getStatus().equalsIgnoreCase("skipped")).count());
+        stat.put("other", "" + steps.stream().filter(s -> getType().equalsIgnoreCase("scenario") & (!s.getResult().getStatus().equalsIgnoreCase("passed") & !s.getResult().getStatus().equalsIgnoreCase("failed") & !s.getResult().getStatus().equalsIgnoreCase("skipped"))).count());
+
+        return stat;
+    }
 
 
 }

@@ -9,11 +9,6 @@ import io.cucumber.tagexpressions.TagExpressionParser;
 
 import java.util.List;
 
-/**
- * @author Manjunath Prabhakar
- * @created 11/09/2020
- * @project cooker-new-version
- */
 public class CookerTagExpressionParser {
 
     /**

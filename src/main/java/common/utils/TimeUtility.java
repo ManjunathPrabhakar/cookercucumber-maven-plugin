@@ -8,11 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Manjunath Prabhakar (Manjunath-PC)
- * @created 08/02/2021
- * @project cooker-maven-plugin
- */
+
 public class TimeUtility {
     private static final int MICROSECOND_FACTOR = 1000000;
 

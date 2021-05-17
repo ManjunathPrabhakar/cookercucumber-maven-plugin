@@ -5,11 +5,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Manjunath Prabhakar (Manjunath-PC)
- * @created 09/02/2021
- * @project cooker-maven-plugin
- */
 public class OtherUtils {
 
     private static final char[] escapeChars = { '<', '(', '[', '{', '\\', '^', '-', '=', '$', '!', '|', ']', '}', ')', '?', '*', '+', '.', '>' };

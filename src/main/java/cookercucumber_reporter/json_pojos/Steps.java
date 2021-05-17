@@ -2,6 +2,7 @@ package cookercucumber_reporter.json_pojos;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,13 @@ public class Steps {
 
     @SerializedName(value = "rows")
     private List<DataTableRows> rows = new ArrayList<DataTableRows>();
+
+    @SerializedName(value="doc_string")
+    private DocStrings docStrings;
+
+    public DocStrings getDocStrings() {
+        return docStrings;
+    }
 
     public List<String> getOutput() {
         return output;
@@ -138,5 +146,25 @@ public class Steps {
                 ", keyword='" + keyword + '\'' +
                 ", rows=" + rows +
                 '}';
+    }
+
+    public Duration getDuration() {
+        return Duration.ofNanos(result.getDuration());
+    }
+
+    public String getDurationStringFormat(Duration duration) {
+        long da = duration.toDays();
+        long h = duration.minusDays(da).toHours();
+        long m = duration.minusHours(h).toMinutes();
+        long s = duration.minusMinutes(m).getSeconds();
+        long mi = duration.minusSeconds(s).getNano();
+
+        String res =  ((da > 0 ? (da + "d") : "") + " " +
+                (h > 0 ? (String.format("%02d", h) + "h") : "") + " " +
+                (m > 0 ? (String.format("%02d", m) + "m") : "") + " " +
+                (s > 0 ? (String.format("%02d", s) + "s") : "") + " " +
+                (mi > 0 ? (("" + mi).substring(0, 3) + "ms") : "")).trim();
+
+        return res.isEmpty() ? "0ms" : res;
     }
 }

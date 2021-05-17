@@ -21,7 +21,7 @@ public class CookIt {
 
     //GET ALL NEEDED VALUES FROM INGREDIENTS FROM Ingredients Class
     ///////////////////////////////////////////////////////////////////////////////////////////
-    private String ExistingFeatureFilePath = null;
+    private String existingFeatureFilePath = null;
     private String listUserTags = null;
     private CookerTagExpressionParser cookerTagExpressionParser;
 
@@ -33,7 +33,7 @@ public class CookIt {
      */
     public CookIt() {
         //Initilize all Info needed from Ingredients Class
-        ExistingFeatureFilePath = Ingredients.getfExiFullPath();
+        existingFeatureFilePath = Ingredients.getfExiFullPath();
         listUserTags = Ingredients.getUserTag();
         cookerTagExpressionParser = new CookerTagExpressionParser();
     }
@@ -50,10 +50,9 @@ public class CookIt {
 
         try {
             //Initilize FileUtils Class with exiting feature files directory
-            FileUtility featurecontent = new FileUtility(ExistingFeatureFilePath);
+            FileUtility featurecontent = new FileUtility(existingFeatureFilePath);
             //Get all *.feature files from existing feature files directory
-            List<File> featurefiles = featurecontent.getFiles(".feature");
-
+            List<File> featurefiles = featurecontent.getFiles(Ext.FEATURE.extension);
 
             //If Feature Files are present
             if (featurefiles.size() > 0) {
@@ -83,7 +82,7 @@ public class CookIt {
                     }
 
                     //Show parsing Feature File
-                    MojoLogger.getLogger().info("parsing " + feature.getName());
+                    MojoLogger.getLogger().info("parsing : " + feature.getName());
 
                     //Create new object of Gherkin Document Parser
                     Parser<GherkinDocument> gherkinDocumentParser = new Parser<>(new AstBuilder());

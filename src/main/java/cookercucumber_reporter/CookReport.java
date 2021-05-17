@@ -12,26 +12,45 @@ import java.util.List;
 public class CookReport {
     String jsonPath = "";
     String htmlpath = "";
-    String logPath = "";
+    String startpage = "";
     String projectName = "";
+    boolean turnOffsplash;
 
-    public CookReport(String jsonPath, String htmlPath, String logPath, String projectName) {
+    public CookReport(String jsonPath, String htmlPath, String startPage, String projectName, boolean turnOffSplash) {
         this.jsonPath = jsonPath;
         this.htmlpath = htmlPath;
-        this.logPath = logPath;
+        this.startpage = startPage;
         this.projectName = projectName;
+        this.turnOffsplash = turnOffSplash;
     }
 
     public void showLogReport() throws Exception {
-        List<String> res = new ConsoleLogReporter().generateReport(this.jsonPath);
-        for (String s : res
-        ) {
-            MojoLogger.getLogger().info(s);
+        try {
+            List<String> res = new ConsoleLogReporter().generateReport(this.jsonPath);
+            for (String s : res
+            ) {
+                MojoLogger.getLogger().info(s);
+            }
+        } catch (Exception e) {
+            System.out.println("Error in Cooker Cucumber Console Reporter");
         }
     }
 
     public void generateHTMLReport() throws Exception {
-        HTMLReporter htmlReporter = new HTMLReporter(jsonPath, htmlpath, logPath, projectName);
-        htmlReporter.genHTML();
+        try {
+            HTMLReporter htmlReporter = new HTMLReporter(jsonPath, htmlpath, "", projectName);
+            htmlReporter.genHTML();
+        } catch (Exception e) {
+            System.out.println("Error in Cooker Cucumber Old HTMl Reporter");
+        }
+    }
+
+    public void generateFTLReport() throws Exception{
+        try {
+            FTLReporter ftl = new FTLReporter(this.jsonPath, this.htmlpath, this.startpage, this.projectName, this.turnOffsplash);
+            ftl.generateFTLReport();
+        } catch (Exception e) {
+            System.out.println("Error in Cooker Cucumber HTML Reporter");
+        }
     }
 }

@@ -2,6 +2,8 @@ package cookercucumber_reporter.json_pojos;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.Duration;
+
 /**
  * @author Manjunath Prabhakar (Manjunath-PC)
  * @created 19/09/2020
@@ -17,6 +19,10 @@ public class AfterHook {
 
     @SerializedName(value = "match")
     private Match match;
+
+    public Duration getDuration() {
+        return Duration.ofNanos(result.getDuration());
+    }
 
     public Result getResult() {
         return result;

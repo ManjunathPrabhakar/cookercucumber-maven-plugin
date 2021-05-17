@@ -2,6 +2,8 @@ package cookercucumber_reporter.json_pojos;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Base64;
+
 /**
  * @author Manjunath Prabhakar (Manjunath-PC)
  * @created 19/09/2020
@@ -42,5 +44,9 @@ public class Embeddings {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDecodedData(String base64Encoded) {
+        return new String(Base64.getDecoder().decode(base64Encoded));
     }
 }

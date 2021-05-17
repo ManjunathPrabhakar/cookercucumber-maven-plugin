@@ -21,11 +21,14 @@ public class CookerReportMOJO extends AbstractMojo {
     @Parameter(property = "htmlGeneratePath", required = false, defaultValue = "none")
     private String htmlPath;
 
-    @Parameter(property = "logFilesPath", required = false, defaultValue = "none")
-    private String logPath;
+    @Parameter(property = "turnOffSplashScreen", required = false, defaultValue = "none")
+    private String turnOffSplashScreen;
 
-    @Parameter(property = "projectName", required = true, defaultValue = "")
+    @Parameter(property = "projectName", required = false, defaultValue = "")
     private String projectName;
+
+    @Parameter(property = "startPage", required = false, defaultValue = "none")
+    private String startPage;
 
 
     /**
@@ -37,6 +40,8 @@ public class CookerReportMOJO extends AbstractMojo {
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
         // The logic of our plugin will go here
+        boolean turnOffSplash = false;
+        int startIndex = 0;
         try {
             if (jsonPath.equalsIgnoreCase("none")) {
                 jsonPath = System.getProperty("user.dir") + "\\target\\cucumber-reports";
@@ -44,17 +49,22 @@ public class CookerReportMOJO extends AbstractMojo {
             if (htmlPath.equalsIgnoreCase("none")) {
                 htmlPath = System.getProperty("user.dir") + "\\target\\cooker-html-report";
             }
-            if (logPath.equalsIgnoreCase("all")) {
-                logPath = System.getProperty("user.dir") + "\\";
+            if (turnOffSplashScreen.equalsIgnoreCase("none") || turnOffSplashScreen.equalsIgnoreCase("false")) {
+                turnOffSplash = false;
+            }else{
+                turnOffSplash = true;
+            }
+            if (startPage.equalsIgnoreCase("none")) {
+                startPage = "dashboard";
             }
 
             LOGGER.info("============== COOKER CUCUMBER REPORT MAVEN PLUGIN STARTED =====================");
             LOGGER.info("========================== By Manjunath Prabhakar ==============================");
             LOGGER.info("======================= ++++ generating started ++++ ===========================");
             MojoLogger.setLogger(LOGGER);
-            CookReport cookReport = new CookReport(jsonPath, htmlPath, logPath,projectName);
+            CookReport cookReport = new CookReport(jsonPath, htmlPath, startPage, projectName,turnOffSplash);
             cookReport.showLogReport();
-            cookReport.generateHTMLReport();
+            cookReport.generateFTLReport();
             LOGGER.info("===================== ++++ generating completed ++++ ===========================");
         } catch (Exception e) {
             LOGGER.error("============== ++++ oh no! report generation aborted ++++ ======================");

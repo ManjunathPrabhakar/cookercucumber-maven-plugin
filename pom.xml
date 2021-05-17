@@ -87,6 +87,7 @@
         <cucumber.tagexpressions>3.0.0</cucumber.tagexpressions>
         <apache.poi>4.1.2</apache.poi>
         <google.gson>2.8.6</google.gson>
+        <apache.freemarker>2.3.31</apache.freemarker>
 
 
     </properties>
@@ -246,6 +247,13 @@
             <artifactId>gson</artifactId>
             <version>${google.gson}</version>
         </dependency>
+        <dependency>
+            <!-- need this to HTML output files for reporting -->
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${apache.freemarker}</version>
+        </dependency>
+
 
         <!-- PROJECT DEPENDENCIES FOR COOKER CUCUMBER END -->
     </dependencies>
