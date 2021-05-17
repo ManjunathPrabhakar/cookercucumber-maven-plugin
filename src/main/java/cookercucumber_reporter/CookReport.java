@@ -50,7 +50,14 @@ public class CookReport {
             FTLReporter ftl = new FTLReporter(this.jsonPath, this.htmlpath, this.startpage, this.projectName, this.turnOffsplash);
             ftl.generateFTLReport();
         } catch (Exception e) {
-            MojoLogger.getLogger().error("Error in Cooker Cucumber HTML Reporter \n" + e);
+            MojoLogger.getLogger().error("Error in Cooker Cucumber HTML Reporter");
+            e.printStackTrace();
         }
     }
+
+//    public static void main(String[] args) throws Exception{
+//        FTLReporter ftl = new FTLReporter(System.getProperty("user.dir") + "\\jsons",
+//                System.getProperty("user.dir"), "dashboard", "projet name", true);
+//        ftl.generateFTLReport();
+//    }
 }

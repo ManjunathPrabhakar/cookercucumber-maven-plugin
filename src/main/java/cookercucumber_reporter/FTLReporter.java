@@ -87,11 +87,12 @@ public class FTLReporter {
         duration = duration.minusSeconds(secs);
         long mils = duration.toMillis();
 
+        System.out.println(mils);
         String res = ((days > 0 ? (days + "d") : "") + " " +
                 (hours > 0 ? (String.format("%02d", hours) + "h") : "") + " " +
                 (mins > 0 ? (String.format("%02d", mins) + "m") : "") + " " +
                 (secs > 0 ? (String.format("%02d", secs) + "s") : "") + " " +
-                (mils > 0 ? (("" + mils).substring(0, 3) + "ms") : "")).trim();
+                (mils > 0 ? (String.format("%04d", mils).substring(0, 3) + "ms") : "")).trim();
 
         return res.isEmpty() ? "0ms" : res;
     }

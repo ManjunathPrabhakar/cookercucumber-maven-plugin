@@ -123,7 +123,7 @@
                             </span>
                             </#if>
 
-                            <#if status == "other" & statusCounts != "0">
+                            <#if status == "other" && statusCounts != "0">
                                 <!-- OTHERS COUNT -->
                                 <span class="tagchip" style="color: rgb(0, 51, 190);background: rgb(235, 243, 254);">
                                 <span class="tagname">

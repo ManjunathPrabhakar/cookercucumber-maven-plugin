@@ -239,7 +239,7 @@ public class Elements {
                 (hours > 0 ? (String.format("%02d", hours) + "h") : "") + " " +
                 (mins > 0 ? (String.format("%02d", mins) + "m") : "") + " " +
                 (secs > 0 ? (String.format("%02d", secs) + "s") : "") + " " +
-                (mils > 0 ? (("" + mils).substring(0, 3) + "ms") : "")).trim();
+                (mils > 0 ? (String.format("%04d", secs).substring(0, 3) + "ms") : "")).trim();
 
         return res.isEmpty() ? "0ms" : res;
     }

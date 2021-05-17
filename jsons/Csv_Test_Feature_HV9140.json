@@ -1,0 +1,108 @@
+[
+  {
+    "line": 3,
+    "elements": [
+      {
+        "start_timestamp": "2021-05-17T13:15:36.805Z",
+        "before": [
+          {
+            "result": {
+              "duration": 4000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefs.MyStepdefs.someBefore(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "Test Scenario New One CSV",
+        "description": "",
+        "id": "csv-test-feature;test-scenario-new-one-csv;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "Some Given",
+            "match": {
+              "location": "stepDefs.MyStepdefs.someGiven()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Some When \"data\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"data\"",
+                  "offset": 10
+                }
+              ],
+              "location": "stepDefs.MyStepdefs.someWhen(java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "Some Then",
+            "match": {
+              "location": "stepDefs.MyStepdefs.someThen()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "Some And",
+            "match": {
+              "location": "stepDefs.MyStepdefs.someAnd()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@E2E1"
+          },
+          {
+            "name": "@E2E2"
+          },
+          {
+            "name": "@csv"
+          }
+        ]
+      }
+    ],
+    "name": "Csv Test Feature",
+    "description": "",
+    "id": "csv-test-feature",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/generated/featureFiles/Csv_Test_Feature_HV9140.feature",
+    "tags": [
+      {
+        "name": "@E2E1",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]
