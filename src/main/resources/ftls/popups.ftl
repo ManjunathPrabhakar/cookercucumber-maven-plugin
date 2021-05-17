@@ -63,6 +63,7 @@
                                                                style="color: var(--others-color-lightcolor);"></i>
                                                         </#if>
                                                         <b>${steps.getKeyword()} </b>${steps.getName()}
+                                                    </label>
                                                 </p>
                                             </label>
                                             <label>
@@ -79,7 +80,9 @@
                                                 <table border="1px black solid"
                                                        style="margin: 2px;width: 100%; border-collapse: collapse;">
                                                     <tbody border="1px black solid">
-                                                        <tr><th>Arguments</th></tr>
+                                                    <tr>
+                                                        <th>Arguments</th>
+                                                    </tr>
                                                     <#list steps.getMatch().getArguments() as args>
                                                         <tr border="1px black solid">
                                                             <td border="1px black solid">
@@ -98,7 +101,9 @@
                                             <table border="1px solid black"
                                                    style="margin: 2px;border-collapse: collapse; width: 100%;">
                                                 <tbody>
-                                                <tr><th>Datatable</th></tr>
+                                                <tr>
+                                                    <th>Datatable</th>
+                                                </tr>
                                                 <#list steps.getRows() as datatable>
                                                     <tr border="1px solid black">
                                                         <#list datatable.getCells() as cells>
@@ -116,10 +121,12 @@
 
                                             <table border="1px red solid" ;
                                                    style="margin: 2px;width: 100%; border-collapse: collapse;">
-                                                <tbody border="1px red solid" ;>
-                                                <tr><th>Error Message</th></tr>
-                                                <tr border="1px red solid" ;>
-                                                    <td border="1px red solid" ;>
+                                                <tbody border="1px red solid">
+                                                <tr>
+                                                    <th>Error Message</th>
+                                                </tr>
+                                                <tr border="1px red solid" >
+                                                    <td border="1px red solid">
                                                     <pre class="error"
                                                          style="padding: 5px; color: red; font-size: small;">${steps.getResult().getErrorMessage()}</pre>
                                                     </td>
@@ -136,7 +143,9 @@
                                                     <table border="1px black solid"
                                                            style="margin: 2px; width: 100%;border-collapse: collapse;">
                                                         <tbody border="1px black solid">
-                                                        <tr><th>Screenshot Embed</th></tr>
+                                                        <tr>
+                                                            <th>Screenshot Embed</th>
+                                                        </tr>
                                                         <#if !(embedding.getName() == '')>
                                                             <tr border="1px black solid">
                                                                 <td border="1px black solid">${embedding.getName()}</td>
@@ -145,7 +154,7 @@
                                                         <tr border="1px black solid">
                                                             <td border="1px black solid">
                                                                 <style>
-                                                                    #pic1:hover{
+                                                                    #pic1:hover {
                                                                         cursor: pointer;
                                                                     }
                                                                 </style>
@@ -165,7 +174,9 @@
                                                     <table border="1px black solid"
                                                            style="width: 100%;margin: 2px;border-collapse: collapse;">
                                                         <tbody border="1px black solid">
-                                                        <tr><th>HTML Embed</th></tr>
+                                                        <tr>
+                                                            <th>HTML Embed</th>
+                                                        </tr>
                                                         <tr border="1px black solid">
                                                             <td border="1px black solid">${embedding.getName()}</td>
                                                         </tr>
@@ -180,7 +191,9 @@
                                                     <table border="margin: 2px;1px black solid"
                                                            style="width: 100%; border-collapse: collapse;">
                                                         <tbody border="1px black solid">
-                                                        <tr><th>Plain text Embed</th></tr>
+                                                        <tr>
+                                                            <th>Plain text Embed</th>
+                                                        </tr>
                                                         <tr border="1px black solid">
                                                             <td border="1px black solid">${embedding.getName()}</td>
                                                         </tr>
@@ -203,7 +216,9 @@
                                                     <table border="1px black solid"
                                                            style="margin: 2px;width: 100%; border-collapse: collapse;">
                                                         <tbody border="1px black solid">
-                                                        <tr><th>Output</th></tr>
+                                                        <tr>
+                                                            <th>Output</th>
+                                                        </tr>
                                                         <tr border="1px black solid">
                                                             <td border="1px black solid">
                                                                 <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${output}</pre>
@@ -221,7 +236,9 @@
                                                 <table border="1px black solid"
                                                        style="margin: 2px;width: 100%; border-collapse: collapse;">
                                                     <tbody border="1px black solid">
-                                                    <tr><th>Doc Strings</th></tr>
+                                                    <tr>
+                                                        <th>Doc Strings</th>
+                                                    </tr>
                                                     <tr border="1px black solid">
                                                         <td border="1px black solid">
                                                             <pre style=" white-space:pre-wrap; padding: 1px; font-family: monospace; font-size: medium;">${steps.getDocStrings().getValue()}</pre>

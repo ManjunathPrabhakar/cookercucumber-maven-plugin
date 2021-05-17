@@ -1,6 +1,7 @@
 package cookercucumber_reporter;
 
 import common.utils.TimeUtility;
+import cookerMojoTrigger.MojoLogger;
 import cookercucumber_reporter.json_pojos.FeaturePOJO;
 import freemarker.template.*;
 
@@ -24,6 +25,7 @@ public class FTLReporter {
     String projectName = null;
     int startPageIndex = 0;
     boolean turnOffSplash = false;
+    String version = "2.0.30";
 
     public FTLReporter(String jsonPath, String htmlpath, String startPage, String projectName, boolean turnOffSplash) {
         this.JSONSPATH = jsonPath;
@@ -125,7 +127,7 @@ public class FTLReporter {
         //INDEX.HTML
         input.put("cookerReportTitle", "Cooker Cucumber Report");
         //If user adds logo with base64 image then below line only
-        input.put("pluginNameWithVersion", "Cooker Cucumber Maven Plugin 2.0.29");
+        input.put("pluginNameWithVersion", "Cooker Cucumber Maven Plugin " + version);
         input.put("pluginAuthorName", "Manjunath Prabhakar");
         input.put("needScreenshot", true);
 
@@ -170,7 +172,7 @@ public class FTLReporter {
 
         // 2.2. Get the template
 
-        Template template = cfg.getTemplate("index.ftl");
+
 
         // 2.3. Generate the output
 
@@ -179,17 +181,17 @@ public class FTLReporter {
 //        template.process(input, consoleWriter);
 
         // For the sake of example, also write output into a file:
-        Writer fileWriter = new FileWriter(new File(HTMLPATH + "\\cooker_cucumber_report_"
-                + TimeUtility.getCurrTimeStampUnderscore() + ".html"));
 
+        new File(HTMLPATH).mkdirs();
 
-        try {
-            template.process(input, fileWriter);
-        } finally {
-            fileWriter.close();
+        try(PrintWriter printWriter = new PrintWriter(new File(HTMLPATH + "\\cooker_cucumber_report_" + TimeUtility.getCurrTimeStampUnderscore() + ".html"))){
+            cfg.getTemplate("index.ftl").process(input, printWriter);
+        }catch(Exception e){
+            MojoLogger.getLogger().error("Couldnt Generate Cooker Cucumber report!");
+            e.printStackTrace();
         }
 
-        System.out.println("Cooker report : " + HTMLPATH + "\\cooker_cucumber_report_"
+        MojoLogger.getLogger().info("Cooker report generated : " + HTMLPATH + "\\cooker_cucumber_report_"
                 + TimeUtility.getCurrTimeStampUnderscore() + ".html");
     }
 

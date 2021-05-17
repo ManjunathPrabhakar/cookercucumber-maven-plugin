@@ -32,7 +32,7 @@ public class CookReport {
                 MojoLogger.getLogger().info(s);
             }
         } catch (Exception e) {
-            System.out.println("Error in Cooker Cucumber Console Reporter");
+            MojoLogger.getLogger().error("Error in Cooker Cucumber Console Reporter" + e);
         }
     }
 
@@ -41,7 +41,7 @@ public class CookReport {
             HTMLReporter htmlReporter = new HTMLReporter(jsonPath, htmlpath, "", projectName);
             htmlReporter.genHTML();
         } catch (Exception e) {
-            System.out.println("Error in Cooker Cucumber Old HTMl Reporter");
+            System.out.println("Error in Cooker Cucumber Old HTMl Reporter" + e);
         }
     }
 
@@ -50,7 +50,7 @@ public class CookReport {
             FTLReporter ftl = new FTLReporter(this.jsonPath, this.htmlpath, this.startpage, this.projectName, this.turnOffsplash);
             ftl.generateFTLReport();
         } catch (Exception e) {
-            System.err.println("Error in Cooker Cucumber HTML Reporter \n" + e);
+            MojoLogger.getLogger().error("Error in Cooker Cucumber HTML Reporter \n" + e);
         }
     }
 }
