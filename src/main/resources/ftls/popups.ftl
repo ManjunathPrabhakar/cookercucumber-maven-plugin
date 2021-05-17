@@ -1,14 +1,10 @@
 <!--pop ups start-->
 <div class="pop-ups">
-
     <#list featurepojos as feature>
-
         <#list feature.getElements() as element>
-
             <#if element.getType() == "scenario">
                 <!-- The Modal -->
                 <div id="f${feature?index}s${element?index}" class="modal">
-
                     <!-- Modal content -->
                     <div class="modal-content">
                         <div class="modal-header">
@@ -34,14 +30,12 @@
                                             <p>${element.getKeyword()}: ${element.getName()}</p>
                                         </label>
                                     </div>
-
                                 </button>
                                 <div style="text-align: start" class="contentM">
                                     <p>Type : ${element.getType()}</p>
                                     <p>Description : ${element.getDescription()}</p>
                                 </div>
                             </div>
-
                             <#list element.getSteps() as steps>
                                 <div style="text-align: center">
                                     <button type="button" class="collapsibleM">
@@ -72,14 +66,12 @@
                                         </div>
                                     </button>
                                     <div style="text-align: start" class="contentM">
-
                                         <!-- STEP ARGUMENTS -->
                                         <#if steps.getMatch()?has_content>
                                             <#if steps.getMatch().getArguments()?size gt 0>
-
                                                 <table border="1px black solid"
-                                                       style="margin: 2px;width: 100%; border-collapse: collapse;">
-                                                    <tbody border="1px black solid">
+                                                       style="max-width:90%; margin: 2px;border-collapse: collapse;">
+                                                    <tbody>
                                                     <tr>
                                                         <th>Arguments</th>
                                                     </tr>
@@ -92,14 +84,12 @@
                                                     </#list>
                                                     </tbody>
                                                 </table>
-
                                             </#if>
                                         </#if>
-
                                         <!-- STEP DATATABLE -->
                                         <#if steps.getRows()?has_content>
                                             <table border="1px solid black"
-                                                   style="margin: 2px;border-collapse: collapse; width: 100%;">
+                                                   style="margin: 2px;border-collapse: collapse; max-width:90%;">
                                                 <tbody>
                                                 <tr>
                                                     <th>Datatable</th>
@@ -115,17 +105,15 @@
                                                 </tbody>
                                             </table>
                                         </#if>
-
                                         <!-- STEP ERROR MESSAGE -->
                                         <#if steps.getResult().getErrorMessage()?has_content>
-
                                             <table border="1px red solid" ;
-                                                   style="margin: 2px;width: 100%; border-collapse: collapse;">
+                                                   style="margin: 2px;max-width:90%; border-collapse: collapse;">
                                                 <tbody border="1px red solid">
                                                 <tr>
                                                     <th>Error Message</th>
                                                 </tr>
-                                                <tr border="1px red solid" >
+                                                <tr border="1px red solid">
                                                     <td border="1px red solid">
                                                     <pre class="error"
                                                          style="padding: 5px; color: red; font-size: small;">${steps.getResult().getErrorMessage()}</pre>
@@ -134,15 +122,13 @@
                                                 </tbody>
                                             </table>
                                         </#if>
-
                                         <!-- STEP EMBEDDING -->
                                         <#if steps.getEmbeddings()?has_content>
                                             <#list steps.getEmbeddings() as embedding>
-
                                                 <#if embedding.getMime_type() == 'image/png'>
                                                     <table border="1px black solid"
-                                                           style="margin: 2px; width: 100%;border-collapse: collapse;">
-                                                        <tbody border="1px black solid">
+                                                           style="margin: 2px; max-width:90%; border-collapse: collapse;">
+                                                        <tbody>
                                                         <tr>
                                                             <th>Screenshot Embed</th>
                                                         </tr>
@@ -158,7 +144,6 @@
                                                                         cursor: pointer;
                                                                     }
                                                                 </style>
-
                                                                 <img id="pic1" class="materialboxed"
                                                                      onclick="displayImage(this)"
                                                                      data-caption='embedding'
@@ -169,11 +154,10 @@
                                                         </tbody>
                                                     </table>
                                                 </#if>
-
                                                 <#if embedding.getMime_type() == 'text/html'>
                                                     <table border="1px black solid"
-                                                           style="width: 100%;margin: 2px;border-collapse: collapse;">
-                                                        <tbody border="1px black solid">
+                                                           style="max-width:90%; margin: 2px;border-collapse: collapse;">
+                                                        <tbody>
                                                         <tr>
                                                             <th>HTML Embed</th>
                                                         </tr>
@@ -186,11 +170,10 @@
                                                         </tbody>
                                                     </table>
                                                 </#if>
-
                                                 <#if embedding.getMime_type() == 'text/plain'>
                                                     <table border="margin: 2px;1px black solid"
-                                                           style="width: 100%; border-collapse: collapse;">
-                                                        <tbody border="1px black solid">
+                                                           style="max-width:90%;  border-collapse: collapse;">
+                                                        <tbody>
                                                         <tr>
                                                             <th>Plain text Embed</th>
                                                         </tr>
@@ -207,15 +190,13 @@
                                                 </#if>
                                             </#list>
                                         </#if>
-
                                         <!-- STEP OUTPUT -->
                                         <#if steps.getOutput()?has_content>
                                             <#list steps.getOutput() as output>
-
                                                 <#if output??>
                                                     <table border="1px black solid"
-                                                           style="margin: 2px;width: 100%; border-collapse: collapse;">
-                                                        <tbody border="1px black solid">
+                                                           style="margin: 2px;max-width:90%; border-collapse: collapse;">
+                                                        <tbody>
                                                         <tr>
                                                             <th>Output</th>
                                                         </tr>
@@ -229,13 +210,12 @@
                                                 </#if>
                                             </#list>
                                         </#if>
-
                                         <!-- STEP DOCSTRING -->
                                         <#if steps.getDocStrings()?has_content>
                                             <#if steps.getDocStrings().getValue()??>
                                                 <table border="1px black solid"
-                                                       style="margin: 2px;width: 100%; border-collapse: collapse;">
-                                                    <tbody border="1px black solid">
+                                                       style="margin: 2px;max-width:90%; border-collapse: collapse;">
+                                                    <tbody>
                                                     <tr>
                                                         <th>Doc Strings</th>
                                                     </tr>
@@ -248,23 +228,17 @@
                                                 </table>
                                             </#if>
                                         </#if>
-
                                     </div>
                                 </div>
                             </#list>
                         </div>
                         <div class="modal-footer">
-                            <h3>...</h3>
+                            <h3>End of Scenario</h3>
                         </div>
                     </div>
-
                 </div>
-
             </#if>
         </#list>
-
     </#list>
-
-
 </div>
 <!-- popups end -->

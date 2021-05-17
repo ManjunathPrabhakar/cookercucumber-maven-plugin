@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class OtherUtils {
 
-    private static final char[] escapeChars = { '<', '(', '[', '{', '\\', '^', '-', '=', '$', '!', '|', ']', '}', ')', '?', '*', '+', '.', '>' };
+    private static final char[] escapeChars = {'<', '(', '[', '{', '\\', '^', '-', '=', '$', '!', '|', ']', '}', ')', '?', '*', '+', '.', '>'};
 
     private static String regexEscape(char character) {
         for (char escapeChar : escapeChars) {
@@ -18,20 +18,19 @@ public class OtherUtils {
         return String.valueOf(character);
     }
 
-    public static String quoteRegExSpecialChars( String s)
-    {
+    public static String quoteRegExSpecialChars(String s) {
         final String regExSpecialChars = "<([{\\^-=$!|]})?*+.>";
-        final String regExSpecialCharsRE = regExSpecialChars.replaceAll( ".", "\\\\$0");
-        final Pattern reCharsREP = Pattern.compile( "[" + regExSpecialCharsRE + "]");
-        Matcher m = reCharsREP.matcher( s);
-        return m.replaceAll( "\\\\$0");
+        final String regExSpecialCharsRE = regExSpecialChars.replaceAll(".", "\\\\$0");
+        final Pattern reCharsREP = Pattern.compile("[" + regExSpecialCharsRE + "]");
+        Matcher m = reCharsREP.matcher(s);
+        return m.replaceAll("\\\\$0");
     }
 
-    public static Map<String,String> getSystemProp(){
-        Map<String,String> prop = new HashMap<>();
-        prop.put("javahome",System.getProperty("java.home"));
-        prop.put("osname",System.getProperty("os.name"));
-        prop.put("osarch",System.getProperty("os.arch"));
+    public static Map<String, String> getSystemProp() {
+        Map<String, String> prop = new HashMap<>();
+        prop.put("javahome", System.getProperty("java.home"));
+        prop.put("osname", System.getProperty("os.name"));
+        prop.put("osarch", System.getProperty("os.arch"));
         return prop;
     }
 }

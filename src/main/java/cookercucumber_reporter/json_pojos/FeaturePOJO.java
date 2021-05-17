@@ -141,21 +141,25 @@ public class FeaturePOJO {
     }
 
     public String getDurationStringFormat(Duration duration) {
-        long da = duration.toDays();
-        long h = duration.minusDays(da).toHours();
-        long m = duration.minusHours(h).toMinutes();
-        long s = duration.minusMinutes(m).getSeconds();
-        long mi = duration.minusSeconds(s).getNano();
 
-        String res =  ((da > 0 ? (da + "d") : "") + " " +
-                (h > 0 ? (String.format("%02d", h) + "h") : "") + " " +
-                (m > 0 ? (String.format("%02d", m) + "m") : "") + " " +
-                (s > 0 ? (String.format("%02d", s) + "s") : "") + " " +
-                (mi > 0 ? (("" + mi).substring(0, 3) + "ms") : "")).trim();
+        long days = duration.toDays();
+        duration = duration.minusDays(days);
+        long hours = duration.toHours();
+        duration = duration.minusHours(hours);
+        long mins = duration.toMinutes();
+        duration = duration.minusMinutes(mins);
+        long secs = duration.getSeconds();
+        duration = duration.minusSeconds(secs);
+        long mils = duration.toMillis();
+
+        String res = ((days > 0 ? (days + "d") : "") + " " +
+                (hours > 0 ? (String.format("%02d", hours) + "h") : "") + " " +
+                (mins > 0 ? (String.format("%02d", mins) + "m") : "") + " " +
+                (secs > 0 ? (String.format("%02d", secs) + "s") : "") + " " +
+                (mils > 0 ? (("" + mils).substring(0, 3) + "ms") : "")).trim();
 
         return res.isEmpty() ? "0ms" : res;
     }
-
 
 
 }

@@ -3,9 +3,12 @@ package cookercucumber_reporter;
 import common.utils.TimeUtility;
 import cookerMojoTrigger.MojoLogger;
 import cookercucumber_reporter.json_pojos.FeaturePOJO;
-import freemarker.template.*;
+import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.Version;
 
-import java.io.*;
+import java.io.File;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Duration;
@@ -25,7 +28,7 @@ public class FTLReporter {
     String projectName = null;
     int startPageIndex = 0;
     boolean turnOffSplash = false;
-    String version = "2.0.30";
+    String version = "2.0.31";
 
     public FTLReporter(String jsonPath, String htmlpath, String startPage, String projectName, boolean turnOffSplash) {
         this.JSONSPATH = jsonPath;
@@ -64,14 +67,34 @@ public class FTLReporter {
             this.projectName = "Cooker Cucumber Report";
         }
 
-        try{
+        try {
             startPageIndex = Pages.valueOf(this.startPage.toUpperCase()).getPageIndex();
-        }catch(Exception e){
+        } catch (Exception e) {
             startPageIndex = 0;
         }
 
     }
 
+    public String getDurationStringFormat(Duration duration) {
+
+        long days = duration.toDays();
+        duration = duration.minusDays(days);
+        long hours = duration.toHours();
+        duration = duration.minusHours(hours);
+        long mins = duration.toMinutes();
+        duration = duration.minusMinutes(mins);
+        long secs = duration.getSeconds();
+        duration = duration.minusSeconds(secs);
+        long mils = duration.toMillis();
+
+        String res = ((days > 0 ? (days + "d") : "") + " " +
+                (hours > 0 ? (String.format("%02d", hours) + "h") : "") + " " +
+                (mins > 0 ? (String.format("%02d", mins) + "m") : "") + " " +
+                (secs > 0 ? (String.format("%02d", secs) + "s") : "") + " " +
+                (mils > 0 ? (("" + mils).substring(0, 3) + "ms") : "")).trim();
+
+        return res.isEmpty() ? "0ms" : res;
+    }
 
     public void generateFTLReport() throws Exception {
         //CODE GOES DOWN BELOW
@@ -160,7 +183,7 @@ public class FTLReporter {
         //features.ftl
         input.put("featurepojos", featurePOJOS);
 
-        input.put("turnOffSplash",this.turnOffSplash);
+        input.put("turnOffSplash", this.turnOffSplash);
 
 
         //logs.ftl - NOTHING NOW
@@ -173,7 +196,6 @@ public class FTLReporter {
         // 2.2. Get the template
 
 
-
         // 2.3. Generate the output
 
         // Write output to the console
@@ -184,29 +206,14 @@ public class FTLReporter {
 
         new File(HTMLPATH).mkdirs();
 
-        try(PrintWriter printWriter = new PrintWriter(new File(HTMLPATH + "\\cooker_cucumber_report_" + TimeUtility.getCurrTimeStampUnderscore() + ".html"))){
+        try (PrintWriter printWriter = new PrintWriter(new File(HTMLPATH + "\\cooker_cucumber_report_" + TimeUtility.getCurrTimeStampUnderscore() + ".html"))) {
             cfg.getTemplate("index.ftl").process(input, printWriter);
-        }catch(Exception e){
+        } catch (Exception e) {
             MojoLogger.getLogger().error("Couldnt Generate Cooker Cucumber report!");
             e.printStackTrace();
         }
 
         MojoLogger.getLogger().info("Cooker report generated : " + HTMLPATH + "\\cooker_cucumber_report_"
                 + TimeUtility.getCurrTimeStampUnderscore() + ".html");
-    }
-
-
-    public static String getDurationStringFormat(Duration duration) {
-        long da = duration.toDays();
-        long h = duration.minusDays(da).toHours();
-        long m = duration.minusHours(h).toMinutes();
-        long s = duration.minusMinutes(m).getSeconds();
-        long mi = duration.minusSeconds(s).getNano();
-
-        return ((da > 0 ? (da + "d") : "") + " " +
-                (h > 0 ? (String.format("%02d", h) + "h") : "") + " " +
-                (m > 0 ? (String.format("%02d", m) + "m") : "") + " " +
-                (s > 0 ? (String.format("%02d", s) + "s") : "") + " " +
-                (mi > 0 ? (("" + mi).substring(0, 3) + "ms") : "")).trim();
     }
 }

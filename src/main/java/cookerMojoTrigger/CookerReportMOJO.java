@@ -51,7 +51,7 @@ public class CookerReportMOJO extends AbstractMojo {
             }
             if (turnOffSplashScreen.equalsIgnoreCase("none") || turnOffSplashScreen.equalsIgnoreCase("false")) {
                 turnOffSplash = false;
-            }else{
+            } else {
                 turnOffSplash = true;
             }
             if (startPage.equalsIgnoreCase("none")) {
@@ -62,7 +62,7 @@ public class CookerReportMOJO extends AbstractMojo {
             LOGGER.info("========================== By Manjunath Prabhakar ==============================");
             LOGGER.info("======================= ++++ generating started ++++ ===========================");
             MojoLogger.setLogger(LOGGER);
-            CookReport cookReport = new CookReport(jsonPath, htmlPath, startPage, projectName,turnOffSplash);
+            CookReport cookReport = new CookReport(jsonPath, htmlPath, startPage, projectName, turnOffSplash);
             cookReport.showLogReport();
             cookReport.generateFTLReport();
             LOGGER.info("===================== ++++ generating completed ++++ ===========================");

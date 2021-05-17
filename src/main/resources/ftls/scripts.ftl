@@ -16,6 +16,7 @@
     }
     /* ===== END OF COLLAPSIBLE IMPLEMENTATION ===== */
 </script>
+<!--show snackbar scripts-->
 <script>
     function showToast(type, msg) {
         var x = document.getElementById("snackbar");
@@ -47,7 +48,7 @@
         }, 3000);
     }
 </script>
-
+<!--show Graph : features bar chart scripts-->
 <script>
     $(document).ready(function () {
         // Chart
@@ -160,6 +161,7 @@
         });
     });
 </script>
+<!--show Graph : scenarios bar chart scripts-->
 <script>
     $(document).ready(function () {
         // Chart
@@ -169,26 +171,26 @@
             "data": {
                 "labels": [
                     <#list featurepojos as featurepojo>
-                        <#list featurepojo.getElements() as elements>
-                            <#if elements.getType() == 'scenario'>
-                                    "${elements.getName()}",
-                            </#if>
-                        </#list>
+                    <#list featurepojo.getElements() as elements>
+                    <#if elements.getType() == 'scenario'>
+                    "${elements.getName()}",
+                    </#if>
+                    </#list>
                     </#list>
                 ],
                 "datasets": [
                     {
                         "data": [
                             <#list featurepojos as featurepojo>
-                                <#list featurepojo.getElements() as elements>
-                                    <#if elements.getType() == 'scenario'>
-                                        <#list elements.getScenariosStatusesCount() as stats,count>
-                                        <#if stats == "pass">
-                                        ${count},
-                                        </#if>
-                                        </#list>
-                                    </#if>
-                                </#list>
+                            <#list featurepojo.getElements() as elements>
+                            <#if elements.getType() == 'scenario'>
+                            <#list elements.getScenariosStatusesCount() as stats,count>
+                            <#if stats == "pass">
+                            ${count},
+                            </#if>
+                            </#list>
+                            </#if>
+                            </#list>
                             </#list>
                         ],
                         "backgroundColor": "lightgreen",
@@ -292,7 +294,7 @@
         });
     });
 </script>
-<!--scripts end-->
+<!--show percentage in pie scripts-->
 <script>
     Chart.pluginService.register({
         beforeDraw: function (chart) {
@@ -378,6 +380,7 @@
         }
     });
 </script>
+<!--show Dashboard : features pie chart scripts-->
 <script>
     var ctx = document.getElementById('featuresGraphDB').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -437,6 +440,7 @@
         }
     });
 </script>
+<!--show Dashboard : scenarios pie chart scripts-->
 <script>
     var ctx = document.getElementById('scenariosGraphDB').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -496,3 +500,16 @@
         }
     });
 </script>
+<!--show Image big & small-->
+<script>
+    function displayImage(imgbox) {
+        document.getElementById("showbigimage").src = (imgbox.src);
+        document.getElementById("showbigimagespan").style.display = "block";
+    }
+
+    function closebigimage(bigimg) {
+        bigimg.src = "";
+        document.getElementById("showbigimagespan").style.display = "none";
+    }
+</script>
+<!--scripts end-->

@@ -45,7 +45,7 @@ public class CookReport {
         }
     }
 
-    public void generateFTLReport() throws Exception{
+    public void generateFTLReport() throws Exception {
         try {
             FTLReporter ftl = new FTLReporter(this.jsonPath, this.htmlpath, this.startpage, this.projectName, this.turnOffsplash);
             ftl.generateFTLReport();

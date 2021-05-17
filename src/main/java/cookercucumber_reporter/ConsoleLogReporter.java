@@ -1,13 +1,6 @@
 package cookercucumber_reporter;
 
-import com.google.gson.Gson;
-import common.fileFactory.FileUtility;
-import cookercucumber_reporter.json_pojos.*;
-
-import java.io.File;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

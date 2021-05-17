@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <!-- maven coordinates -->
@@ -12,7 +13,9 @@
 
     <!-- maven project details -->
     <name>Cooker Cucumber Maven Plugin</name>
-    <description>Derives smallest Feature File, Allows Data from Excel(xls and xlsx)</description>
+    <description>Derives smallest Feature File, Allows Data from Excel(xls and xlsx) and Also provides a clear and
+        concise reporting
+    </description>
     <url>https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin</url>
     <inceptionYear>2020</inceptionYear>
 
@@ -46,8 +49,8 @@
         <developerConnection>scm:git:https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin.git
         </developerConnection>
         <url>https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <!-- maven artifact distribution -->
     <distributionManagement>

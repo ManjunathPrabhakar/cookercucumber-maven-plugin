@@ -29,7 +29,7 @@ public class ReportHandler {
         return features;
     }
 
-    public static List<FeaturePOJO> combineMultipleScenariosOfSameFeature(List<FeaturePOJO> featuresList) throws Exception{
+    public static List<FeaturePOJO> combineMultipleScenariosOfSameFeature(List<FeaturePOJO> featuresList) throws Exception {
         List<FeaturePOJO> finalFeatures = new ArrayList<FeaturePOJO>();
 
         //Combine Different Scenarios of Same Feature name Jsons as One
@@ -49,7 +49,6 @@ public class ReportHandler {
 
         return finalFeatures;
     }
-
 
 
 }
