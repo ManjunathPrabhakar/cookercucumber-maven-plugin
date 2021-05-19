@@ -28,7 +28,7 @@ public class FTLReporter {
     String projectName = null;
     int startPageIndex = 0;
     boolean turnOffSplash = false;
-    String version = "2.0.31";
+    String version = "2.0.33";
 
     public FTLReporter(String jsonPath, String htmlpath, String startPage, String projectName, boolean turnOffSplash) {
         this.JSONSPATH = jsonPath;
