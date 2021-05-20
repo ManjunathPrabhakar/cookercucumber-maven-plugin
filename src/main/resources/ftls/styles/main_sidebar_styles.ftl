@@ -2,9 +2,7 @@
 <style type="text/css">
     /* IMPORT TO USE FONT FAMILY ROBOTO SLAB */
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap');
-
     /* Apply to All Elements unless specified seperately */
-
     * {
         padding: 0;
         margin: 0;
@@ -32,7 +30,6 @@
     /* Apply to company image in the side bar on the LEFT */
     .side-bar .companylogo {
         /* background: linear-gradient(#3204fde6, #9907fae6);  */
-
         overflow: hidden;
         width: 100%;
         height: 100%;
@@ -96,7 +93,6 @@
     .boxborder:hover > div[class^="menubox-"][class$="-selected"] {
         display: block;
     }
-
 
     /* Apply to Menu LOGO holder when not selected in the side bar on the LEFT */
     .user-txt {

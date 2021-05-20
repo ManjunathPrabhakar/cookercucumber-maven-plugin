@@ -1,20 +1,39 @@
 package cookercucumber_reporter;
 
+import cookerMojoTrigger.MojoLogger;
+import cookercucumber_reporter.json_pojos.Elements;
+import cookercucumber_reporter.json_pojos.FeaturePOJO;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-/**
- * @author Manjunath Prabhakar (Manjunath-PC)
- * @created 20/09/2020
- * @project cooker-cucumber-reporter
- */
 public class ConsoleLogReporter {
 
-    public List<String> generateReport(String jsonPath) throws Exception {
-        List<String> total = new ArrayList<>();
+    public void generateConsoleLog(Map<String, Object> params) throws Exception {
+        //CODE GOES DOWN BELOW
+        List<FeaturePOJO> jsons = ReportHandler.getJSONsToList(params.get("jsonPath").toString());
+        List<FeaturePOJO> featurePOJOS = ReportHandler.combineMultipleScenariosOfSameFeature(jsons);
 
-        return (total);
-
+        List<String> ls = new ArrayList<>();
+        MojoLogger.getLogger().info("----------------------------------------------");
+        MojoLogger.getLogger().info("Features/Scenarios that are broken!");
+        int featureCount = 1;
+        int scncount = 1;
+        for (FeaturePOJO featurePOJO : featurePOJOS) {
+            List<String> scenario = featurePOJO.getElements().stream().filter(s -> s.getType().equalsIgnoreCase("scenario") && !s.getStatus().equalsIgnoreCase("pass")).map(Elements::getName).collect(Collectors.toList());
+            if (scenario.size() > 0) {
+                MojoLogger.getLogger().info("----------------------------------------------");
+                MojoLogger.getLogger().info(featureCount++ + ". " + featurePOJO.getName());
+                MojoLogger.getLogger().info("----------------------------------------------");
+                for (String a : scenario) {
+                    MojoLogger.getLogger().info(scncount++ + ". " + a);
+                }
+            }
+            scncount = 1;
+        }
+        MojoLogger.getLogger().info("----------------------------------------------");
     }
 
     private List<String> gatherDataInList(List<List<String>> data) {

@@ -14,7 +14,6 @@
     function revertSideMenu() {
         var profile = document.getElementsByClassName("user-txt-holder");
         profile[0].getElementsByClassName('boxborder')[0].style.backgroundColor = 'rgb(27, 45, 85)';
-
         var sidebarBoxes = document.getElementsByClassName("sidebar-menu");
         for (var i = 0; i < sidebarBoxes.length; i++) {
             var borderbox = sidebarBoxes[i].getElementsByTagName('div')[0];
@@ -31,10 +30,6 @@
 //console.log("Enabled : " + pages.children[what].getAttribute('class'));
     }
 
-    /**
-     * Hide all content of all sidemenus
-     * <br>Author : Manjunath Prahakar (manjunath189@gmail.com)
-     */
     function hideAllPages() {
 //Get 1st Element with Class Name 'content'
         var pages = document.getElementsByClassName("main-content")[0];

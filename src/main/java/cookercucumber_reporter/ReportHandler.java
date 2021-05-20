@@ -5,6 +5,7 @@ import common.fileFactory.FileUtility;
 import cookercucumber_reporter.json_pojos.FeaturePOJO;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.*;
 
 public class ReportHandler {
@@ -48,6 +49,75 @@ public class ReportHandler {
         finalFeatures = new ArrayList<>(featuresMap.values());
 
         return finalFeatures;
+    }
+
+    public static Map<String, Object> getScenariosData(List<FeaturePOJO> featurePOJOS) {
+        Map<String, Object> res = new HashMap<String, Object>();
+        long totalscenarios = 0, scenariospasscount = 0, scenariosfailcount = 0, scenariosskipcount = 0, scenariosothercount = 0;
+        for (FeaturePOJO featureList : featurePOJOS) {
+            totalscenarios = totalscenarios +
+                    featureList.getElements().stream().filter(e -> e.getType().equalsIgnoreCase("scenario")).count();
+            scenariospasscount = scenariospasscount +
+                    featureList.getElements().stream().filter(e -> e.getType().equalsIgnoreCase("scenario") & e.getStatus().equalsIgnoreCase("pass")).count();
+            scenariosfailcount = scenariosfailcount +
+                    featureList.getElements().stream().filter(e -> e.getType().equalsIgnoreCase("scenario") & e.getStatus().equalsIgnoreCase("fail")).count();
+            scenariosskipcount = scenariosskipcount +
+                    featureList.getElements().stream().filter(e -> e.getType().equalsIgnoreCase("scenario") & e.getStatus().equalsIgnoreCase("skip")).count();
+            scenariosothercount = scenariosothercount +
+                    featureList.getElements().stream().filter(e -> e.getType().equalsIgnoreCase("scenario") & e.getStatus().equalsIgnoreCase("other")).count();
+        }
+
+        res.put("totalScenarios", "" + totalscenarios);
+        res.put("totalPassScenarios", "" + scenariospasscount);
+        res.put("totalFailScenarios", "" + scenariosfailcount);
+        res.put("totalSkipScenarios", "" + scenariosskipcount);
+        res.put("totalOtherScenarios", "" + scenariosothercount);
+        res.put("scenariosPassPercentage", (int) Math.round(((float) scenariospasscount / totalscenarios) * 100));
+        return res;
+    }
+
+    public static Map<String, Object> getFeatureDatas(List<FeaturePOJO> featurePOJOS) {
+
+        Map<String, Object> res = new HashMap<String, Object>();
+        long totalFeatures = featurePOJOS.size();
+        long totalPassFeatures = featurePOJOS.stream().filter(s -> s.getStatus().equalsIgnoreCase("pass")).count();
+        long totalFailFeatures = featurePOJOS.stream().filter(s -> s.getStatus().equalsIgnoreCase("fail")).count();
+        long totalSkipFeatures = featurePOJOS.stream().filter(s -> s.getStatus().equalsIgnoreCase("skip")).count();
+        long totalOtherFeatures = featurePOJOS.stream().filter(s -> s.getStatus().equalsIgnoreCase("other")).count();
+        Duration totalExectionDuration = Duration.ofSeconds(0);
+        for (FeaturePOJO f : featurePOJOS) {
+            Duration featureDur = f.getDuration();
+            totalExectionDuration = totalExectionDuration.plus(featureDur);
+        }
+        res.put("totalFeatures", "" + totalFeatures);
+        res.put("totalPassFeatures", "" + totalPassFeatures);
+        res.put("totalFailFeatures", "" + totalFailFeatures);
+        res.put("totalSkipFeatures", "" + totalSkipFeatures);
+        res.put("totalOtherFeatures", "" + totalOtherFeatures);
+        res.put("featurePassPercentage", (int) Math.round(((float) totalPassFeatures / totalFeatures) * 100));
+        res.put("totalDuration", totalExectionDuration);
+        return res;
+    }
+
+    public static String getDurationStringFormat(Duration duration) {
+
+        long days = duration.toDays();
+        duration = duration.minusDays(days);
+        long hours = duration.toHours();
+        duration = duration.minusHours(hours);
+        long mins = duration.toMinutes();
+        duration = duration.minusMinutes(mins);
+        long secs = duration.getSeconds();
+        duration = duration.minusSeconds(secs);
+        long mils = duration.toMillis();
+
+        String res = ((days > 0 ? (days + "d") : "") + " " +
+                (hours > 0 ? (String.format("%02d", hours) + "h") : "") + " " +
+                (mins > 0 ? (String.format("%02d", mins) + "m") : "") + " " +
+                (secs > 0 ? (String.format("%02d", secs) + "s") : "") + " " +
+                (mils > 0 ? (String.format("%04d", mils).substring(0, 3) + "ms") : "")).trim();
+
+        return res.isEmpty() ? "0ms" : res;
     }
 
 

@@ -1,7 +1,6 @@
 <!-- main_tag_chip_styles.css STYLESHEET START -->
 <style type="text/css">
     /* CHIP DATA */
-
     .tagname {
         line-height: 1.2;
         overflow: hidden;
@@ -32,6 +31,5 @@
         /* color: rgb(0, 190, 170);
         background: rgb(235, 254, 252); */
     }
-
 </style>
 <!-- main_tag_chip_styles.css STYLESHEET END -->

@@ -1,7 +1,5 @@
 <!-- main_collapsable_modal_styles.css STYLESHEET START -->
 <style type="text/css">
-    /* --------------------------------------------- */
-
     .scenario {
         margin-top: 2px;
         margin-bottom: 2px;
@@ -16,8 +14,6 @@
         outline: none;
         font-size: 15px;
     }
-
-    /* -----------------COLLAPSIBLE---------------------------- */
 
     .collapsibleM {
         margin-top: 2px;
@@ -59,9 +55,7 @@
     }
 
     /* --------------- MODAL ----------------- */
-
     /* The Modal (background) */
-
     .modal {
         display: none;
         /* Hidden by default */
@@ -86,9 +80,7 @@
         overflow: auto;
     }
 
-
     /* Modal Content */
-
     .modal-content {
         max-height: 80%;
         overflow: auto;
@@ -105,33 +97,26 @@
         animation-duration: 0.4s
     }
 
-
     /* Add Animation */
-
     @-webkit-keyframes animatetop {
         from {
             transform: scale(0);
         }
-
         to {
             transform: scale(1);
         }
-
     }
 
     @keyframes animatetop {
         from {
             transform: scale(0);
         }
-
         to {
             transform: scale(1);
         }
     }
 
-
     /* The Close Button */
-
     .close {
         color: white;
         float: right;

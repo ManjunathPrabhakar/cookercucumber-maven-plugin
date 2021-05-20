@@ -2,7 +2,8 @@ package cookercucumber_reporter;
 
 import cookerMojoTrigger.MojoLogger;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Manjunath Prabhakar (Manjunath-PC)
@@ -10,54 +11,23 @@ import java.util.List;
  * @project cooker-maven-plugin
  */
 public class CookReport {
-    String jsonPath = "";
-    String htmlpath = "";
-    String startpage = "";
-    String projectName = "";
-    boolean turnOffsplash;
+    Map<String, Object> params = new HashMap<>();
 
-    public CookReport(String jsonPath, String htmlPath, String startPage, String projectName, boolean turnOffSplash) {
-        this.jsonPath = jsonPath;
-        this.htmlpath = htmlPath;
-        this.startpage = startPage;
-        this.projectName = projectName;
-        this.turnOffsplash = turnOffSplash;
+    public CookReport(Map<String, Object> params) {
+        this.params = params;
     }
 
     public void showLogReport() throws Exception {
-        try {
-            List<String> res = new ConsoleLogReporter().generateReport(this.jsonPath);
-            for (String s : res
-            ) {
-                MojoLogger.getLogger().info(s);
-            }
-        } catch (Exception e) {
-            MojoLogger.getLogger().error("Error in Cooker Cucumber Console Reporter" + e);
-        }
-    }
-
-    public void generateHTMLReport() throws Exception {
-        try {
-            HTMLReporter htmlReporter = new HTMLReporter(jsonPath, htmlpath, "", projectName);
-            htmlReporter.genHTML();
-        } catch (Exception e) {
-            System.out.println("Error in Cooker Cucumber Old HTMl Reporter" + e);
-        }
+        new ConsoleLogReporter().generateConsoleLog(params);
     }
 
     public void generateFTLReport() throws Exception {
         try {
-            FTLReporter ftl = new FTLReporter(this.jsonPath, this.htmlpath, this.startpage, this.projectName, this.turnOffsplash);
+            FTLReporter ftl = new FTLReporter(params);
             ftl.generateFTLReport();
         } catch (Exception e) {
             MojoLogger.getLogger().error("Error in Cooker Cucumber HTML Reporter");
             e.printStackTrace();
         }
     }
-
-//    public static void main(String[] args) throws Exception{
-//        FTLReporter ftl = new FTLReporter(System.getProperty("user.dir") + "\\jsons",
-//                System.getProperty("user.dir"), "dashboard", "projet name", true);
-//        ftl.generateFTLReport();
-//    }
 }

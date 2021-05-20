@@ -1,40 +1,12 @@
 <!-- main_jsdata.js STYLESHEET START -->
 <script type="text/javascript">
-    function downloadit() {
-        alert("Cooker Says : PDF, Excel, Image Download Coming Soon!")
-    }
-
-    function statusEmoji(current) {
-        var c = current.getElementsByTagName("i")[0];
-        switch (c.innerText.toLowerCase()) {
-            case "sentiment_very_dissatisfied" :
-                alert("Pass % Between 0-20%");
-                break;
-            case "sentiment_dissatisfied" :
-                alert("Pass % Between 21-40%");
-                break;
-            case "sentiment_neutral" :
-                alert("Pass % Between 41-60%");
-                break;
-            case "sentiment_satisfied" :
-                alert("Pass % Between 61-80%");
-                break;
-            case "sentiment_very_satisfied" :
-                alert("Pass % Between 81-100%");
-                break;
-        }
-    }
-
     function featureSearch() {
         var input, filter;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
-
         var selectedCheckboxes = checkboxSelected();
-
         var feats = document.getElementsByClassName("featurecoll")[0];
         var featureButton = feats.getElementsByClassName("collapsibleM");
-
         for (var i = 0; i < featureButton.length; i++) {
             var featbar = featureButton[i].getElementsByClassName("featbar")[0]
             var labels = featbar.getElementsByTagName("label")[0];

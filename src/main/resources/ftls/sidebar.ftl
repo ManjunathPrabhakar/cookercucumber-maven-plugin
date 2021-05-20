@@ -1,12 +1,15 @@
 <!--side menu bar start-->
 <div class="side-bar">
     <div class="companylogo-holder">
-        <img class="companylogo" src="${cookerlogo}" alt="logo"/>
+        <a target="_blank" href="https://manjunathprabhakar.github.io/cookercucumber-maven-plugin/"
+           style="text-decoration: none;">
+            <img class="companylogo" src="${cookerlogo}" alt="logo"/>
+        </a>
     </div>
-    <div class="user-txt-holder" onClick="showToast(null,'Nothing here now, Check back later!');"
+    <div class="user-txt-holder"
          style="margin-top: 1rem;margin-bottom: 2rem;">
         <div class="boxborder">
-            <p class="user-txt">${sidebarAlphabet}</p>
+            <p class="user-txt">${userLetter}</p>
         </div>
     </div>
     <div class="sidebar-menu" onclick="enableView(0)">
@@ -28,18 +31,7 @@
         </div>
         <p class="nav-text">Graph</p>
     </div>
-    <div class="sidebar-menu"
-         onclick="showToast(null,'Statistics, work in progress. Coming in future version');/*enableView(2)*/">
-        <div class="boxborder">
-            <div class="menubox-03-selected"></div>
-            <p class="user-txt">
-                <i class="fa fa-th-list" aria-hidden="true"></i>
-                <!--                <i class="material-icons" style="vertical-align: -6px;">wysiwyg</i>-->
-            </p>
-        </div>
-        <p class="nav-text">Statistics</p>
-    </div>
-    <div class="sidebar-menu" onclick="enableView(3)/*enableView(3)*/">
+    <div class="sidebar-menu" onclick="enableView(2)/*enableView(3)*/">
         <div class="boxborder">
             <div class="menubox-04-selected"></div>
             <p class="user-txt">
@@ -50,7 +42,7 @@
         <p class="nav-text">Features</p>
     </div>
     <div class="sidebar-menu"
-         onclick="showToast(null,'Logs, work in progress. Coming in future version');/*enableView(4)*/">
+         onclick="enableView(3)">
         <div class="boxborder">
             <div class="menubox-05-selected"></div>
             <p class="user-txt">

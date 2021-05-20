@@ -9,7 +9,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <span class="close">&times;</span>
-                            <h2><b>${element.getKeyword()}</b></h2>
+                            <h2><b>${element.getKeyword()}</b>${element.getName()}</h2>
                         </div>
                         <div class="modal-body">
                             <#if element.getTags()?has_content>
@@ -121,33 +121,78 @@
                                         <!-- STEP EMBEDDING -->
                                         <#if steps.getEmbeddings()?has_content>
                                             <#list steps.getEmbeddings() as embedding>
-                                                <#if embedding.getMime_type() == 'image/png'>
-                                                    <table class="stepTable">
-                                                        <tbody>
-                                                        <tr>
-                                                            <th>Screenshot Embed</th>
-                                                        </tr>
-                                                        <#if !(embedding.getName() == '')>
-                                                            <tr>
-                                                                <td>${embedding.getName()}</td>
-                                                            </tr>
+                                                <#if includeScreenshots == true>
+                                                    <#if includeOnlyScreenshotsOfFailStep == true>
+                                                        <#if !(steps.getResult().getStatus() == "passed")>
+                                                            <#if embedding.getMime_type() == 'image/png'>
+                                                                <table class="stepTable">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <th>Screenshot Embed</th>
+                                                                    </tr>
+                                                                    <#if !(embedding.getName() == '')>
+                                                                        <tr>
+                                                                            <td>${embedding.getName()}</td>
+                                                                        </tr>
+                                                                    </#if>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <style>
+                                                                                #pic1:hover {
+                                                                                    cursor: pointer;
+                                                                                }
+                                                                            </style>
+                                                                            <img id="pic1" class="materialboxed"
+                                                                                 onclick="displayImage(this)"
+                                                                                 data-caption='embedding'
+                                                                                 width="300"
+                                                                                 src="data:image/png;base64,${embedding.getData()}">
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </#if>
+                                                        <#else>
+                                                            <table class="stepTable">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th>Generated Screenshot has been requested not to
+                                                                        display for Passed Steps
+                                                                    </th>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </#if>
-                                                        <tr>
-                                                            <td>
-                                                                <style>
-                                                                    #pic1:hover {
-                                                                        cursor: pointer;
-                                                                    }
-                                                                </style>
-                                                                <img id="pic1" class="materialboxed"
-                                                                     onclick="displayImage(this)"
-                                                                     data-caption='embedding'
-                                                                     width="300"
-                                                                     src="data:image/png;base64,${embedding.getData()}">
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <#else>
+                                                        <#if embedding.getMime_type() == 'image/png'>
+                                                            <table class="stepTable">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th>Screenshot Embed</th>
+                                                                </tr>
+                                                                <#if !(embedding.getName() == '')>
+                                                                    <tr>
+                                                                        <td>${embedding.getName()}</td>
+                                                                    </tr>
+                                                                </#if>
+                                                                <tr>
+                                                                    <td>
+                                                                        <style>
+                                                                            #pic1:hover {
+                                                                                cursor: pointer;
+                                                                            }
+                                                                        </style>
+                                                                        <img id="pic1" class="materialboxed"
+                                                                             onclick="displayImage(this)"
+                                                                             data-caption='embedding'
+                                                                             width="300"
+                                                                             src="data:image/png;base64,${embedding.getData()}">
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </#if>
+                                                    </#if>
                                                 </#if>
                                                 <#if embedding.getMime_type() == 'text/html'>
                                                     <table class="stepTable">

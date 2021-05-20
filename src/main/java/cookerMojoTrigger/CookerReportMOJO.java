@@ -9,6 +9,9 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Mojo(name = "cook-report", threadSafe = true, defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
 public class CookerReportMOJO extends AbstractMojo {
@@ -21,14 +24,20 @@ public class CookerReportMOJO extends AbstractMojo {
     @Parameter(property = "htmlGeneratePath", required = false, defaultValue = "none")
     private String htmlPath;
 
-    @Parameter(property = "turnOffSplashScreen", required = false, defaultValue = "none")
-    private String turnOffSplashScreen;
-
-    @Parameter(property = "projectName", required = false, defaultValue = "")
+    @Parameter(property = "projectName", required = false, defaultValue = "Cooker Cucumber Automation Report")
     private String projectName;
 
     @Parameter(property = "startPage", required = false, defaultValue = "none")
     private String startPage;
+
+    @Parameter(property = "includeScreenshots", required = false, defaultValue = "none")
+    private String includeScreenshots;
+
+    @Parameter(property = "includeOnlyScreenshotsOfFailStep", required = false, defaultValue = "none")
+    private String includeOnlyScreenshotsOfFailStep;
+
+    @Parameter(property = "showConsoleLogReport", required = false, defaultValue = "true")
+    private String showConsoleLogReport;
 
 
     /**
@@ -40,7 +49,7 @@ public class CookerReportMOJO extends AbstractMojo {
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
         // The logic of our plugin will go here
-        boolean turnOffSplash = false;
+        boolean bincludeScreenshots = false, bincludeOnlyScreenshotsOfFailStep = false, bshowConsoleLogReport = false;
         int startIndex = 0;
         try {
             if (jsonPath.equalsIgnoreCase("none")) {
@@ -49,21 +58,43 @@ public class CookerReportMOJO extends AbstractMojo {
             if (htmlPath.equalsIgnoreCase("none")) {
                 htmlPath = System.getProperty("user.dir") + "\\target\\cooker-html-report";
             }
-            if (turnOffSplashScreen.equalsIgnoreCase("none") || turnOffSplashScreen.equalsIgnoreCase("false")) {
-                turnOffSplash = false;
-            } else {
-                turnOffSplash = true;
-            }
             if (startPage.equalsIgnoreCase("none")) {
                 startPage = "dashboard";
             }
+            if (includeScreenshots.equalsIgnoreCase("none") || includeScreenshots.equalsIgnoreCase("false")) {
+                bincludeScreenshots = false;
+            } else {
+                bincludeScreenshots = true;
+            }
+            if (includeOnlyScreenshotsOfFailStep.equalsIgnoreCase("none") || includeOnlyScreenshotsOfFailStep.equalsIgnoreCase("false")) {
+                bincludeOnlyScreenshotsOfFailStep = false;
+            } else {
+                bincludeOnlyScreenshotsOfFailStep = true;
+            }
+            if (showConsoleLogReport.equalsIgnoreCase("true")) {
+                bshowConsoleLogReport = true;
+            } else {
+                bshowConsoleLogReport = false;
+            }
+
+            Map<String, Object> params = new HashMap<>();
+            //Strings
+            params.put("jsonPath", jsonPath);
+            params.put("htmlPath", htmlPath);
+            params.put("startPage", startPage);
+            params.put("projectName", projectName);
+            //Boolean
+            params.put("includeScreenshots", bincludeScreenshots);
+            params.put("includeOnlyScreenshotsOfFailStep", bincludeOnlyScreenshotsOfFailStep);
 
             LOGGER.info("============== COOKER CUCUMBER REPORT MAVEN PLUGIN STARTED =====================");
             LOGGER.info("========================== By Manjunath Prabhakar ==============================");
             LOGGER.info("======================= ++++ generating started ++++ ===========================");
             MojoLogger.setLogger(LOGGER);
-            CookReport cookReport = new CookReport(jsonPath, htmlPath, startPage, projectName, turnOffSplash);
-            cookReport.showLogReport();
+            CookReport cookReport = new CookReport(params);
+            if (bshowConsoleLogReport) {
+                cookReport.showLogReport();
+            }
             cookReport.generateFTLReport();
             LOGGER.info("===================== ++++ generating completed ++++ ===========================");
         } catch (Exception e) {

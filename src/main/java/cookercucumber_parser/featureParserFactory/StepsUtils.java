@@ -42,8 +42,6 @@ public class StepsUtils implements StepI {
 
             this.result.append(sKeyword).append(" ").append(sText); //Append StepKeyword Step Data
             this.result.append(System.getProperty("line.separator")); // Append New Line
-
-
             /*
             If the Step Argument is an instance of DocString
              */

@@ -3,54 +3,53 @@
         <i id="featuresinfo-tooltip" style="margin-left: 5px; font-size: medium;" class="fa fa-info-circle"
            aria-hidden="true"></i>
     </div>
-
     <!-- SEARCH FILTERS START -->
-    <div class="card-content">
-        <p class="card-title">Search here</p>
-        <div class="card-data">
-            <div class="card-start-line"></div>
-            <p>Filter</p>
+    <div>
+        <div class="card-content">
+            <p class="card-title">Search here</p>
+            <div class="card-data">
+                <div class="card-start-line"></div>
+                <p>Filter</p>
+            </div>
         </div>
-    </div>
 
-    <div class="card-content">
-        <p class="card-title">By Feature Name</p>
-        <div class="card-data">
-            <div class="card-start-line"></div>
-            <input type="text" id="myInput" onkeyup="featureSearch()" placeholder="Search feature names.."><br>
+        <div class="card-content">
+            <p class="card-title">By Feature Name</p>
+            <div class="card-data">
+                <div class="card-start-line"></div>
+                <input type="text" id="myInput" onkeyup="featureSearch()" placeholder="Search feature names.."><br>
+            </div>
         </div>
-    </div>
 
-    <div class="card-content">
-        <p class="card-title">By Status</p>
-        <div class="card-data">
-            <div class="card-start-line"></div>
-            <input type="checkbox" class="statuscheckbox" id="statuspass" name="pass" checked
-                   onclick="featureSearch()" value="Pass">
-            <label for="statuspass"> Pass</label>
-            <input type="checkbox" class="statuscheckbox" id="statusfail" name="fail" checked
-                   onclick="featureSearch()" value="Fail">
-            <label for="statusfail"> Fail</label>
-            <input type="checkbox" class="statuscheckbox" id="statusskip" name="skip" checked
-                   onclick="featureSearch()" value="Skip">
-            <label for="statusskip"> Skip</label>
-            <input type="checkbox" class="statuscheckbox" id="statusothers" checked name="others"
-                   onclick="featureSearch()" value="Others">
-            <label for="statusothers"> Others</label>
+        <div class="card-content">
+            <p class="card-title">By Status</p>
+            <div class="card-data">
+                <div class="card-start-line"></div>
+                <input type="checkbox" class="statuscheckbox" id="statuspass" name="pass" checked
+                       onclick="featureSearch()" value="Pass">
+                <label for="statuspass"> Pass</label>
+                <input type="checkbox" class="statuscheckbox" id="statusfail" name="fail" checked
+                       onclick="featureSearch()" value="Fail">
+                <label for="statusfail"> Fail</label>
+                <input type="checkbox" class="statuscheckbox" id="statusskip" name="skip" checked
+                       onclick="featureSearch()" value="Skip">
+                <label for="statusskip"> Skip</label>
+                <input type="checkbox" class="statuscheckbox" id="statusothers" checked name="others"
+                       onclick="featureSearch()" value="Others">
+                <label for="statusothers"> Others</label>
+            </div>
         </div>
-    </div>
 
-    <div class="card-content">
-        <p class="card-title">Clear</p>
-        <div class="card-data" onclick="resetfeaturefilter()">
-            <div class="card-start-line"></div>
-            <i class="material-icons">cancel</i><br>
+        <div class="card-content">
+            <p class="card-title">Clear</p>
+            <div class="card-data" onclick="resetfeaturefilter()">
+                <div class="card-start-line"></div>
+                <i class="material-icons">cancel</i><br>
+            </div>
         </div>
     </div>
     <!-- SEARCH FILTERS END -->
-
-
-    <div class="featurecoll" style="text-align: center;">
+    <div class="featurecoll" style="text-align: center; margin-bottom: 10px; ">
 
         <#list featurepojos as feature>
             <!-- Features List Start -->
@@ -158,7 +157,6 @@
                 <#if !(feature.getUri() == "")>
                     <span>URI: ${feature.getUri()}</span>
                 </#if>
-
                 <!-- Trigger/Open The Modal -->
                 <#list feature.getElements() as elements>
                     <#if elements.getType() == "scenario">
