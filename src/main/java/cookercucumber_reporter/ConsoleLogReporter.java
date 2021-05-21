@@ -16,24 +16,48 @@ public class ConsoleLogReporter {
         List<FeaturePOJO> jsons = ReportHandler.getJSONsToList(params.get("jsonPath").toString());
         List<FeaturePOJO> featurePOJOS = ReportHandler.combineMultipleScenariosOfSameFeature(jsons);
 
-        List<String> ls = new ArrayList<>();
-        MojoLogger.getLogger().info("----------------------------------------------");
-        MojoLogger.getLogger().info("Features/Scenarios that are broken!");
+        MojoLogger.getLogger().info("----------------------------------------------------------");
+        MojoLogger.getLogger().info("------------------- Features Overview --------------------");
+        MojoLogger.getLogger().info("----------------------------------------------------------");
+        MojoLogger.getLogger().info("Total Features      : " + params.get("totalFeatures").toString());
+        MojoLogger.getLogger().info("Passed Features     : " + params.get("totalPassFeatures").toString());
+        MojoLogger.getLogger().info("Failed Features     : " + params.get("totalFailFeatures").toString());
+        MojoLogger.getLogger().info("Skipped Features    : " + params.get("totalSkipFeatures").toString());
+        MojoLogger.getLogger().info("Other Features      : " + params.get("totalOtherFeatures").toString());
+        MojoLogger.getLogger().info("Feature Pass %      : " + params.get("featurePassPercentage").toString() + "%");
+        MojoLogger.getLogger().info("Overall Exec Time   : " + params.get("totalExecutionTime").toString());
+        MojoLogger.getLogger().info("----------------------------------------------------------");
+        MojoLogger.getLogger().info("------------------- Scenarios Overview -------------------");
+        MojoLogger.getLogger().info("----------------------------------------------------------");
+        MojoLogger.getLogger().info("Total Scenarios     : " + params.get("totalScenarios").toString());
+        MojoLogger.getLogger().info("Passed Scenarios    : " + params.get("totalPassScenarios").toString());
+        MojoLogger.getLogger().info("Failed Scenarios    : " + params.get("totalFailScenarios").toString());
+        MojoLogger.getLogger().info("Skipped Scenarios   : " + params.get("totalSkipScenarios").toString());
+        MojoLogger.getLogger().info("Other Scenarios     : " + params.get("totalOtherScenarios").toString());
+        MojoLogger.getLogger().info("Scenarios Pass %    : " + params.get("scenariosPassPercentage").toString() + "%");
+        MojoLogger.getLogger().info("----------------------------------------------------------");
+
+        if (params.get("featurePassPercentage").toString().equalsIgnoreCase("100")) {
+            return;
+        }
+
+        MojoLogger.getLogger().info("-------------- Features/Scenarios Broken! ----------------");
         int featureCount = 1;
         int scncount = 1;
         for (FeaturePOJO featurePOJO : featurePOJOS) {
             List<String> scenario = featurePOJO.getElements().stream().filter(s -> s.getType().equalsIgnoreCase("scenario") && !s.getStatus().equalsIgnoreCase("pass")).map(Elements::getName).collect(Collectors.toList());
             if (scenario.size() > 0) {
-                MojoLogger.getLogger().info("----------------------------------------------");
-                MojoLogger.getLogger().info(featureCount++ + ". " + featurePOJO.getName());
-                MojoLogger.getLogger().info("----------------------------------------------");
+                MojoLogger.getLogger().info("----------------------------------------------------------");
+                MojoLogger.getLogger().info("------------------------ Feature -------------------------");
+                MojoLogger.getLogger().info("F" + featureCount++ + ". " + featurePOJO.getName());
+                MojoLogger.getLogger().info("----------------------- Scenarios ------------------------");
                 for (String a : scenario) {
-                    MojoLogger.getLogger().info(scncount++ + ". " + a);
+                    MojoLogger.getLogger().info("S" + scncount++ + ". " + a);
                 }
             }
             scncount = 1;
         }
-        MojoLogger.getLogger().info("----------------------------------------------");
+        MojoLogger.getLogger().info("----------------------------------------------------------");
     }
 
     private List<String> gatherDataInList(List<List<String>> data) {

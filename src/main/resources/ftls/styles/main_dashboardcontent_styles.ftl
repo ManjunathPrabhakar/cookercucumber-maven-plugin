@@ -1,5 +1,5 @@
 <!-- main_dashboardcontent_styles.css STYLESHEET START -->
-<style type="text/css">
+<style>
     #brief-summary {
         border-spacing: 5px;
         display: table;
@@ -10,7 +10,7 @@
         width: auto;
     }
 
-    #chart-exec {
+    .chart-exec {
         background-color: #FFFFFF;
         position: absolute;
         width: 85vw;

@@ -86,16 +86,17 @@ public class CookerReportMOJO extends AbstractMojo {
             //Boolean
             params.put("includeScreenshots", bincludeScreenshots);
             params.put("includeOnlyScreenshotsOfFailStep", bincludeOnlyScreenshotsOfFailStep);
+            params.put("showConsoleLogReport",bshowConsoleLogReport);
 
             LOGGER.info("============== COOKER CUCUMBER REPORT MAVEN PLUGIN STARTED =====================");
             LOGGER.info("========================== By Manjunath Prabhakar ==============================");
             LOGGER.info("======================= ++++ generating started ++++ ===========================");
             MojoLogger.setLogger(LOGGER);
             CookReport cookReport = new CookReport(params);
+            cookReport.generateFTLReport();
             if (bshowConsoleLogReport) {
                 cookReport.showLogReport();
             }
-            cookReport.generateFTLReport();
             LOGGER.info("===================== ++++ generating completed ++++ ===========================");
         } catch (Exception e) {
             LOGGER.error("============== ++++ oh no! report generation aborted ++++ ======================");

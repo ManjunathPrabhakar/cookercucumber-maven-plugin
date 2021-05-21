@@ -1,5 +1,5 @@
 <!-- main_colors.css STYLESHEET START -->
-<style type="text/css">
+<style>
     :root {
         --pass-color-darkcolor: mediumseagreen;
         --fail-color-darkcolor: tomato;

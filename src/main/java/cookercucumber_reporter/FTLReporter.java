@@ -92,6 +92,9 @@ public class FTLReporter {
 
         reportData(input);
         generateReport(input);
+
+        this.params.clear();
+        this.params.putAll(input);
     }
 
     private void generateReport(Map<String, Object> data) {
@@ -126,6 +129,7 @@ public class FTLReporter {
         logger.info("cooker cucumber report parameters");
         logger.info("----------------------------------------");
         logger.info("Project Name             : " + data.get("projectName").toString());
+        logger.info("Show Report on Console   : " + data.get("showConsoleLogReport").toString());
         logger.info("Source JSONs Path        : " + data.get("jsonPath").toString());
         logger.info("Target HTML Path         : " + data.get("htmlPath").toString());
         logger.info("Start Page               : " + Arrays.stream(Pages.values()).filter(s -> s.getPageIndex() == (int) data.get("startPage")).collect(Collectors.toList()));
@@ -133,6 +137,10 @@ public class FTLReporter {
         logger.info("Include Fail Screenshots : " + data.get("includeOnlyScreenshotsOfFailStep").toString());
         logger.info("----------------------------------------");
 
+    }
+
+    public Map<String,Object> getParams(){
+        return this.params;
     }
 
 }

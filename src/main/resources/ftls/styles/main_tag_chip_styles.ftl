@@ -1,5 +1,5 @@
 <!-- main_tag_chip_styles.css STYLESHEET START -->
-<style type="text/css">
+<style>
     /* CHIP DATA */
     .tagname {
         line-height: 1.2;

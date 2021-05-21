@@ -8,14 +8,14 @@
     <div class="chart-container" style="display:flex;flex-direction: column;">
         <div>
             <p>Execution Summary (Features against Scenarios)</p>
-            <div id="chart-exec" style="position: relative; flex: 1">
+            <div class="chart-exec" style="position: relative; flex: 1">
                 <canvas id="chart-area-features" width="100%" height="100%"
                         style="display: block; width: 95vw; height: 600px;"></canvas>
             </div>
         </div>
         <div>
             <p>Execution Summary (Scenarios against Steps)</p>
-            <div id="chart-exec" style="position: relative; flex: 1">
+            <div class="chart-exec" style="position: relative; flex: 1">
                 <canvas id="chart-area-scenarios" width="100%" height="100%"
                         style="display: block; width: auto; height: 600px;"></canvas>
             </div>

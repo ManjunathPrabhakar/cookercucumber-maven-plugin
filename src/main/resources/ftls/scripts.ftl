@@ -2,11 +2,11 @@
 <script>
     /* ===== START OF COLLAPSIBLE IMPLEMENTATION ===== */
     /* Code to Implement Collapasible's */
-    var coll_element = document.getElementsByClassName("collapsibleM");
-    for (var i = 0; i < coll_element.length; i++) {
+    let coll_element = document.getElementsByClassName("collapsibleM");
+    for (let i = 0; i < coll_element.length; i++) {
         coll_element[i].addEventListener("click", function () {
             this.classList.toggle("active");
-            var content = this.nextElementSibling;
+            let content = this.nextElementSibling;
             if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
@@ -18,70 +18,56 @@
 </script>
 <!--show Graph : features bar chart scripts-->
 <script>
-    $(document).ready(function () {
+   function loadGraphPageFeaturesbarchart() {
         // Chart
-        var canvas = document.getElementById('chart-area-features');
-        var ctx = canvas.getContext("2d");
-        var chart = new Chart(ctx, {
+        let canvas = document.getElementById('chart-area-features');
+        let ctx = canvas.getContext("2d");
+        let chart = new Chart(ctx, {
             "data": {
-                "labels": [
-                    <#list featurepojos as featurepojo>
-                    "${featurepojo.getName()}",
-                    </#list>
-                ],
+                "labels": [${getFeatureNames()?remove_ending(",")}],
+                <#function getFeatureNames>
+                <#local str=''>
+                <@compress single_line=true>
+                <#list featurepojos as featurepojo>
+                <#local str += "\"" + featurepojo.getName() + "\"" + ",">
+                </#list>
+                </@compress>
+                <#return (str)>
+                </#function>
                 "datasets": [
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getFeaturesStatusesCount() as stats,count>
-                            <#if stats == "pass">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#list >
-                        ],
+                        "data": [${getFeatStatusData("pass")?remove_ending(",")}],
                         "backgroundColor": "lightgreen",
                         "label": "passed"
                     },
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getFeaturesStatusesCount() as stats,count>
-                            <#if stats == "fail">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#list >
-                        ],
+                        "data": [${getFeatStatusData("fail")?remove_ending(",")}],
                         "backgroundColor": "salmon",
                         "label": "failed"
                     },
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getFeaturesStatusesCount() as stats,count>
-                            <#if stats == "skip">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#list >
-                        ],
+                        "data": [${getFeatStatusData("skip")?remove_ending(",")}],
                         "backgroundColor": "peachpuff",
                         "label": "skipped"
                     },
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getFeaturesStatusesCount() as stats,count>
-                            <#if stats == "other">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#list >
-                        ],
+                        "data": [${getFeatStatusData("other")?remove_ending(",")}],
                         "backgroundColor": "lavender",
                         "label": "others"
                     }
+                    <#function getFeatStatusData(status)>
+                    <#local str=''>
+                    <#list featurepojos as featurepojo>
+                    <#list featurepojo.getFeaturesStatusesCount() as stats,count>
+                    <#if stats == status>
+                    <@compress single_line=true>
+                    <#local str += count + ",">
+                    </@compress>
+                    </#if>
+                    </#list>
+                    </#list>
+                    <#return (str)>
+                    </#function>
                 ]
             },
             "options":
@@ -94,7 +80,10 @@
                                 "ticks": {
                                     "min": 0,
                                     "stepSize": 0,
-                                    "display": false
+                                    "display": false,
+                                    callback: function (value) {
+                                        return value.substr(0, 10) || '';
+                                    }
                                 },
                                 "stacked": true,
                                 "scaleLabel": {
@@ -123,99 +112,92 @@
                     "events": [
                         "click",
                         "mousemove"
-                    ]
+                    ],
+                    tooltips: {
+                        enabled: true,
+                        mode: 'label',
+                        callbacks: {
+                            title: function (toolTipItems, data) {
+                                let titleData = data.labels[toolTipItems[0].index];
+                                return titleData;
+                            },
+                            label: function (toolTipItems, data) {
+                                let curVal = (data.datasets[toolTipItems.datasetIndex]).data[toolTipItems.index];
+                                let labelData = (data.datasets[toolTipItems.datasetIndex]).label;
+                                if (curVal > 0) {
+                                    return labelData + ":" + curVal;
+                                }
+                            }
+                        }
+                    }
                 },
             "type": "bar"
         });
-    });
+    };
 </script>
 <!--show Graph : scenarios bar chart scripts-->
 <script>
-    $(document).ready(function () {
+    function loadGraphPageScenariosbarchart() {
         // Chart
-        var canvas = document.getElementById('chart-area-scenarios');
-        var ctx = canvas.getContext("2d");
-        var chart = new Chart(ctx, {
+        let canvas = document.getElementById('chart-area-scenarios');
+        let ctx = canvas.getContext("2d");
+        let chart = new Chart(ctx, {
             "data": {
-                "labels": [
-                    <#list featurepojos as featurepojo>
-                    <#list featurepojo.getElements() as elements>
-                    <#if elements.getType() == 'scenario'>
-                    "${elements.getName()}",
-                    </#if>
-                    </#list>
-                    </#list>
-                ],
+                "labels": [${getScenarioNames()?remove_ending(",")}],
+
+                <#function getScenarioNames>
+                <#local str=''>
+                <#list featurepojos as featurepojo>
+                <#list featurepojo.getElements() as elements>
+                <#if elements.getType() == 'scenario'>
+                <@compress single_line=true>
+                <#local str += "\"" + elements.getName() + "\"" + ",">
+                </@compress>
+                </#if>
+                </#list>
+                </#list>
+                <#return (str)>
+                </#function>
+
                 "datasets": [
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getElements() as elements>
-                            <#if elements.getType() == 'scenario'>
-                            <#list elements.getScenariosStatusesCount() as stats,count>
-                            <#if stats == "pass">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#if>
-                            </#list>
-                            </#list>
-                        ],
+                        "data": [${getScnStatusData("pass")?remove_ending(",")}],
                         "backgroundColor": "lightgreen",
                         "label": "passed"
                     },
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getElements() as elements>
-                            <#if elements.getType() == 'scenario'>
-                            <#list elements.getScenariosStatusesCount() as stats,count>
-                            <#if stats == "fail">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#if>
-                            </#list>
-                            </#list>
-                        ],
+                        "data": [${getScnStatusData("fail")?remove_ending(",")}],
                         "backgroundColor": "salmon",
                         "label": "failed"
                     },
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getElements() as elements>
-                            <#if elements.getType() == 'scenario'>
-                            <#list elements.getScenariosStatusesCount() as stats,count>
-                            <#if stats == "skip">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#if>
-                            </#list>
-                            </#list>
-                        ],
+                        "data": [${getScnStatusData("skip")?remove_ending(",")}],
                         "backgroundColor": "peachpuff",
                         "label": "skipped"
                     },
                     {
-                        "data": [
-                            <#list featurepojos as featurepojo>
-                            <#list featurepojo.getElements() as elements>
-                            <#if elements.getType() == 'scenario'>
-                            <#list elements.getScenariosStatusesCount() as stats,count>
-                            <#if stats == "other">
-                            ${count},
-                            </#if>
-                            </#list>
-                            </#if>
-                            </#list>
-                            </#list>
-                        ],
+                        "data": [${getScnStatusData("other")?remove_ending(",")}],
                         "backgroundColor": "lavender",
                         "label": "others"
                     }
                 ]
+                <#function getScnStatusData(status)>
+                <#local str=''>
+                <#list featurepojos as featurepojo>
+                <#list featurepojo.getElements() as elements>
+                <#if elements.getType() == 'scenario'>
+                <#list elements.getScenariosStatusesCount() as stats,count>
+                <#if stats == status>
+                <@compress single_line=true>
+                <#local str += count + ",">
+                </@compress>
+                </#if>
+                </#list>
+                </#if>
+                </#list>
+                </#list>
+                <#return (str)>
+                </#function>
             },
             "options":
                 {
@@ -227,7 +209,10 @@
                                 "ticks": {
                                     "min": 0,
                                     "stepSize": 0,
-                                    "display": false
+                                    "display": false,
+                                    callback: function (value) {
+                                        return value.substr(0, 10) || '';
+                                    }
                                 },
                                 "stacked": true,
                                 "scaleLabel": {
@@ -256,27 +241,44 @@
                     "events": [
                         "click",
                         "mousemove"
-                    ]
+                    ],
+                    tooltips: {
+                        enabled: true,
+                        mode: 'label',
+                        callbacks: {
+                            title: function (toolTipItems, data) {
+                                let titleData = data.labels[toolTipItems[0].index];
+                                return titleData;
+                            },
+                            label: function (toolTipItems, data) {
+                                let curVal = (data.datasets[toolTipItems.datasetIndex]).data[toolTipItems.index];
+                                let labelData = (data.datasets[toolTipItems.datasetIndex]).label;
+                                if (curVal > 0) {
+                                    return labelData + ":" + curVal;
+                                }
+                            }
+                        }
+                    }
                 },
             "type": "bar"
         });
-    });
+    };
 </script>
 <!--show percentage in pie scripts-->
 <script>
     Chart.pluginService.register({
         beforeDraw: function (chart) {
-            var width = chart.chart.width,
+            let width = chart.chart.width,
                 height = chart.chart.height,
                 ctx = chart.chart.ctx;
 
             ctx.restore();
-            var fontSize = ((height / 114).toFixed(2)) - ((height / 114).toFixed(2)) * 0.2;
+            let fontSize = ((height / 114).toFixed(2)) - ((height / 114).toFixed(2)) * 0.2;
             ctx.font = fontSize + "em Arial";
             ctx.textBaseline = "middle";
             ctx.fillStyle = chart.options.centerTextColor;
 
-            var text = chart.options.centerText,
+            let text = chart.options.centerText || '',
                 textX = Math.round((width - ctx.measureText(text).width) / 2),
                 textY = height / 2;
 
@@ -287,107 +289,112 @@
 </script>
 <!--show Dashboard : features pie chart scripts-->
 <script>
-    var ctx = document.getElementById('featuresGraphDB').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Pass', 'Fail', 'Skip', 'Others'],
-            datasets: [{
-                label: 'Features',
-                data: [${totalPassFeatures}, ${totalFailFeatures}, ${totalSkipFeatures}, ${totalOtherFeatures}],
-                backgroundColor: [
-                    'lightgreen',
-                    'salmon',
-                    'peachpuff',
-                    'lavender'
-                ],
-                hoverOffset: 4
-            }],
-        },
-        options: {
-            responsive: false,
-            legend: {
-                display: false,
-                position: 'bottom',
+
+    function loadDashboardPageFeaturesDoughNutchart()  {
+        let featCtx = document.getElementById('featuresGraphDB').getContext('2d');
+        let myChart = new Chart(featCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail', 'Skip', 'Others'],
+                datasets: [{
+                    label: 'Features',
+                    data: [${totalPassFeatures}, ${totalFailFeatures}, ${totalSkipFeatures}, ${totalOtherFeatures}],
+                    backgroundColor: [
+                        'lightgreen',
+                        'salmon',
+                        'peachpuff',
+                        'lavender'
+                    ],
+                    hoverOffset: 4
+                }],
             },
-            title: {
-                display: false,
-                text: 'Features'
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            },
-            centerText: '${featurePassPercentage}%',
-            centerTextColor: 'mediumseagreen',
-            tooltips: {
-                callbacks: {
-                    label: function (tooltipItem, data) {
-                        var dataset = data.datasets[tooltipItem.datasetIndex];
-                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-                            return previousValue + currentValue;
-                        });
-                        var currentValue = dataset.data[tooltipItem.index];
-                        var currLabel = data.labels[tooltipItem.index];
-                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                        return currLabel + ":" + currentValue + " (" + percentage + "%)";
+            options: {
+                responsive: false,
+                legend: {
+                    display: false,
+                    position: 'bottom',
+                },
+                title: {
+                    display: false,
+                    text: 'Features'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                },
+                centerText: '${featurePassPercentage}%',
+                centerTextColor: 'mediumseagreen',
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            let dataset = data.datasets[tooltipItem.datasetIndex];
+                            let total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                return previousValue + currentValue;
+                            });
+                            let currentValue = dataset.data[tooltipItem.index];
+                            let currLabel = data.labels[tooltipItem.index];
+                            let percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                            return currLabel + ":" + currentValue + " (" + percentage + "%)";
+                        }
                     }
                 }
             }
-        }
-    });
+        });
+    };
 </script>
 <!--show Dashboard : scenarios pie chart scripts-->
 <script>
-    var ctx = document.getElementById('scenariosGraphDB').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Pass', 'Fail', 'Skip', 'Others'],
-            datasets: [{
-                label: 'Features',
-                data: [${totalPassScenarios}, ${totalFailScenarios}, ${totalSkipScenarios}, ${totalOtherScenarios}],
-                backgroundColor: [
-                    'lightgreen',
-                    'salmon',
-                    'peachpuff',
-                    'lavender'
-                ],
-                hoverOffset: 4
-            }],
-        },
-        options: {
-            responsive: false,
-            legend: {
-                display: false,
-                position: 'bottom',
+    function loadDashboardPageScenariosDoughNutchart() {
+        let scnCtx = document.getElementById('scenariosGraphDB').getContext('2d');
+        let myChart = new Chart(scnCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail', 'Skip', 'Others'],
+                datasets: [{
+                    label: 'Features',
+                    data: [${totalPassScenarios}, ${totalFailScenarios}, ${totalSkipScenarios}, ${totalOtherScenarios}],
+                    backgroundColor: [
+                        'lightgreen',
+                        'salmon',
+                        'peachpuff',
+                        'lavender'
+                    ],
+                    hoverOffset: 4
+                }],
             },
-            title: {
-                display: false,
-                text: 'Features'
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            },
-            centerText: '${scenariosPassPercentage}%',
-            centerTextColor: 'mediumseagreen',
-            tooltips: {
-                callbacks: {
-                    label: function (tooltipItem, data) {
-                        var dataset = data.datasets[tooltipItem.datasetIndex];
-                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-                            return previousValue + currentValue;
-                        });
-                        var currentValue = dataset.data[tooltipItem.index];
-                        var currLabel = data.labels[tooltipItem.index];
-                        var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
-                        return currLabel + ":" + currentValue + " (" + percentage + "%)";
+            options: {
+                responsive: false,
+                legend: {
+                    display: false,
+                    position: 'bottom',
+                },
+                title: {
+                    display: false,
+                    text: 'Features'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                },
+                centerText: '${scenariosPassPercentage}%',
+                centerTextColor: 'mediumseagreen',
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            let dataset = data.datasets[tooltipItem.datasetIndex];
+                            let total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                return previousValue + currentValue;
+                            });
+                            let currentValue = dataset.data[tooltipItem.index];
+                            let currLabel = data.labels[tooltipItem.index];
+                            let percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+                            return currLabel + ":" + currentValue + " (" + percentage + "%)";
+                        }
                     }
                 }
             }
-        }
-    });
+        });
+    };
 </script>
 <!--show Image big & small-->
 <script>

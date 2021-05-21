@@ -1,5 +1,5 @@
 <!-- main_collapsable_modal_styles.css STYLESHEET START -->
-<style type="text/css">
+<style>
     .scenario {
         margin-top: 2px;
         margin-bottom: 2px;

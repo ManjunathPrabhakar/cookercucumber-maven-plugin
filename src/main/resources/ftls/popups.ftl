@@ -138,11 +138,11 @@
                                                                     <tr>
                                                                         <td>
                                                                             <style>
-                                                                                #pic1:hover {
+                                                                                .materialboxed:hover {
                                                                                     cursor: pointer;
                                                                                 }
                                                                             </style>
-                                                                            <img id="pic1" class="materialboxed"
+                                                                            <img class="materialboxed"
                                                                                  onclick="displayImage(this)"
                                                                                  data-caption='embedding'
                                                                                  width="300"
@@ -178,11 +178,11 @@
                                                                 <tr>
                                                                     <td>
                                                                         <style>
-                                                                            #pic1:hover {
+                                                                            .materialboxed:hover {
                                                                                 cursor: pointer;
                                                                             }
                                                                         </style>
-                                                                        <img id="pic1" class="materialboxed"
+                                                                        <img class="materialboxed"
                                                                              onclick="displayImage(this)"
                                                                              data-caption='embedding'
                                                                              width="300"

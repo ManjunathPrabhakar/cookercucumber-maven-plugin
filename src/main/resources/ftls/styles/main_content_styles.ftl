@@ -1,5 +1,5 @@
 <!-- main_content_styles.css STYLESHEET START -->
-<style type="text/css">
+<style>
     /* IMPORT TO USE FONT FAMILY ROBOTO SLAB */
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap');
 

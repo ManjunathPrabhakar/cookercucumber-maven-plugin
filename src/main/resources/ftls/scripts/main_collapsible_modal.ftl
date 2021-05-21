@@ -10,14 +10,14 @@
 //Display modal popup
             popupbox.style.display = "block";
 // Get the <span> element that closes the modal
-            var span = popupbox.getElementsByClassName("close")[0];
+            let span = popupbox.getElementsByClassName("close")[0];
             // If user click on close, then close modal popup
-            span.addEventListener("click", function (event) {
+            span.addEventListener("click", function () {
                 popupbox.style.display = "none";
             });
             //If user click outside modal popup then close modal popup
             window.addEventListener("click", function (event) {
-                if (event.target == popupbox) {
+                if (event.target === popupbox) {
                     popupbox.style.display = "none";
                 }
             });
