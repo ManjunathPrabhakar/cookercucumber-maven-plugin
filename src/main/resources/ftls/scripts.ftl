@@ -18,7 +18,7 @@
 </script>
 <!--show Graph : features bar chart scripts-->
 <script>
-   function loadGraphPageFeaturesbarchart() {
+    function loadGraphPageFeaturesbarchart() {
         // Chart
         let canvas = document.getElementById('chart-area-features');
         let ctx = canvas.getContext("2d");
@@ -290,7 +290,7 @@
 <!--show Dashboard : features pie chart scripts-->
 <script>
 
-    function loadDashboardPageFeaturesDoughNutchart()  {
+    function loadDashboardPageFeaturesDoughNutchart() {
         let featCtx = document.getElementById('featuresGraphDB').getContext('2d');
         let myChart = new Chart(featCtx, {
             type: 'doughnut',

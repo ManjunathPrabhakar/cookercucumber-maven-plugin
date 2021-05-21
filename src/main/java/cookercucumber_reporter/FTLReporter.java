@@ -139,7 +139,7 @@ public class FTLReporter {
 
     }
 
-    public Map<String,Object> getParams(){
+    public Map<String, Object> getParams() {
         return this.params;
     }
 

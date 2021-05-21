@@ -86,7 +86,7 @@ public class CookerReportMOJO extends AbstractMojo {
             //Boolean
             params.put("includeScreenshots", bincludeScreenshots);
             params.put("includeOnlyScreenshotsOfFailStep", bincludeOnlyScreenshotsOfFailStep);
-            params.put("showConsoleLogReport",bshowConsoleLogReport);
+            params.put("showConsoleLogReport", bshowConsoleLogReport);
 
             LOGGER.info("============== COOKER CUCUMBER REPORT MAVEN PLUGIN STARTED =====================");
             LOGGER.info("========================== By Manjunath Prabhakar ==============================");

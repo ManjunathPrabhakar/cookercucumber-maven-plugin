@@ -73,7 +73,8 @@
 
 - Read all JSON files in the directory
 - Create a Standalone Graphical Webpage with all reporting of the execution.
-- Example report : [Here](miscellaneous\cooker_cucumber_report_21_May_2021_18_15_21_IST.html)
+- Example report : [Here](https://cooker-cucumber-report-example.herokuapp.com/)
+
 ---
 
 ## Plugin Usage
