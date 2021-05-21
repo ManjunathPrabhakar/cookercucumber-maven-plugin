@@ -3,6 +3,7 @@
 <p align="left">
 <!--     <a href="#" alt="maven-release-version">  
         <img src="https://img.shields.io/github/workflow/status/ManjunathPrabhakar/cookercucumber-maven-plugin/CookerCucumberReleaseWorkflow" /></a> -->
+	<a href="https://lgtm.com/projects/g/ManjunathPrabhakar/cookercucumber-maven-plugin/context:java"><img alt="Language grade: Java" src="https://img.shields.io/lgtm/grade/java/g/ManjunathPrabhakar/cookercucumber-maven-plugin.svg?logo=lgtm&logoWidth=18"/></a>
     <a href="https://search.maven.org/search?q=g:%22com.github.manjunathprabhakar%22%20AND%20a:%22cooker-maven-plugin%22" alt="maven-release-version">  
         <img src="https://img.shields.io/maven-central/v/com.github.manjunathprabhakar/cooker-maven-plugin" /></a>  
     <a href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/releases" alt="maven-release-version">  
