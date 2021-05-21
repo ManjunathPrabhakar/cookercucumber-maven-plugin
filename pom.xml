@@ -5,7 +5,7 @@
     <!-- maven coordinates -->
     <groupId>com.github.manjunathprabhakar</groupId>
     <artifactId>cooker-maven-plugin</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1-SNAPSHOT</version>
 
     <!-- maven packaging type -->
     <packaging>maven-plugin</packaging>
@@ -48,7 +48,7 @@
         <developerConnection>scm:git:https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin.git
         </developerConnection>
         <url>https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin</url>
-        <tag>cooker-maven-plugin-3.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <!-- maven artifact distribution -->
