@@ -1,4 +1,6 @@
-[![cooker_cucumber logo](miscellaneous/cooker-logo.png)](https://manjunathprabhakar.github.io/cookercucumber-maven-plugin/)
+<head>
+	<link rel="shortcut icon" type="image/png" href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/blob/master/miscellaneous/cooker-cucumber-logo.png">
+</head>
 
 <p align="left">
     <a href="#" alt="maven-release-version">  
