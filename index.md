@@ -8,8 +8,8 @@
 </p>
 
 <p align="left">
-    <a href="#" alt="maven-release-version">  
-        <img src="https://img.shields.io/github/workflow/status/ManjunathPrabhakar/cookercucumber-maven-plugin/CookerCucumberReleaseWorkflow" /></a>
+<!--     <a href="#" alt="maven-release-version">  
+        <img src="https://img.shields.io/github/workflow/status/ManjunathPrabhakar/cookercucumber-maven-plugin/CookerCucumberReleaseWorkflow" /></a> -->
     <a href="https://search.maven.org/search?q=g:%22com.github.manjunathprabhakar%22%20AND%20a:%22cooker-maven-plugin%22" alt="maven-release-version">  
         <img src="https://img.shields.io/maven-central/v/com.github.manjunathprabhakar/cooker-maven-plugin" /></a>  
     <a href="https://github.com/ManjunathPrabhakar/cookercucumber-maven-plugin/releases" alt="maven-release-version">  
