@@ -6,7 +6,7 @@
     <!-- maven coordinates -->
     <groupId>com.github.manjunathprabhakar</groupId>
     <artifactId>cooker-maven-plugin</artifactId>
-    <version>2.0.35-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
 
     <!-- maven packaging type -->
     <packaging>maven-plugin</packaging>
