@@ -27,7 +27,7 @@ public class ExcelParser {
         exampleFromExcel.append("Examples:");
         exampleFromExcel.append(System.getProperty("line.separator"));
 
-        //Create an object of File class to open xlsx file
+        //Create an object of File class to open xlsx files
         File file = new File(filePath + "\\" + fileName);
 
         //Create an object of FileInputStream class to read excel file
