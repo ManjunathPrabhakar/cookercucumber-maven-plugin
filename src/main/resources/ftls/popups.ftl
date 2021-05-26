@@ -4,14 +4,20 @@
         <#list feature.getElements() as element>
             <#if element.getType() == "scenario">
                 <!-- The Modal -->
-                <div id="f${feature?index}s${element?index}" class="modal">
+                <div id="feat${feature?index}scn${element?index}" class="modal">
                     <!-- Modal content -->
                     <div class="modal-content">
                         <div class="modal-header">
                             <span class="close">&times;</span>
-                            <h2><b>${element.getKeyword()}</b>${element.getName()}</h2>
+                            <span><b>${element.getKeyword()}: </b>${element.getName()}</span>
                         </div>
                         <div class="modal-body">
+
+                            <#if !(element.getDescription() == "")>
+                                <span>Description: ${element.getDescription()}</span>
+                                <br>
+                            </#if>
+
                             <#if element.getTags()?has_content>
                                 <#list element.getTags() as tag>
                                     <span class="tagchip"
@@ -22,20 +28,19 @@
                                     </span>
                                 </span>
                                 </#list>
+                                <br>
                             </#if>
-                            <div style="text-align: center">
-                                <button type="button" class="collapsibleM">
-                                    <div class="featbar">
-                                        <label>
-                                            <p>${element.getKeyword()}: ${element.getName()}</p>
-                                        </label>
-                                    </div>
-                                </button>
-                                <div style="text-align: start" class="contentM">
-                                    <p>Type : ${element.getType()}</p>
-                                    <p>Description : ${element.getDescription()}</p>
-                                </div>
-                            </div>
+
+                            <#if !(element.getType() == "")>
+                                <span>Type: ${element.getType()}</span>
+                                <br>
+                            </#if>
+
+                            <#if !(element.getStart_timestamp() == "")>
+                                <span>Start TimeStamp: ${element.getStart_timestamp()}</span>
+                                <br>
+                            </#if>
+
                             <#list element.getSteps() as steps>
                                 <div style="text-align: center">
                                     <button type="button" class="collapsibleM">
@@ -107,12 +112,12 @@
                                             <table class="stepTable">
                                                 <tbody>
                                                 <tr>
-                                                    <th>Error Message</th>
+                                                    <th>Error Message(s)</th>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                     <pre class="error"
-                                                         style="white-space:pre-wrap; padding: 5px; color: red; font-size: small;">${steps.getResult().getErrorMessage()}</pre>
+                                                         style="font-family: monospace;white-space:pre-wrap; padding: 5px; color: #d20000; font-size: small;">${steps.getResult().getErrorMessage()}</pre>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -156,8 +161,7 @@
                                                             <table class="stepTable">
                                                                 <tbody>
                                                                 <tr>
-                                                                    <th>Generated Screenshot has been requested not to
-                                                                        display for Passed Steps
+                                                                    <th><span style="font-size: small;">Captured Screenshot for passed step has been decided not to display with <b>includeOnlyScreenshotsOfFailStep=true</b></span>
                                                                     </th>
                                                                 </tr>
                                                                 </tbody>
@@ -255,7 +259,7 @@
                                                 <table class="stepTable">
                                                     <tbody>
                                                     <tr>
-                                                        <th>Doc Strings</th>
+                                                        <th>Doc String(s)</th>
                                                     </tr>
                                                     <tr>
                                                         <td>

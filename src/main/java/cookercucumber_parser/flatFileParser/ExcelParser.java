@@ -54,6 +54,8 @@ public class ExcelParser {
         else if (fileExtensionName.equals(".xls")) {
             //If it is xls file then create object of HSSFWorkbook class
             excWorkbook = new HSSFWorkbook(inputStream);
+        }else{
+            throw new Exception("Unsupported Excel Extension! (Supported .xlsx & .xls)");
         }
 
         //Read sheet inside the workbook by its name
@@ -79,6 +81,8 @@ public class ExcelParser {
 
             exampleFromExcel.append(System.getProperty("line.separator"));
         }
+
+        inputStream.close();
 
 
         return exampleFromExcel.toString();

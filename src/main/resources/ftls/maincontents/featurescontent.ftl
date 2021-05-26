@@ -160,7 +160,7 @@
                 <!-- Trigger/Open The Modal -->
                 <#list feature.getElements() as elements>
                     <#if elements.getType() == "scenario">
-                        <button class="scenario" onclick="showPopUp(this,'f${feature?index}s${elements?index}')">
+                        <button class="scenario" onclick="showPopUp(this,'feat${feature?index}scn${elements?index}')">
                             <div class="featbar">
                                 <label>
                                     <#if elements.getStatus() == "pass">

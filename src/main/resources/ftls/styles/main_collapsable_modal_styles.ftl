@@ -120,7 +120,6 @@
     .close {
         color: white;
         float: right;
-        font-size: 28px;
         font-weight: bold;
     }
 

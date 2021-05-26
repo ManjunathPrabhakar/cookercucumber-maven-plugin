@@ -144,6 +144,9 @@ public class FileUtility {
      */
     public List<File> getFiles(String extension) throws Exception {
         File[] listFilesFolders = fileFolder.listFiles();
+        if(listFilesFolders==null || listFilesFolders.length < 0){
+            throw new Exception("No Json Files found in the directory!");
+        }
         for (File file : listFilesFolders) {
             if (file.isDirectory()) {
                 fileFolder = file;

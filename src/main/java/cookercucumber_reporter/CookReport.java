@@ -2,6 +2,8 @@ package cookercucumber_reporter;
 
 import cookerMojoTrigger.MojoLogger;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +27,12 @@ public class CookReport {
             this.Allparams.putAll(ftl.getParams());
         } catch (Exception e) {
             MojoLogger.getLogger().error("Error in Cooker Cucumber HTML Reporter");
-            e.printStackTrace();
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+            MojoLogger.getLogger().error(errors.toString());
+            errors.flush();
+            errors.close();
+
         }
     }
 

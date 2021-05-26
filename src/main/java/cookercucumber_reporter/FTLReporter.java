@@ -111,15 +111,16 @@ public class FTLReporter {
         File htmlTargetDir = new File(data.get("htmlPath").toString());
         boolean mkdirs = htmlTargetDir.mkdirs();
 
-        try (PrintWriter printWriter = new PrintWriter(new File(data.get("htmlPath").toString() + "\\cooker_cucumber_report_" + TimeUtility.getCurrTimeStampUnderscore() + ".html"))) {
+        String fileName = data.get("htmlPath").toString() + "\\cooker_cucumber_report_" + TimeUtility.getCurrTimeStampUnderscore() + ".html";
+
+        try (PrintWriter printWriter = new PrintWriter(new File(fileName))) {
             cfg.getTemplate("index.ftl").process(data, printWriter);
         } catch (Exception e) {
             MojoLogger.getLogger().error("Couldnt Generate Cooker Cucumber report!");
             e.printStackTrace();
         }
 
-        MojoLogger.getLogger().info("Cooker report generated : " + data.get("htmlPath").toString() + "\\cooker_cucumber_report_"
-                + TimeUtility.getCurrTimeStampUnderscore() + ".html");
+        MojoLogger.getLogger().info("Cooker report generated : " + fileName);
 
     }
 
