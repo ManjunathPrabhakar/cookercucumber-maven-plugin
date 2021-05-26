@@ -30,7 +30,7 @@ public class ExcelParser {
         //Create an object of File class to open xlsx files
         File file = new File(filePath + "\\" + fileName);
 
-        //Create an object of FileInputStream class to read excel file
+        //Create an object of FileInputStream class to read excel files
         FileInputStream inputStream = new FileInputStream(file);
 
         Workbook excWorkbook = null;
